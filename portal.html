@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Passenger Portal - Login</title>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+  <div class="login-box">
+    <!-- radios -->
+    <input type="radio" id="login-tab" name="tab" checked>
+    <input type="radio" id="register-tab" name="tab">
+
+    <!-- tabs -->
+    <div class="tab-header">
+      <label for="login-tab">Login</label>
+      <label for="register-tab">Create Account</label>
+    </div>
+
+    <!-- forms wrapper -->
+    <div class="form-slider">
+      <!-- login -->
+      <div class="form">
+        <h2>LOGIN</h2>
+        <p class="subtitle">Manage your bookings & check-in</p>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" placeholder="Enter your email">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" placeholder="Enter your password">
+        </div>
+        <button class="btn primary">Login</button>
+      </div>
+
+      <!-- register -->
+      <div class="form">
+        <h2>Create Account</h2>
+        <p class="subtitle">Join us and book your next flight</p>
+        <div class="field"><label>Full Name</label><input type="text" placeholder="Enter your name"></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="Enter your email"></div>
+        <div class="field"><label>Password</label><input type="password" placeholder="Enter your password"></div>
+        <div class="field"><label>Confirm Password</label><input type="password" placeholder="Confirm password"></div>
+        <button class="btn primary">Register</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="portal.js"></script>
+
+</body>
+</html>

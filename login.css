@@ -1,0 +1,134 @@
+:root {
+  --primary: #0a1a3a;
+  --accent: #3a7bd5;
+  --highlight: #00c6ff;
+  --light-gray: #f5f7fa;
+  --white: #ffffff;
+  --shadow: 0 6px 20px rgba(0,0,0,0.1);
+  --radius: 14px;
+}
+
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { font-family: 'Inter', sans-serif; background: var(--light-gray); color: var(--primary); }
+
+/* Header */
+.site-header {
+  background: var(--white);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+}
+.logo { font-size: 22px; font-weight: 700; color: var(--accent); }
+nav a {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 600;
+  margin-left: 16px;
+}
+nav a:hover { color: var(--accent); }
+
+/* Main login selection */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 120px);
+  padding: 40px 20px;
+  background: linear-gradient(135deg, var(--accent), var(--highlight));
+}
+
+.login-container {
+  background: var(--white);
+  padding: 40px 50px;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-container h1 {
+  font-size: 28px;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 40px;
+  color: var(--primary);
+}
+
+.role-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.role-card {
+  background: var(--light-gray);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  text-decoration: none;
+  color: var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+.role-card:hover {
+  transform: translateY(-6px);
+  background: var(--accent);
+  color: var(--white);
+}
+.role-card .icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+.role-card h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.role-card p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+.back-home {
+  margin-top: 10px;
+}
+.back-home a {
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
+}
+.back-home a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.login-footer {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 12px 0;
+  font-size: 14px;
+}
+
+/* Fade-in effect */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s forwards ease-out;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

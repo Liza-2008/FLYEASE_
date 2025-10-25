@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlyEase – Login Selection</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">✈ FlyEase</div>
+      <nav>
+        <a href="homepage.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Login Role Selection -->
+  <main class="login-page">
+    <div class="login-container fade-in">
+      <h1>Who are you logging in as?</h1>
+
+      <div class="role-buttons">
+        <a href="user-login.html" class="role-card user">
+          <div class="icon">🧍‍♂️</div>
+          <h2>User</h2>
+          <p>Passengers who book & travel</p>
+        </a>
+
+        <a href="admin-login.html" class="role-card admin">
+          <div class="icon">🧑‍💼</div>
+          <h2>Admin</h2>
+          <p>Manages flights, users, and payments</p>
+        </a>
+
+        <a href="support-login.html" class="role-card support">
+          <div class="icon">👨‍🔧</div>
+          <h2>Airline Support</h2>
+          <p>Handles verifications, luggage, seat confirmations</p>
+        </a>
+      </div>
+
+      <div class="back-home">
+        <a href="homepage.html">← Back to Home</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="login-footer">
+    <p>© 2025 FlyEase. All rights reserved.</p>
+  </footer>
+
+  <script src="login.js"></script>
+
+</body>
+</html>
