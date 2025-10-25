@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlyEase – Flight Scheduling & Passenger Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="homepage.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">✈ FlyEase</div>
+    <nav class="site-nav hidden" id="nav-menu">
+  <a href="#home">Home</a>
+  <a href="#book">Book Flights</a> 
+  <a href="#schedule">Flight Schedules</a>
+  <a href="#destinations">Destinations</a>
+  <a href="#checkin">Check-in</a>
+  <a href="portal.html">Passenger Portal</a>
+</nav>
+
+    <!-- menu button -->
+    <button class="menubutton" id="menubutton">☰</button>
+  </div>
+</header>
+
+
+  <!-- HERO -->
+  <section id="home" class="hero full-hero">
+    <video autoplay muted loop id="video-bg">
+      <source src="assets/airplane.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1>Your Journey, Our Priority</h1>
+      <p>Book, manage, and fly with ease. Experience travel the modern way.</p>
+    </div>
+  </section>
+
+  <!--BOOK FLIGHTS -->
+<section id="book" class="full-section teaser-section">
+  <div class="container fade-in">
+    <h2>Ready to Fly?</h2>
+    <p>Plan your next journey with FlyEase — fast, easy, and reliable.</p>
+    <button class="btn primary">
+      Book Your Flight
+    </button>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule" class="full-section">
+  <div class="container">
+    <h2>Flight Schedules</h2>
+    <p>Check upcoming flights and timings</p>
+
+    <div class="schedule-wrapper">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Flight No</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Flight No">AI-202</td>
+            <td data-label="From">Delhi</td>
+            <td data-label="To">Mumbai</td>
+            <td data-label="Departure">07:30</td>
+            <td data-label="Arrival">09:35</td>
+            <td data-label="Status"><span class="status on-time">On Time</span></td>
+          </tr>
+          <tr>
+            <td data-label="Flight No">SG-110</td>
+            <td data-label="From">Bangalore</td>
+            <td data-label="To">Kolkata</td>
+            <td data-label="Departure">10:15</td>
+            <td data-label="Arrival">13:20</td>
+            <td data-label="Status"><span class="status delayed">Delayed</span></td>
+          </tr>
+          <tr>
+            <td data-label="Flight No">EK-505</td>
+            <td data-label="From">Mumbai</td>
+            <td data-label="To">Dubai</td>
+            <td data-label="Departure">14:00</td>
+            <td data-label="Arrival">16:30</td>
+            <td data-label="Status"><span class="status on-time">On Time</span></td>
+          </tr>
+          <tr>
+            <td data-label="Flight No">BA-256</td>
+            <td data-label="From">Delhi</td>
+            <td data-label="To">London</td>
+            <td data-label="Departure">02:45</td>
+            <td data-label="Arrival">07:15</td>
+            <td data-label="Status"><span class="status on-time">On Time</span></td>
+          </tr>
+          <tr>
+            <td data-label="Flight No">UA-837</td>
+            <td data-label="From">Delhi</td>
+            <td data-label="To">San Francisco</td>
+            <td data-label="Departure">23:55</td>
+            <td data-label="Arrival">06:45 (+1)</td>
+            <td data-label="Status"><span class="status on-time">On Time</span></td>
+          </tr>
+          <tr>
+            <td data-label="Flight No">JL-740</td>
+            <td data-label="From">Bangalore</td>
+            <td data-label="To">Tokyo</td>
+            <td data-label="Departure">11:20</td>
+            <td data-label="Arrival">22:30</td>
+            <td data-label="Status"><span class="status cancelled">Cancelled</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+  <!-- DESTINATIONS -->
+<section id="destinations" class="full-section">
+  <div class="container">
+    <h2 class="section-title">Popular Destinations</h2>
+    <div class="tiles">
+      <div class="tile">
+        <img src="assets/paris.jpg" alt="Paris">
+        <div class="caption">Paris</div>
+      </div>
+      <div class="tile">
+        <img src="assets/newyork.jpg" alt="New York">
+        <div class="caption">New York</div>
+      </div>
+      <div class="tile">
+        <img src="assets/tokyo.jpg" alt="Tokyo">
+        <div class="caption">Tokyo</div>
+      </div>
+      <div class="tile">
+        <img src="assets/london.jpg" alt="London">
+        <div class="caption">London</div>
+      </div>
+      <div class="tile">
+        <img src="assets/dubai.jpg" alt="Dubai">
+        <div class="caption">Dubai</div>
+      </div>
+      <div class="tile">
+        <img src="assets/sydney.jpg" alt="Sydney">
+        <div class="caption">Sydney</div>
+      </div>
+      <div class="tile">
+        <img src="assets/singapore.jpg" alt="Singapore">
+        <div class="caption">Singapore</div>
+      </div>
+      <div class="tile">
+        <img src="assets/rome.jpg" alt="Rome">
+        <div class="caption">Rome</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- CHECK-IN -->
+<section id="checkin" class="checkin-section">
+  <div class="boarding-pass">
+    <!-- Left side (Boarding Pass Design / Branding) -->
+    <div class="boarding-left">
+      <h3>FlyEase Check-in</h3>
+      <p>Your journey, simplified.</p>
+    </div>
+
+    <!-- Right side (Check-in Form) -->
+    <div class="boarding-right">
+      <h2>Online Check-in</h2>
+      <form action="check-in.html" method="get" class="checkin-form">
+  <div class="field">
+    <label>Booking Reference</label>
+    <input type="text" placeholder="Enter PNR / Booking ID" required>
+  </div>
+  <div class="field">
+    <label>Last Name</label>
+    <input type="text" placeholder="Enter Last Name" required>
+  </div>
+  <button type="submit" class="btn primary">Proceed to Check-in</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="homepage.js"></script>
+
+</body>
+</html>

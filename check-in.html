@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FlyEase - Passenger & Flight Details</title>
+  <link rel="stylesheet" href="check-in.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">✈ FlyEase</div>
+    <nav>
+      <ul>
+        <li><a href="homepage.html">Home</a></li>
+        <li><a href="book">Book</a></li>
+        <li><a href="schedules">Schedules</a></li>
+        <li><a href="destinations">Destinations</a></li>
+        <li><a href="portal.html">Passenger Portal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Section -->
+ <main class="checkin-container">
+  <!-- Step 2: Passenger Details -->
+  <section class="card passenger-details" id="passenger">
+    <h2>Passenger Details</h2>
+    <form action="seat-selection.html" method="get">
+      <label for="pnr">Booking Reference (PNR)</label>
+      <input type="text" id="pnr" name="pnr" placeholder="PNR (if any)" >
+
+      <label for="lastname">Last Name</label>
+      <input type="text" id="lastname" name="lastname" placeholder="Last name">
+
+      <label for="fullname">Passenger Full Name</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Enter full name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210">
+
+      <button type="submit" class="btn-primary">Proceed</button>
+    </form>
+  </section>
+
+  <!-- Step 1: Flight Summary -->
+  <section class="card flight-summary" id="flight">
+    <h2>Flight Summary</h2>
+    <p><strong>Flight:</strong> FE123</p>
+    <p><strong>From:</strong> New Delhi (DEL)</p>
+    <p><strong>To:</strong> Mumbai (BOM)</p>
+    <p><strong>Date:</strong> 10 Sept 2025</p>
+    <p><strong>Departure:</strong> 08:45 AM</p>
+    <p><strong>Gate:</strong> A12</p>
+
+    <!-- Link to passenger step -->
+    <a href="#passenger" class="btn-primary">Confirm Flight</a>
+  </section>
+  </main>
+
+  <script src="check-in.js"></script>
+
+</body>
+</html>

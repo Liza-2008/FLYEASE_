@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlyEase – Book Your Flight</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="booking.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">✈ FlyEase</div>
+      <nav class="site-nav" id="nav-menu">
+  <a href="homepage.html">Home</a>
+  <a href="booking.html" class="active">Book Flights</a>
+  <a href="homepage.html#schedule">Flight Schedules</a>
+  <a href="homepage.html#destinations">Destinations</a>
+  <a href="homepage.html#checkin">Check-In</a>
+  <a href="login.html">Login</a>
+</nav>
+    </div>
+  </header>
+
+  <!-- Booking Section -->
+  <section id="book" class="full-section transparent-bg">
+    <div class="container book-grid">
+
+      <!-- Left Content -->
+      <div class="book-info fade-in">
+        <h2>Travel Smarter. Travel FlyEase.</h2>
+        <p>
+          From easy bookings to real-time updates, FlyEase ensures comfort, punctuality, 
+          and a seamless flying experience — so you can focus on the adventure, not the hassle.
+        </p>
+      </div>
+
+      <!-- Right Content -->
+      <div class="book-form fade-in">
+        <div class="tabs">
+          <span class="tab active">One Way</span>
+          <span class="tab">Round Trip</span>
+          <span class="tab">Multi-City</span>
+        </div>
+
+        <form id="searchForm" class="search-form">
+          <div class="field">
+            <label>From</label>
+            <input id="fromInput" type="text" placeholder="Origin" />
+          </div>
+          <div class="field">
+            <label>To</label>
+            <input id="toInput" type="text" placeholder="Destination" />
+          </div>
+          <div class="field">
+            <label>Depart</label>
+            <input id="departInput" type="date" />
+          </div>
+          <div class="field">
+            <label>Return</label>
+            <input id="returnInput" type="date" />
+          </div>
+          <div class="field">
+            <label>Passengers</label>
+            <select id="passengerInput">
+              <option>1 Adult</option>
+              <option>2 Adults</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Class</label>
+            <select id="classInput">
+              <option>Economy</option>
+              <option>Business</option>
+            </select>
+          </div>
+          <button type="submit" class="btn primary">Search</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="foot container">
+      <div>
+        <strong>FlyEase</strong>
+        <p class="small">Making travel simple.</p>
+      </div>
+      <div class="footer-links">
+        <a href="homepage.html#about">About</a>
+        <a href="homepage.html#contact">Contact</a>
+        <a href="homepage.html#policies">Policies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="booking.js"></script>
+
+</body>
+</html>
