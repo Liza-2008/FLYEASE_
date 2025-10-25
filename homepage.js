@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bookFlightBtn) {
         // Add a click listener to redirect the user to booking.html
         bookFlightBtn.addEventListener('click', () => {
-            window.location.href = 'booking.html';
+            window.location.href = 'book-flight.html';
         });
     }
 
