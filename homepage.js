@@ -1,19 +1,28 @@
 // homepage.js - Cleaned and Corrected Version
 
 // =========================================================
-// 1. Core Functionality: Button Click Listener
-//    Attaches the redirect logic to the "Book Your Flight" button.
+// 1. Core Functionality: Button Click Listener (NOW INCLUDES SCHEDULE)
 // =========================================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Select the "Book Your Flight" button inside the 'book' section
+    // Select the "Book Your Flight" button
     const bookFlightBtn = document.querySelector('#book .btn.primary');
 
     if (bookFlightBtn) {
-        // Add a click listener to redirect the user to booking.html
+        // Add a click listener to redirect the user to book-flight.html
         bookFlightBtn.addEventListener('click', () => {
             window.location.href = 'book-flight.html';
         });
     }
+
+    // --- NEW LOGIC ADDED: For "View Live Schedules" button ---
+    const viewScheduleBtn = document.getElementById('view-schedule-btn');
+    if (viewScheduleBtn) {
+        viewScheduleBtn.addEventListener('click', () => {
+            // Redirects to the dedicated schedule page
+            window.location.href = 'flight-schedules.html'; 
+        });
+    }
+    // --------------------------------------------------------
 
     // Since the fade-in elements might not be immediately visible,
     // we call the function here to handle elements visible on load.
@@ -24,13 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // 2. Smooth Scroll for Navigation Links (Existing Code)
 // =========================================================
 document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
 });
 
 // =========================================================
@@ -41,28 +50,28 @@ const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('nav a'); 
 
 window.addEventListener('scroll', () => {
-  let current = '';
-  // Use window.scrollY (modern standard) instead of pageYOffset
-  const scrollPosition = window.scrollY;
+  let current = '';
+  // Use window.scrollY (modern standard) instead of pageYOffset
+  const scrollPosition = window.scrollY;
 
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
 
-    // Check if the scroll position is within the section boundaries
-    if (scrollPosition >= sectionTop - sectionHeight / 3) {
-      current = section.getAttribute('id');
-    }
-  });
+    // Check if the scroll position is within the section boundaries
+    if (scrollPosition >= sectionTop - sectionHeight / 3) {
+      current = section.getAttribute('id');
+    }
+  });
 
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    
-    // Only apply 'active' to smooth scroll links (href starting with #)
-    if (link.getAttribute('href').startsWith('#') && link.getAttribute('href').includes(current)) {
-      link.classList.add('active');
-    }
-  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    
+    // Only apply 'active' to smooth scroll links (href starting with #)
+    if (link.getAttribute('href').startsWith('#') && link.getAttribute('href').includes(current)) {
+      link.classList.add('active');
+    }
+  });
 });
 
 // =========================================================
@@ -70,13 +79,13 @@ window.addEventListener('scroll', () => {
 // =========================================================
 const scrollTopBtn = document.querySelector('.scroll-top');
 if (scrollTopBtn) {
-  window.addEventListener('scroll', () => {
-    scrollTopBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
-  });
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
+  });
 
-  scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 }
 
 // =========================================================
@@ -85,12 +94,12 @@ if (scrollTopBtn) {
 const fadeEls = document.querySelectorAll('.fade-in');
 
 const fadeInOnScroll = () => {
-  fadeEls.forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      el.classList.add('visible');
-    }
-  });
+  fadeEls.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      el.classList.add('visible');
+    }
+  });
 };
 
 window.addEventListener('scroll', fadeInOnScroll);
