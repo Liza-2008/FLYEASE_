@@ -1,0 +1,98 @@
+/* flight-schedules.css */
+:root {
+  --primary: #0a1a3a;
+  --accent: #3a7bd5;
+  --white: #ffffff;
+  --light-gray: #f5f7fa;
+  --text-dark: #2d2d2d;
+  --radius: 14px;
+  --shadow: 0 6px 20px rgba(0,0,0,0.08);
+  --container: 1140px;
+}
+
+/* Global/Reset (Ensures base fonts/styling is present) */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; color: var(--primary); background: var(--light-gray); }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
+
+/* Header and Navigation Styles (Keep minimal, as most are in the HTML structure) */
+.site-header { background: var(--white); box-shadow: var(--shadow); position: sticky; top: 0; z-index: 50; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; }
+.logo { font-size: 22px; font-weight: 700; color: var(--accent); }
+.site-nav a { text-decoration: none; color: var(--primary); font-weight: 500; margin-left: 20px; transition: color 0.3s; }
+.site-nav a:hover, .site-nav a.active { color: var(--accent); }
+
+/* Full Page Schedule Section */
+#schedule-full {
+  padding: 60px 20px;
+  min-height: 80vh; 
+}
+#schedule-full h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 10px;
+}
+#schedule-full p {
+  text-align: center;
+  font-size: 18px;
+  color: var(--text-dark);
+  margin-bottom: 30px;
+}
+
+/* Schedule Table Styles (Copied directly from homepage.css) */
+.schedule-wrapper { width: 100%; padding: 0 12px; box-sizing: border-box; }
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  font-size: 16px;
+  text-align: center;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.schedule-table th, .schedule-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  color: var(--text-dark);
+}
+.schedule-table th {
+  background: var(--accent);
+  color: var(--white);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.schedule-table tbody tr:nth-child(even) { background-color: #f9f9f9; }
+.schedule-table tbody tr:hover {
+  background: rgba(58, 123, 213, 0.08);
+  transition: 0.3s ease;
+}
+
+/* Status Styles */
+.status { font-weight: 500; padding: 2px 8px; border-radius: 12px; font-size: 13px; display: inline-block; }
+.status.on-time { background: #eafaf1; color: #1b7f3b; border: 1px solid #a8e6b2; }
+.status.delayed { background: #fff4e5; color: #b36b00; border: 1px solid #ffcc80; }
+.status.cancelled { background: #ffecec; color: #b30000; border: 1px solid #ff9999; }
+
+/* Responsive Table (Copied from homepage.css) */
+@media(max-width: 768px) {
+  .schedule-table thead { display: none; }
+  .schedule-table { display: block; }
+  .schedule-table tbody { display: grid; grid-template-columns: 1fr; gap: 15px; } /* Single column view */
+  .schedule-table tr { 
+    display: block; background: #fff; border: 1px solid #ddd; 
+    border-radius: var(--radius); padding: 12px; box-shadow: var(--shadow);
+  }
+  .schedule-table td { display: block; text-align: left; padding: 6px 8px; border: none; }
+  .schedule-table td::before {
+    content: attr(data-label); font-weight: 600; color: var(--primary);
+    display: block; margin-bottom: 4px;
+  }
+}
+
+/* Footer Styles */
+footer { background: var(--primary); color: var(--white); padding: 20px 0; text-align: center; }

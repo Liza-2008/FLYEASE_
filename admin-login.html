@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyEase – Administrator Login</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="logo">✈ FlyEase</div>
+        <nav class="site-nav">
+          <a href="homepage.html">Home</a>
+          <a href="login.html">Change Role</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="login-page">
+        <div class="login-container fade-in">
+            <h2>Administrator Login</h2>
+            
+            <form id="admin-login-form">
+                <div class="field">
+                    <label for="admin-username">Username / Email</label>
+                    <input type="text" id="admin-username" placeholder="Enter admin username or email" required>
+                </div>
+                
+                <div class="field">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" placeholder="Enter password" required>
+                </div>
+                
+                <a href="forgot-password.html" class="small-link forgot-link">Forgot Password?</a>
+                
+                <button type="submit" class="btn primary full-width-btn admin-btn">Log In</button>
+            </form>
+            
+            <div class="back-home">
+              <a href="login.html">← Back to Role Selection</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="login-footer">
+        <p>© 2025 FlyEase. All rights reserved.</p>
+    </footer>
+    
+    <script src="admin-login.js"></script>
+</body>
+</html>

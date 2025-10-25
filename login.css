@@ -132,3 +132,11 @@ nav a:hover { color: var(--accent); }
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- ADMIN SPECIFIC STYLES (Add to the end of login.css) --- */
+.btn.admin-btn {
+    background: #f1c40f; /* Standard Gold/Yellow for distinction */
+}
+.btn.admin-btn:hover {
+    background: #d4ac0d; /* Darker shade of gold on hover */
+}
