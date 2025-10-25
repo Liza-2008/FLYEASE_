@@ -140,3 +140,11 @@ nav a:hover { color: var(--accent); }
 .btn.admin-btn:hover {
     background: #d4ac0d; /* Darker shade of gold on hover */
 }
+
+/* --- SUPPORT SPECIFIC STYLES (Add to the end of login.css) --- */
+.btn.support-btn {
+    background: #9b59b6; /* Standard Purple/Indigo color */
+}
+.btn.support-btn:hover {
+    background: #8e44ad; /* Darker shade on hover */
+}
