@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyEase – Airline Support Panel</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="homepage.css"> 
+    <link rel="stylesheet" href="support.css"> 
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">✈ Support Panel</div>
+            <nav class="site-nav">
+                <a href="#dashboard" class="active">Check Booking</a>
+                <a href="#issues">Issue Log</a>
+                <a href="logout.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="support-main container">
+        <h1>Support Operations Panel</h1>
+        
+        <section class="search-section">
+            <h2>Find Booking by PNR</h2>
+            <form id="pnr-search-form" class="form-grid">
+                <div class="field search-field">
+                    <label for="pnr-input">Enter PNR / Booking ID</label>
+                    <input type="text" id="pnr-input" placeholder="e.g., A1B2C3" required>
+                </div>
+                <button type="submit" class="btn primary small-btn search-btn">Search</button>
+            </form>
+        </section>
+
+        <section class="booking-details-view" id="booking-details-view">
+            <p class="initial-message">Enter a PNR above to load booking information and manage check-in tasks.</p>
+        </section>
+        
+    </main>
+
+    <script src="support.js"></script>
+</body>
+</html>
