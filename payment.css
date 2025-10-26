@@ -130,4 +130,19 @@
     box-sizing: border-box; 
 }
 
+/* payment.css: FINAL NAVIGATION STABILITY FIX */
+
+/* 1. Ensure the Book Flights link is always active on this page */
+.site-nav a[href="book-flight.html"] {
+    background: var(--accent) !important;
+    color: var(--white) !important;
+    /* You may need to adjust padding/border-radius here if homepage.css styles were complex */
+}
+
+/* 2. Ensure NO OTHER link is active */
+.site-nav a[href="check-in.html"] {
+    background: transparent !important;
+    color: var(--primary) !important;
+}
+
 /* Button style defined in homepage.css */

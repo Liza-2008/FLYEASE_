@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyEase – E-Ticket Confirmation</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="booking-details.css"> 
+    <link rel="stylesheet" href="ticket.css"> 
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">✈ FlyEase</div>
+            <nav class="site-nav">
+                <a href="homepage.html">Home</a>
+                <a href="book-flight.html">Book Flights</a>
+                <a href="flight-schedules.html">Flight Schedules</a>
+                <a href="check-in.html">Check-In</a>
+                <a href="my-tickets.html" class="active">My Tickets</a>
+                <a href="logout.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="ticket-section container">
+        <div class="ticket-box">
+            <h2>✈ FlyEase E-Ticket</h2>
+            
+            <div class="status-banner success">
+                Payment Status: SUCCESS ✅
+            </div>
+            
+            <div class="ticket-details-grid">
+                <div class="detail-group">
+                    <h4>Booking Reference (PNR)</h4>
+                    <p id="pnr-display" class="highlight-pnr">LOADING...</p>
+                </div>
+                <div class="detail-group">
+                    <h4>Passenger Name</h4>
+                    <p id="passenger-name">Loading...</p>
+                </div>
+                <div class="detail-group">
+                    <h4>Flight & Route</h4>
+                    <p id="flight-route">Loading...</p>
+                </div>
+                <div class="detail-group">
+                    <h4>Date & Departure</h4>
+                    <p id="date-time">Loading...</p>
+                </div>
+                <div class="detail-group">
+                    <h4>Seat Number</h4>
+                    <p id="seat-number">Auto-Assigned</p>
+                </div>
+                <div class="detail-group">
+                    <h4>Amount Paid</h4>
+                    <p id="amount-paid">Loading...</p>
+                </div>
+            </div>
+
+            <div class="ticket-actions">
+                <button class="btn primary large-btn" id="download-btn">Download PDF</button>
+                <button class="btn secondary large-btn" id="checkin-btn">Check-In Now</button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="foot container">
+            <p>© 2025 FlyEase. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="ticket.js"></script>
+</body>
+</html>

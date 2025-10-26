@@ -1,67 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FlyEase - Passenger & Flight Details</title>
-  <link rel="stylesheet" href="check-in.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyEase – Online Check-in</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="check-in.css"> 
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">✈ FlyEase</div>
-    <nav>
-      <ul>
-        <li><a href="homepage.html">Home</a></li>
-        <li><a href="book">Book</a></li>
-        <li><a href="schedules">Schedules</a></li>
-        <li><a href="destinations">Destinations</a></li>
-        <li><a href="portal.html">Passenger Portal</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">✈ FlyEase</div>
+            <nav class="site-nav">
+                <a href="homepage.html">Home</a>
+                <a href="book-flight.html">Book Flights</a>
+                <a href="flight-schedules.html">Flight Schedules</a>
+                <a href="check-in.html" class="active">Check-In</a>
+                <a href="my-tickets.html">My Tickets</a>
+                <a href="logout.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="checkin-details-section container">
+        <h2>Online Check-in Verification</h2>
+        
+        <div id="checkin-verification-area">
+            <p id="loading-message">Verifying booking details...</p>
+            
+            <div id="flight-details-verified" style="display:none;" class="verification-card">
+                <h3>Booking Confirmed!</h3>
+                <p id="pnr-info"></p>
+                <p id="passenger-info"></p>
+                <p id="route-info"></p>
 
-  <!-- Main Section -->
- <main class="checkin-container">
-  <!-- Step 2: Passenger Details -->
-  <section class="card passenger-details" id="passenger">
-    <h2>Passenger Details</h2>
-    <form action="seat-selection.html" method="get">
-      <label for="pnr">Booking Reference (PNR)</label>
-      <input type="text" id="pnr" name="pnr" placeholder="PNR (if any)" >
+                <div id="confirmation-step">
+                    <h4>Complete Check-in</h4>
+                    <div class="field seat-select-field">
+                        <label for="seat-selection">Select Seat</label>
+                        <select id="seat-selection">
+                            <option value="12A">12A</option>
+                            <option value="12B">12B</option>
+                        </select>
+                    </div>
+                    <button id="complete-checkin-btn" class="btn primary large-btn">Confirm & Generate Boarding Pass</button>
+                </div>
+            </div>
+            
+            <p id="error-display" style="display:none; color:red; margin-top:20px;">Verification Failed.</p>
+        </div>
+    </section>
 
-      <label for="lastname">Last Name</label>
-      <input type="text" id="lastname" name="lastname" placeholder="Last name">
-
-      <label for="fullname">Passenger Full Name</label>
-      <input type="text" id="fullname" name="fullname" placeholder="Enter full name" required>
-
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="you@example.com" required>
-
-      <label for="phone">Phone</label>
-      <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210">
-
-      <button type="submit" class="btn-primary">Proceed</button>
-    </form>
-  </section>
-
-  <!-- Step 1: Flight Summary -->
-  <section class="card flight-summary" id="flight">
-    <h2>Flight Summary</h2>
-    <p><strong>Flight:</strong> FE123</p>
-    <p><strong>From:</strong> New Delhi (DEL)</p>
-    <p><strong>To:</strong> Mumbai (BOM)</p>
-    <p><strong>Date:</strong> 10 Sept 2025</p>
-    <p><strong>Departure:</strong> 08:45 AM</p>
-    <p><strong>Gate:</strong> A12</p>
-
-    <!-- Link to passenger step -->
-    <a href="#passenger" class="btn-primary">Confirm Flight</a>
-  </section>
-  </main>
-
-  <script src="check-in.js"></script>
-
+    <script src="check-in.js"></script>
 </body>
 </html>

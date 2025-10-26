@@ -110,30 +110,29 @@
   <!-- CHECK-IN -->
 <section id="checkin" class="checkin-section">
   <div class="boarding-pass">
-    <!-- Left side (Boarding Pass Design / Branding) -->
     <div class="boarding-left">
       <h3>FlyEase Check-in</h3>
       <p>Your journey, simplified.</p>
     </div>
 
-    <!-- Right side (Check-in Form) -->
     <div class="boarding-right">
       <h2>Online Check-in</h2>
-      <form action="check-in.html" method="get" class="checkin-form">
-  <div class="field">
-    <label>Booking Reference</label>
-    <input type="text" placeholder="Enter PNR / Booking ID" required>
-  </div>
-  <div class="field">
-    <label>Last Name</label>
-    <input type="text" placeholder="Enter Last Name" required>
-  </div>
-  <button type="submit" class="btn primary">Proceed to Check-in</button>
+      <form id="homepage-checkin-form" class="checkin-form">
+        <div class="field">
+          <label for="pnr-input-home">Booking Reference</label>
+          <input type="text" id="pnr-input-home" placeholder="Enter PNR / Booking ID" required>
+        </div>
+        <div class="field">
+          <label for="lastname-input-home">Last Name</label>
+          <input type="text" id="lastname-input-home" placeholder="Enter Last Name" required>
+        </div>
+        <button type="submit" class="btn primary">Proceed to Check-in</button>
       </form>
     </div>
   </div>
 </section>
 
+<script src="data-manager.js"></script>
 <script src="homepage.js"></script>
 
 </body>
