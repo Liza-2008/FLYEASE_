@@ -1,0 +1,119 @@
+/* ticket.css - Final Standalone Styles for the E-Ticket Page */
+
+/* Base Colors & Variables (Must be defined locally for independence) */
+:root {
+  --primary: #0a1a3a;
+  --accent: #3a7bd5;
+  --white: #ffffff;
+  --light-gray: #f5f7fa;
+  --success: #1b7f3b; 
+  --shadow: 0 6px 20px rgba(0,0,0,0.08);
+  --radius: 14px;
+}
+
+/* Base Layout (Copying required styles from booking-details.css) */
+.ticket-section {
+    padding: 60px 0 80px;
+}
+.container { 
+    max-width: 1140px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
+.btn {
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn.primary {
+    background: var(--accent);
+    color: var(--white);
+}
+.btn.primary:hover {
+    background: #2a61b8;
+}
+
+/* E-Ticket Box Styling */
+.ticket-box {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 40px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    border-top: 5px solid var(--accent);
+}
+
+.ticket-box h2 {
+    font-size: 32px;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* Success Banner */
+.status-banner {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    background: #eafaf1; /* Light green background */
+    color: var(--success); 
+    border: 1px solid var(--success);
+}
+
+/* Ticket Details Grid */
+.ticket-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 30px;
+    margin-bottom: 40px;
+}
+.detail-group h4 {
+    font-size: 14px;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.detail-group p {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary);
+}
+.highlight-pnr {
+    font-size: 24px !important;
+    color: var(--accent);
+    font-weight: 700 !important;
+}
+
+/* Action Buttons */
+.ticket-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+.ticket-actions .large-btn {
+    width: 48%;
+    padding: 12px 20px;
+    font-size: 16px;
+}
+.btn.secondary {
+    background: var(--primary); 
+    color: var(--white);
+}
+.btn.secondary:hover {
+    background: #1f3358;
+}
+
+/* Footer (Minimal styles needed for the footer area) */
+footer {
+    background: var(--primary);
+    color: var(--white);
+    padding: 20px 0;
+    text-align: center;
+}

@@ -1,137 +1,132 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+/* check-in.css - Styles for the Dynamic Check-in Verification Page */
+
+:root {
+  --primary: #0a1a3a;
   --accent: #3a7bd5;
+  --white: #ffffff;
+  --light-gray: #f5f7fa;
+  --radius: 14px;
+  --shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
-/* Navbar */
-.navbar {
-  background: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+/* Check-in Section Layout (Reused from the original homepage design) */
+.checkin-details-section {
+    background: var(--light-gray);
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+.checkin-details-section .container {
+    max-width: 900px;
 }
 
-.logo {
-  font-size: 22px;
-    font-weight: 700;
+/* Card Styling for the Verification Area */
+#checkin-verification-area {
+    display: flex;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    min-height: 400px;
+    margin-top: 20px;
+}
+
+/* Left Side Branding (Gradient area, adapted from original) */
+#checkin-verification-area .boarding-left-static {
+    flex: 1;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: var(--white);
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.boarding-left-static h3 { font-size: 24px; margin-bottom: 10px; }
+.boarding-left-static p { font-size: 16px; opacity: 0.9; }
+
+
+/* Right Side Verification Content */
+#flight-details-verified {
+    flex: 1;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+#checkin-verification-area h2 {
+    font-size: 32px;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Dynamic Content Display Styles */
+.verification-card h3 {
+    font-size: 24px;
     color: var(--accent);
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+.verification-card p {
+    line-height: 1.6;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
+/* Confirmation Step Styles */
+#confirmation-step h4 {
+    font-size: 20px;
+    color: var(--primary);
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ddd;
 }
-
-.navbar a {
-  text-decoration: none;
-  color: #222;
-  font-weight: 500;
+.seat-select-field {
+    max-width: 300px;
+    margin: 20px 0;
 }
-
-/* Background Image */
-body {
-  background: url("assets/checkin.jpg") no-repeat center center fixed;
-  background-size: cover;
+.seat-select-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
 }
-
-/* Main Container */
-.checkin-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 20px;
-  min-height: 90vh;
-}
-
-/* Card Styles */
-.card {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 35px;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  width: 400px;
-  max-width: 100%;
-  animation: fadeIn 0.5s ease;
-}
-
-/* Titles */
-.flight-summary h2,
-.passenger-details h2 {
-  margin-bottom: 20px;
-  color: #0a1a3a;
-}
-
-/* Labels & Inputs */
-label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
-  color: #333;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-/* Buttons */
-.btn-primary {
-  display: inline-block;
-  text-align: center;
-  width: 100%;
-  background: linear-gradient(90deg, #0a1a3a, #0078ff);
-  color: #fff;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 15px;
-  transition: 0.3s;
-  text-decoration: none;
-}
-
-.btn-primary:hover {
-  opacity: 0.9;
-}
-
-/* Fade-in Animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Step Logic (CSS only) */
-.passenger-details {
-  display: none;
-}
-
-#passenger:target {
-  display: block;
-  margin-left: auto;  /* push to right margin */
-  margin-right: 60px;
-}
-
-#passenger:target ~ .flight-summary {
-  display: none;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .checkin-container {
-    padding: 40px 10px;
-  }
-  .card {
+.seat-select-field select {
     width: 100%;
-  }
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Button Styles (Reused from base design) */
+.btn.primary {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--accent);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn.primary:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Responsive adjustments */
+@media(max-width: 768px) {
+    #checkin-verification-area {
+        flex-direction: column;
+    }
+    #checkin-verification-area .boarding-left-static {
+        order: -1; /* Puts branding on top */
+        min-height: 150px;
+    }
 }

@@ -6,8 +6,8 @@
   --accent: #3a7bd5;
   --white: #ffffff;
   --light-gray: #f5f7fa;
-  --success: #1b7f3b; /* Green for revenue */
-  --error: #e74c3c; /* Red for delete buttons */
+  --success: #1b7f3b; 
+  --error: #e74c3c; 
   --shadow: 0 6px 20px rgba(0,0,0,0.08);
   --radius: 14px;
 }
