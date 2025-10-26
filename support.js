@@ -1,10 +1,62 @@
-// support.js - Airline Support Panel Functionality (Vanilla JS + Local Storage)
+// support.js - FINAL INTEGRATED Airline Support Panel Functionality
 
-// Function to fetch a single booking based on PNR
+// NOTE: Assumes getCollection and updateCollection are exposed globally by data-manager.js
+
+// Function to fetch a single booking based on PNR (Uses global utility)
 const fetchBookingByPNR = (pnr) => {
-    // Looks up the booking in the browser's simulated database
-    const bookings = JSON.parse(localStorage.getItem('flyease_bookings')) || [];
+    // CRITICAL FIX: Use global utility to fetch the central bookings array
+    const bookings = getCollection('bookings'); 
     return bookings.find(b => b.pnr.toUpperCase() === pnr.toUpperCase());
+};
+
+// Function to handle the actual verification and assignment actions
+const attachEventListeners = () => {
+    // Luggage Verification Simulation
+    document.querySelector('.manage-luggage').addEventListener('click', (e) => {
+        const btn = e.target;
+        const pnr = btn.dataset.pnr;
+
+        if (btn.dataset.verified === 'false') {
+            alert(`Luggage verified for PNR ${pnr}. (Simulated Update)`);
+            
+            // 1. Update the local view
+            btn.textContent = 'Verified ✅';
+            btn.dataset.verified = 'true';
+            btn.classList.remove('secondary');
+            btn.classList.add('success-btn'); 
+
+            // 2. CRITICAL FIX: Update the status in the central JSON store
+            let bookings = getCollection('bookings');
+            const bookingIndex = bookings.findIndex(b => b.pnr === pnr);
+            if (bookingIndex > -1) {
+                bookings[bookingIndex].luggageVerified = true;
+                updateCollection('bookings', bookings); // Save change
+            }
+        }
+    });
+
+    // Seat Assignment Simulation
+    document.querySelector('.manage-seat').addEventListener('click', (e) => {
+        const btn = e.target;
+        const pnr = btn.dataset.pnr;
+
+        if (btn.dataset.status === 'Pending') {
+            const assignedSeat = '14A';
+            alert(`Seat assigned to ${assignedSeat} for PNR ${pnr}. (Simulated Update)`);
+            
+            // 1. Update the local view
+            btn.textContent = assignedSeat;
+            btn.dataset.status = assignedSeat;
+
+            // 2. CRITICAL FIX: Update the status in the central JSON store
+            let bookings = getCollection('bookings');
+            const bookingIndex = bookings.findIndex(b => b.pnr === pnr);
+            if (bookingIndex > -1) {
+                bookings[bookingIndex].seat = assignedSeat;
+                updateCollection('bookings', bookings); // Save change
+            }
+        }
+    });
 };
 
 // Function to render the booking details card and management buttons
@@ -15,7 +67,7 @@ const renderBookingDetails = (booking) => {
         return;
     }
 
-    // Mock passenger/flight data (for display only, should be filled from payment/booking pages)
+    // Mock passenger/flight data (for display only)
     const mockData = { 
         name: booking.name || 'Jane Smith', 
         seat: booking.seat || 'Pending', 
@@ -54,34 +106,6 @@ const renderBookingDetails = (booking) => {
     `;
     
     attachEventListeners();
-};
-
-// Function to handle the actual verification and assignment actions
-const attachEventListeners = () => {
-    // Luggage Verification Simulation
-    document.querySelector('.manage-luggage').addEventListener('click', (e) => {
-        const btn = e.target;
-        if (btn.dataset.verified === 'false') {
-            alert(`Luggage verified for PNR ${btn.dataset.pnr}. (Simulated Update)`);
-            btn.textContent = 'Verified ✅';
-            btn.dataset.verified = 'true';
-            btn.classList.remove('secondary');
-            btn.classList.add('success-btn'); // Use a success-specific class
-            // In a real app, this status would be updated in the LocalStorage booking object.
-        }
-    });
-
-    // Seat Assignment Simulation
-    document.querySelector('.manage-seat').addEventListener('click', (e) => {
-        const btn = e.target;
-        if (btn.dataset.status === 'Pending') {
-            const assignedSeat = '14A';
-            alert(`Seat assigned to ${assignedSeat} for PNR ${btn.dataset.pnr}. (Simulated Update)`);
-            btn.textContent = assignedSeat;
-            btn.dataset.status = assignedSeat;
-            // In a real app, this seat would be updated in the LocalStorage booking object.
-        }
-    });
 };
 
 

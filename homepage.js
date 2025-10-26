@@ -109,6 +109,37 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'flight-schedules.html'; 
         });
     }
+
+    // homepage.js: Function to swap the navbar links
+const updateNavForAuth = () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const nav = document.querySelector('.site-nav');
+
+    // This is a simplified manual DOM replacement (You may need to adapt your specific HTML structure)
+    if (nav) {
+        if (isLoggedIn) {
+            nav.innerHTML = `
+                <a href="homepage.html">Home</a>
+                <a href="#book">Book Flights</a>
+                <a href="flight-schedules.html">Flight Schedules</a>
+                <a href="check-in.html">Check-In</a>
+                <a href="my-tickets.html">My Tickets</a> 
+                <a href="logout.html">Logout</a>
+            `;
+        } else {
+            nav.innerHTML = `
+                <a href="homepage.html">Home</a>
+                <a href="#destinations">Destinations</a>
+                <a href="flight-schedules.html">Flight Schedules</a>
+                <a href="check-in.html">Check-In</a>
+                <a href="login.html">Login</a>
+            `;
+        }
+    }
+};
+
+// CALL THIS FUNCTION in your homepage.js DOMContentLoaded block:
+// document.addEventListener('DOMContentLoaded', updateNavForAuth);
     
     // --- PROTECTED FORM: HOMEPAGE CHECK-IN FORM SUBMISSION ---
     const homeCheckinForm = document.getElementById("homepage-checkin-form");

@@ -1,25 +1,85 @@
-// booking.js
+// book-flight.js - Complete Code (Fading, Form Submission, and Tab Switching)
 
 document.addEventListener("DOMContentLoaded", () => {
-  const fadeEls = document.querySelectorAll(".fade-in");
+    // =========================================================
+    // 1. FADE-IN EFFECT (Existing Logic)
+    // =========================================================
+    const fadeEls = document.querySelectorAll(".fade-in");
 
-  const fadeInOnScroll = () => {
-    fadeEls.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        el.classList.add("visible");
-      }
-    });
-  };
-  window.addEventListener("scroll", fadeInOnScroll);
-  window.addEventListener("load", fadeInOnScroll);
+    const fadeInOnScroll = () => {
+        fadeEls.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 100) {
+                el.classList.add("visible");
+            }
+        });
+    };
+    window.addEventListener("scroll", fadeInOnScroll);
+    window.addEventListener("load", fadeInOnScroll);
 
-  // Handle form submission (redirect to available flights page)
-  const form = document.getElementById("searchForm");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      window.location.href = "available-flights.html";
+
+    // =========================================================
+    // 2. PRIMARY FORM SUBMISSION (Existing Logic)
+    //    NOTE: This targets the 'one-way-form' ID now, not a generic 'searchForm'.
+    // =========================================================
+    const oneWayForm = document.getElementById("one-way-form");
+    if (oneWayForm) {
+        oneWayForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            // Blueprint Step 5: Redirect to Available Flights page
+            window.location.href = "available-flights.html"; 
+        });
+    }
+
+    // You should add similar logic for 'round-trip-form' and 'multi-city-form' submissions here if needed.
+
+
+    // =========================================================
+    // 3. TAB SWITCHING LOGIC (New Sliding Feature)
+    // =========================================================
+    const tabs = document.querySelectorAll(".tab");
+    const formWrapper = document.getElementById("form-wrapper");
+    
+    // Function to handle the actual form switch
+    const switchForm = (targetFormId) => {
+        // 1. Update the tab visual state
+        tabs.forEach(t => {
+            t.classList.remove("active");
+            if (t.dataset.form === targetFormId) {
+                t.classList.add("active");
+            }
+        });
+
+        // 2. Manage the form containers
+        const allForms = formWrapper.querySelectorAll('.search-form');
+        
+        allForms.forEach(form => {
+            if (form.id === `${targetFormId}-form`) {
+                // Show target form
+                form.classList.remove("hidden-form");
+                form.classList.add("active-form");
+                
+                // Adjust wrapper height to prevent jumping (critical for smooth transition)
+                formWrapper.style.height = `${form.offsetHeight}px`;
+            } else {
+                // Hide other forms
+                form.classList.remove("active-form");
+                form.classList.add("hidden-form");
+            }
+        });
+    }
+
+    // Attach click listeners to tabs
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            const targetFormId = tab.dataset.form; // 'one-way', 'round-trip', or 'multi-city'
+            switchForm(targetFormId);
+        });
     });
-  }
+
+    // Initialize height on load (run after forms are structured)
+    const activeForm = document.querySelector('.active-form');
+    if (activeForm) {
+        formWrapper.style.height = `${activeForm.offsetHeight}px`;
+    }
 });
