@@ -1,4 +1,6 @@
-// user-login.js
+// user-login.js - Final Code with Mock Password Check and Homepage Redirect
+
+const MOCK_PASSWORD = 'password123'; // The password required for successful login
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('user-login-form');
@@ -7,20 +9,32 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
+            const passwordInput = document.getElementById('password');
+            const password = passwordInput.value.trim();
+            
             // --- SIMULATED LOGIN LOGIC (Blueprint Step 3) ---
             
-            console.log('Login attempt initiated...');
-            
-            // Simulate successful authentication delay
-            setTimeout(() => {
-                alert('Login Successful! Redirecting to dashboard...');
+            // 1. Primary check: Ensure the mock password is correct.
+            if (password === MOCK_PASSWORD) {
                 
-                // --- CRITICAL ADDITION: SET AUTHENTICATION FLAG ---
-                localStorage.setItem('isLoggedIn', 'true'); 
+                console.log('Login attempt successful.');
                 
-                [cite_start]// Redirect to User Dashboard (user-dashboard.html) on success [cite: 27]
-                window.location.href = 'user-dashboard.html'; 
-            }, 1000); // 1 second delay simulation
+                // Simulate successful authentication delay
+                setTimeout(() => {
+                    alert('Login Successful! Redirecting to homepage...');
+                    
+                    // --- CRITICAL FIX: SET AUTHENTICATION FLAG AND REDIRECT TO HOMEPAGE ---
+                    localStorage.setItem('isLoggedIn', 'true'); 
+                    
+                    // Redirect to the homepage, which will now display the logged-in navbar (Blueprint Step 4)
+                    window.location.href = 'homepage.html'; 
+                }, 1000); 
+
+            } else {
+                // If password fails
+                alert('Login Failed: Invalid password. Please use the mock password "password123".');
+                passwordInput.value = ''; // Clear the password field for security
+            }
         });
     }
 });

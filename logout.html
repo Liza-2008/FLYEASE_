@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logging Out...</title>
     <script>
-        localStorage.removeItem('isLoggedIn');
-        alert('You have been successfully logged out.');
-        window.location.href = 'homepage.html';
-    </script>
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('auth_alerted'); // Clear alert flag
+    alert('You have been successfully logged out.');
+    window.location.href = 'homepage.html';
+</script>
 </head>
 <body>
     <p>Logging out, please wait...</p>

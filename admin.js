@@ -1,46 +1,18 @@
-// admin.js
+// admin.js - FINAL INTEGRATED CODE (Uses centralized data-manager.js utilities)
 
-// --- 1. MOCK DATA (Simulated Database) ---
-const initialFlightData = [
-    { flightId: 'FL001', flightNo: 'AI-101', from: 'DEL', to: 'JFK', date: '2025-11-15', time: '14:00', seats: 50, price: 45000, status: 'On Time' },
-    { flightId: 'FL002', flightNo: 'EK-203', from: 'DEL', to: 'DXB', date: '2025-11-15', time: '22:00', seats: 120, price: 25000, status: 'Delayed' },
-    { flightId: 'FL003', flightNo: 'SQ-440', from: 'DEL', to: 'SIN', date: '2025-11-16', time: '06:00', seats: 15, price: 38000, status: 'On Time' },
-];
+// NOTE: Assumes getCollection and updateCollection are exposed globally by data-manager.js
 
-// Function to fetch or initialize mock data from LocalStorage
-const ensureDataStore = () => {
-    if (!localStorage.getItem('admin_flights')) {
-        localStorage.setItem('admin_flights', JSON.stringify(initialFlightData));
-    }
-    // Ensure mock bookings exist for revenue calculation
-    if (!localStorage.getItem('flyease_bookings')) {
-        localStorage.setItem('flyease_bookings', JSON.stringify([
-             { pnr: 'A1B2C3', flightId: 'FL001', amountPaid: '₹45,000', paymentStatus: 'SUCCESS' },
-             { pnr: 'B4D5E6', flightId: 'FL003', amountPaid: '₹38,000', paymentStatus: 'SUCCESS' }
-        ]));
-    }
-};
-
-const fetchAllFlights = () => {
-    ensureDataStore();
-    return JSON.parse(localStorage.getItem('admin_flights'));
-};
-
-const fetchAllBookings = () => {
-    return JSON.parse(localStorage.getItem('flyease_bookings'));
-};
-
-
-// --- 2. CORE DASHBOARD FUNCTIONS ---
+// --- 1. CORE DASHBOARD FUNCTIONS ---
 
 // Update quick stats (Blueprint Step 11: View total bookings, View revenue reports)
 const updateStats = () => {
-    const flights = fetchAllFlights();
-    const bookings = fetchAllBookings();
+    // CRITICAL FIX: Use the global utility to fetch centralized data
+    const flights = getCollection('flights');
+    const bookings = getCollection('bookings'); 
     
     // Calculate total revenue
     const totalRevenue = bookings.reduce((sum, booking) => {
-        // Safely parse amount, assuming it's in the format "₹XX,XXX"
+        // Safely parse amount from "₹XX,XXX" format
         const amount = parseInt(booking.amountPaid.replace('₹', '').replace(',', ''));
         return sum + (isNaN(amount) ? 0 : amount);
     }, 0);
@@ -103,12 +75,14 @@ const attachEventListeners = () => {
             const flightId = e.target.dataset.id;
             const newStatus = e.target.value;
             
-            let flights = fetchAllFlights();
+            // CRITICAL FIX: Use the global utility to fetch and update data
+            let flights = getCollection('flights');
             const flightIndex = flights.findIndex(f => f.flightId === flightId);
             if (flightIndex > -1) {
                 flights[flightIndex].status = newStatus;
-                localStorage.setItem('admin_flights', JSON.stringify(flights));
+                updateCollection('flights', flights); // Save updated data back to Local Storage
                 alert(`Status for ${flights[flightIndex].flightNo} updated to ${newStatus}.`);
+                updateStats(); // Refresh stats display
             }
         });
     });
@@ -121,7 +95,6 @@ const attachEventListeners = () => {
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             if (confirm('Are you sure you want to delete this flight? (Simulated)')) {
-                 // In production, this would make an API call to delete the flight.
                 alert('Flight deleted! (Simulated)');
             }
         });
@@ -129,9 +102,12 @@ const attachEventListeners = () => {
 };
 
 
-// --- 3. INITIALIZATION ---
+// --- 2. INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
+    // NOTE: The local initialization/fetching functions (ensureDataStore, fetchAllFlights) 
+    // are REMOVED as data-manager.js now handles the initialization on homepage load.
+    
     updateStats();
-    const flights = fetchAllFlights();
+    const flights = getCollection('flights'); // Fetch using global utility
     renderFlightTable(flights);
 });
