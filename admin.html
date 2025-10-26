@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyEase – Admin Dashboard</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="homepage.css"> 
+    <link rel="stylesheet" href="admin.css"> 
+    <link rel="stylesheet" href="flight-schedules.css"> </head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">✈ Admin Panel</div>
+            <nav class="site-nav">
+                <a href="#dashboard" class="active">Dashboard</a>
+                <a href="#flights">Manage Flights</a>
+                <a href="#reports">Reports</a>
+                <a href="logout.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="admin-main container">
+        <h1>Welcome, Administrator</h1>
+        
+        <section class="stats-grid">
+            <div class="stat-card total-flights">
+                <h3>Total Flights</h3>
+                <p id="stat-flights">--</p>
+            </div>
+            <div class="stat-card total-bookings">
+                <h3>Total Bookings</h3>
+                <p id="stat-bookings">--</p>
+            </div>
+            <div class="stat-card total-revenue">
+                <h3>Est. Revenue</h3>
+                <p id="stat-revenue">--</p>
+            </div>
+        </section>
+
+        <section id="flights">
+            <h2>Manage Flights</h2>
+            <button class="btn primary add-flight-btn">Add New Flight</button>
+            <div class="admin-table-wrapper" id="flight-management-container">
+                <p>Loading flight data...</p>
+            </div>
+        </section>
+        
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>

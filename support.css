@@ -1,0 +1,124 @@
+/* support.css - Dedicated Airline Support Panel Styles */
+
+/* Base Colors and Variables */
+:root {
+  --primary: #0a1a3a;
+  --support-color: #9b59b6; /* Purple for support distinction */
+  --white: #ffffff;
+  --light-gray: #f5f7fa;
+  --success: #1b7f3b;
+  --shadow: 0 6px 20px rgba(0,0,0,0.08);
+  --radius: 14px;
+}
+
+/* Main Layout */
+.support-main {
+    padding: 30px 20px 80px;
+    min-height: 80vh;
+}
+.support-main h1 {
+    font-size: 36px;
+    color: var(--support-color);
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+/* PNR Search Section */
+.search-section {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    padding: 25px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+.search-section h2 {
+    font-size: 24px;
+    color: var(--primary);
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 15px;
+    align-items: end;
+}
+
+/* Booking Details Display */
+.booking-details-view {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    min-height: 250px;
+}
+.booking-card h3 {
+    color: var(--support-color);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.booking-card .highlight {
+    color: var(--primary);
+    font-weight: 700;
+}
+.detail-row {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* Action Grid (Management Buttons) */
+.action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+.management-item p {
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Button Styles for Actions */
+.btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+}
+.btn.secondary {
+    background: #e74c3c; /* Red for non-verified status */
+    color: var(--white);
+}
+.btn.primary {
+    background: var(--support-color);
+    color: var(--white);
+}
+.btn.success-btn {
+    background: var(--success);
+}
+
+/* Input Fields (reusing styles) */
+.field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--primary);
+    font-size: 14px;
+}
+.field input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box; 
+}
