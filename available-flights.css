@@ -1,0 +1,159 @@
+/* available-flights.css - Complete, Standalone Styles */
+
+/* --- Base Colors & Variables --- */
+:root {
+  --primary: #0a1a3a;      /* Dark Blue */
+  --accent: #3a7bd5;       /* Bright Blue */
+  --white: #ffffff;
+  --light-gray: #f5f7fa;
+  --text-dark: #2d2d2d;
+  --radius: 14px;
+  --shadow: 0 6px 20px rgba(0,0,0,0.08);
+  --container: 1140px;
+}
+
+/* Reset & Base Layout */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { 
+    font-family: 'Inter', 'Poppins', sans-serif; 
+    background: var(--light-gray); 
+    color: var(--primary); 
+}
+.container { 
+    max-width: var(--container); 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
+
+/* -------------------------------------- */
+/* HEADER & NAVIGATION STYLES */
+/* (Minimal duplication of homepage header for consistency) */
+/* -------------------------------------- */
+
+.site-header { 
+    background: var(--white); 
+    box-shadow: var(--shadow); 
+    position: sticky; 
+    top: 0; 
+    z-index: 50; 
+}
+.header-inner { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 16px 20px; 
+}
+.logo { 
+    font-size: 22px; 
+    font-weight: 700; 
+    color: var(--accent); 
+}
+.site-nav a { 
+    text-decoration: none; 
+    color: var(--primary); 
+    font-weight: 500; 
+    margin-left: 20px; 
+    transition: color 0.3s; 
+}
+.site-nav a:hover, .site-nav a.active { 
+    color: var(--accent); 
+}
+
+/* -------------------------------------- */
+/* PAGE SPECIFIC STYLES (Results Section) */
+/* -------------------------------------- */
+
+.results-section {
+    padding: 60px 20px 80px;
+    min-height: 80vh;
+}
+.results-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 5px;
+}
+.results-section p {
+    font-size: 18px;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 30px;
+}
+.results-table-wrapper {
+    overflow-x: auto; /* Makes table scrollable on small screens */
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+/* -------------------------------------- */
+/* FLIGHT TABLE STYLES (Combined from schedule.css) */
+/* -------------------------------------- */
+
+.schedule-table {
+    width: 100%;
+    min-width: 1200px; /* Forces horizontal scroll on mobile */
+    border-collapse: collapse;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    font-size: 16px;
+    text-align: center;
+    overflow: hidden;
+}
+.schedule-table th, .schedule-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    color: var(--text-dark);
+}
+.schedule-table th {
+    background: var(--accent);
+    color: var(--white);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.schedule-table tbody tr:nth-child(even) { background-color: #f9f9f9; }
+.schedule-table tbody tr:hover {
+    background: rgba(58, 123, 213, 0.08);
+    transition: 0.3s ease;
+}
+
+/* BOOK NOW Button Style (using .btn.primary definition) */
+.btn.primary {
+    display: inline-block;
+    background: var(--accent); 
+    color: var(--white);
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 14px;
+}
+.btn.primary:hover { 
+    background: #2a61b8;
+}
+
+/* -------------------------------------- */
+/* FOOTER STYLES */
+/* -------------------------------------- */
+
+footer {
+    background: var(--primary);
+    color: var(--white);
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* -------------------------------------- */
+/* RESPONSIVENESS (for the table) */
+/* -------------------------------------- */
+
+@media(max-width: 768px) {
+    /* On smaller screens, allow the table to scroll horizontally */
+    .schedule-table {
+        min-width: 800px; 
+    }
+}

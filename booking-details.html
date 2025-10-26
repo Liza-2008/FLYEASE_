@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyEase – Booking Details</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="booking-details.css"> 
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">✈ FlyEase</div>
+            <nav class="site-nav">
+                <a href="homepage.html">Home</a>
+                <a href="book-flight.html" class="active">Book Flights</a>
+                <a href="flight-schedules.html">Flight Schedules</a>
+                <a href="check-in.html">Check-In</a>
+                <a href="my-tickets.html">My Tickets</a>
+                <a href="logout.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="booking-details-section container">
+        <h2>Passenger and Booking Details</h2>
+        
+        <div class="flight-summary fade-in">
+            <h3>Selected Flight Summary</h3>
+            <p id="flight-details">Loading flight details...</p>
+        </div>
+
+        <form id="booking-details-form" class="passenger-form">
+            <h3>Passenger Information</h3>
+            <div class="form-grid">
+                <div class="field">
+                    <label>Passenger Full Name [cite: 50]</label>
+                    <input type="text" placeholder="John Doe" required>
+                </div>
+                <div class="field">
+                    <label>Email [cite: 51]</label>
+                    <input type="email" placeholder="email@example.com" required>
+                </div>
+                <div class="field">
+                    <label>Phone [cite: 52]</label>
+                    <input type="tel" placeholder="+91-9876543210" required>
+                </div>
+                <div class="field">
+                    <label>ID Type (Aadhaar / Passport) [cite: 53]</label>
+                    <select required>
+                        <option value="">Select ID Type</option>
+                        <option>Aadhaar</option>
+                        <option>Passport</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>ID Number [cite: 54]</label>
+                    <input type="text" required>
+                </div>
+                <div class="field">
+                    <label>Luggage Weight (Optional) [cite: 55]</label>
+                    <select>
+                        <option>Standard (20kg)</option>
+                        <option>Extra 5kg</option>
+                        <option>Extra 10kg</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn primary large-btn">Proceed to Payment</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="foot container">
+            <p>© 2025 FlyEase. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="booking-details.js"></script>
+</body>
+</html>
