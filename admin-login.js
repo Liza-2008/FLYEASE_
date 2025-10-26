@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Admin Login Successful! Redirecting to Admin Dashboard...');
                 
                 // Blueprint: Redirect to the admin dashboard on success
-                window.location.href = 'admin-dashboard.html'; 
+                window.location.href = 'admin.html'; 
             }, 1000); // 1 second delay simulation
         });
     }
