@@ -1,0 +1,181 @@
+/* booking-details.css - Complete, Standalone Styles (No reliance on homepage.css) */
+
+/* -------------------------------------- */
+/* 1. ROOT VARIABLES & BASE */
+/* -------------------------------------- */
+:root {
+  --primary: #0a1a3a;
+  --accent: #3a7bd5;
+  --white: #ffffff;
+  --light-gray: #f5f7fa;
+  --text-dark: #2d2d2d;
+  --radius: 14px;
+  --shadow: 0 6px 20px rgba(0,0,0,0.08);
+  --container: 1140px;
+}
+
+/* Reset & Base Layout */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { 
+    font-family: 'Inter', 'Poppins', sans-serif; 
+    background: var(--light-gray); 
+    color: var(--primary); 
+    min-height: 100vh;
+}
+.container { 
+    max-width: var(--container); 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
+
+
+/* -------------------------------------- */
+/* 2. HEADER & NAVIGATION STYLES */
+/* -------------------------------------- */
+
+.site-header { 
+    background: var(--white); 
+    box-shadow: var(--shadow); 
+    position: sticky; 
+    top: 0; 
+    z-index: 50; 
+}
+.header-inner { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 16px 20px; 
+}
+.logo { 
+    font-size: 22px; 
+    font-weight: 700; 
+    color: var(--accent); 
+}
+.site-nav a { 
+    text-decoration: none; 
+    color: var(--primary); 
+    font-weight: 500; 
+    margin-left: 20px; 
+    transition: color 0.3s; 
+}
+.site-nav a:hover, .site-nav a.active { 
+    color: var(--accent); 
+}
+
+/* -------------------------------------- */
+/* 3. FORM & PAGE SPECIFIC STYLES */
+/* -------------------------------------- */
+
+.booking-details-section {
+    padding: 60px 0 80px;
+}
+
+.booking-details-section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Flight Summary Box (Auto-filled Details) */
+.flight-summary {
+    background: #e9f0f9; /* Light accent background */
+    border: 1px solid var(--accent);
+    padding: 20px;
+    border-radius: var(--radius);
+    margin-bottom: 40px;
+}
+.flight-summary h3 {
+    font-size: 22px;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+.flight-summary p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+.flight-summary strong {
+    font-weight: 700;
+}
+
+/* Passenger Form Layout */
+.passenger-form h3 {
+    font-size: 24px;
+    color: var(--accent);
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Form Fields */
+.field {
+    text-align: left;
+}
+.field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--primary);
+    font-size: 14px;
+}
+.field input, .field select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box; 
+}
+
+/* -------------------------------------- */
+/* 4. BUTTON STYLES */
+/* -------------------------------------- */
+
+.btn {
+    display: inline-block;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn.primary {
+    background: var(--accent);
+    color: var(--white);
+}
+.btn.primary:hover {
+    background: #2a61b8;
+}
+
+/* Button - Proceed to Payment */
+.large-btn {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 40px auto 0;
+    padding: 14px 20px;
+    font-size: 18px;
+}
+
+/* -------------------------------------- */
+/* 5. FOOTER STYLES */
+/* -------------------------------------- */
+
+footer {
+    background: var(--primary);
+    color: var(--white);
+    padding: 20px 0;
+    text-align: center;
+}
+.foot {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 20px;
+}

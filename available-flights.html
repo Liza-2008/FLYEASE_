@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyEase – Available Flights</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="available-flights.css"> 
+    </head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">✈ FlyEase</div>
+            <nav class="site-nav">
+                <a href="homepage.html">Home</a>
+                <a href="book-flight.html" class="active">Book Flights</a>
+                <a href="flight-schedules.html">Flight Schedules</a>
+                <a href="check-in.html">Check-In</a>
+                <a href="my-tickets.html">My Tickets</a>
+                <a href="logout.html">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="results-section">
+        <div class="container">
+            <h2>Flights Available</h2>
+            <p>Select the best option for your journey.</p>
+            
+            <div class="results-table-wrapper" id="flight-results-container">
+                <p>Loading flights...</p>
+                </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="foot container">
+            <p>© 2025 FlyEase. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="available-flights.js"></script>
+</body>
+</html>
