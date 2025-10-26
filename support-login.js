@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Support Login Successful! Redirecting to Support Panel...');
                 
                 // Blueprint Step 12 requires a dedicated panel (e.g., support-dashboard.html)
-                window.location.href = 'support-dashboard.html'; 
+                window.location.href = 'support.html'; 
             }, 1000); // 1 second delay simulation
         });
     }
