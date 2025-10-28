@@ -1,0 +1,20 @@
+FLYEASE: Website Project
+FLYEASE is a responsive, role-based flight scheduling and passenger portal application designed to demonstrate full-stack transactional flow and efficient client-side data management.
+
+Key Features and Functionality
+1. Complete User Journey: The project implements the entire passenger experience, including searching and selecting flights, secure booking details collection, simulated payment processing, E-Ticket generation, and PNR-based online check-in.
+
+2. Role-Based Access: The application includes a multi-step login gateway that authenticates users into specific roles (Passenger, Administrator, Airline Support) before allowing access to privileged features.
+
+3. Administrative Panel (40-50% Complete): The Admin Dashboard is built to manage the core application data, featuring live statistics (total revenue, total flights), a dynamic flight management table, and the ability to update flight statuses using Local Storage persistence.
+
+4. Support Panel (40-50% Complete): The Support Panel allows staff to look up specific bookings by PNR and perform essential pre-boarding tasks, such as verifying luggage status and assigning seats.
+
+Technical Framework (Second Evaluation Focus):
+The project architecture relies solely on foundational web technologies to meet the syllabus requirements:
+
+1. Frontend Logic: Built using Vanilla JavaScript (pure JS) for all DOM manipulation, user interactions, and control flows.
+
+2. Data Persistence: The application uses the browser's Local Storage to function as a simulated, persistent JSON database. All flight, user, and booking data is stored, retrieved (getCollection), and updated (updateCollection) via serialized JSON objects.
+
+3. Authentication: Security restrictions are enforced by a JS-based Authentication Gatekeeper that checks a simple isLoggedIn flag in Local Storage, redirecting unauthorized users to the login page.
