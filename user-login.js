@@ -1,40 +1,52 @@
-// user-login.js - Final Code with Mock Password Check and Homepage Redirect
+// user-login.js - Updated to use Fetch API for verification
 
-const MOCK_PASSWORD = 'password123'; // The password required for successful login
+const BASE_URL = 'http://localhost:3000/';
+const USER_HOMEPAGE = 'homepage.html';
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('user-login-form');
     
     if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener('submit', async (e) => { // ADD async HERE
             e.preventDefault();
             
+            const emailInput = document.getElementById('email');
             const passwordInput = document.getElementById('password');
+            
+            const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
             
-            // --- SIMULATED LOGIN LOGIC (Blueprint Step 3) ---
+            // Fetch users from the JSON Server
+            const users = await fetchUsers();
             
-            // 1. Primary check: Ensure the mock password is correct.
-            if (password === MOCK_PASSWORD) {
+            // Simulate Authentication Check
+            const user = users.find(u => u.email === email && u.password === password && u.role === 'user');
+            
+            if (user) {
+                console.log(`Login attempt for ${email} successful.`);
                 
-                console.log('Login attempt successful.');
-                
-                // Simulate successful authentication delay
                 setTimeout(() => {
                     alert('Login Successful! Redirecting to homepage...');
-                    
-                    // --- CRITICAL FIX: SET AUTHENTICATION FLAG AND REDIRECT TO HOMEPAGE ---
                     localStorage.setItem('isLoggedIn', 'true'); 
-                    
-                    // Redirect to the homepage, which will now display the logged-in navbar (Blueprint Step 4)
-                    window.location.href = 'homepage.html'; 
+                    window.location.href = USER_HOMEPAGE; 
                 }, 1000); 
 
             } else {
-                // If password fails
-                alert('Login Failed: Invalid password. Please use the mock password "password123".');
-                passwordInput.value = ''; // Clear the password field for security
+                alert('Login Failed: Invalid credentials or not a User role.');
+                passwordInput.value = ''; 
             }
         });
     }
 });
+
+// New Fetch Utility for this file
+const fetchUsers = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}users`);
+        return response.ok ? await response.json() : [];
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        alert('Cannot connect to database. Ensure JSON server is running.');
+        return [];
+    }
+};

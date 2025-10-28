@@ -53,7 +53,8 @@ const verifyBooking = (pnr, lastName) => {
     return { 
         status: 'success', 
         booking: {
-            ...booking,
+            // Spread existing booking data and add derived/display fields
+            ...booking, 
             passengerName: booking.name || 'John Doe',
             flightRoute: booking.flightRoute || 'AI-101 (DEL to JFK)',
         }
@@ -82,6 +83,7 @@ const displayMessage = (message) => {
 // Function to simulate generating the boarding pass
 const generateBoardingPass = (booking, seat) => {
     alert(`Check-In Complete! Boarding Pass Generated.\n\nFlight: ${booking.flightRoute}\nSeat: ${seat}`);
+    // Redirect back to the ticket page (or a dedicated boarding pass view) as confirmation.
     window.location.href = `ticket.html?pnr=${booking.pnr}&checkedin=true`;
 };
 
@@ -106,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (result.status === 'too_early') {
                 // PNR 2: FUTURE PNR (Show special message)
                 displayMessage(result.message);
-                // Optionally display summary details from the booking for confirmation
                 document.getElementById('loading-message').style.display = 'none';
             } else {
                 // PNR 3: Verification Failed

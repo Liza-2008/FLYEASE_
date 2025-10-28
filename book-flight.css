@@ -356,11 +356,37 @@ footer {
     text-decoration: underline; 
 }
 
+/* Footer Styles (Cleaned and Corrected) */
+footer {
+    /* Ensures the footer occupies full width and is visually stable */
+    width: 100%; 
+    flex-shrink: 0; /* Prevents the footer from shrinking */
+
+    /* Sets the background and color */
+    background: var(--primary); 
+    color: var(--white);
+    padding: 20px 0;
+    margin-top: 0; 
+}
+
+/* Inner Container for Footer Content */
+.foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1140px; /* Use your container max-width */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 /* CRITICAL: Ensure the main content section pushes the footer down */
 .full-section {
-    flex-grow: 1; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* ... rest of full-section styles ... */
+    flex-grow: 1; /* CRITICAL: This forces the content area to take all available space */
+    display: flex; /* Required to center content */
+    flex-direction: column;
+    align-items: center; /* Vertically centers the form */
+    justify-content: center; /* Horizontally centers the form */
+    
+    padding: 80px 20px; /* Use vertical padding only */
+    background: transparent;
 }
