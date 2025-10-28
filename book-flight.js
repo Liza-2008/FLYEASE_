@@ -18,21 +18,24 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("load", fadeInOnScroll);
 
 
-    // =========================================================
-    // 2. PRIMARY FORM SUBMISSION (Existing Logic)
-    //    NOTE: This targets the 'one-way-form' ID now, not a generic 'searchForm'.
-    // =========================================================
-    const oneWayForm = document.getElementById("one-way-form");
-    if (oneWayForm) {
-        oneWayForm.addEventListener("submit", (e) => {
+   // book-flight.js (Section 2: Primary Form Submission)
+
+// =========================================================
+// 2. PRIMARY FORM SUBMISSION (FIXED to include all forms)
+// =========================================================
+
+const forms = ['one-way-form', 'round-trip-form', 'multi-city-form'];
+
+forms.forEach(formId => {
+    const form = document.getElementById(formId);
+    if (form) {
+        form.addEventListener("submit", (e) => {
             e.preventDefault();
-            // Blueprint Step 5: Redirect to Available Flights page
+            // All forms redirect to the Available Flights page
             window.location.href = "available-flights.html"; 
         });
     }
-
-    // You should add similar logic for 'round-trip-form' and 'multi-city-form' submissions here if needed.
-
+});
 
     // =========================================================
     // 3. TAB SWITCHING LOGIC (New Sliding Feature)
