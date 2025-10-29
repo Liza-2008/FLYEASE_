@@ -1,49 +1,90 @@
-// admin-login.js - Updated to use Fetch API for verification
-
 const BASE_URL = 'http://localhost:3000/';
-const ADMIN_DASHBOARD = 'admin.html';
-
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('admin-login-form');
-    
-    if (loginForm) {
-        loginForm.addEventListener('submit', async (e) => { // ADD async HERE
-            e.preventDefault();
-            
-            const emailInput = document.getElementById('admin-email');
-            const passwordInput = document.getElementById('admin-password');
-            
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-
-            const users = await fetchUsers();
-            
-            // Simulate Authentication Check
-            const adminUser = users.find(u => u.email === email && u.password === password && u.role === 'admin');
-            
-            if (adminUser) {
-                console.log('Admin login attempt successful.');
-                setTimeout(() => {
-                    alert('Admin Login Successful! Redirecting to Admin Dashboard...');
-                    localStorage.setItem('isLoggedIn', 'true'); 
-                    window.location.href = ADMIN_DASHBOARD; 
-                }, 1000); 
-
-            } else {
-                alert('Login Failed: Invalid credentials or role.');
-            }
-        });
-    }
-});
-
-// New Fetch Utility for this file
-const fetchUsers = async () => {
-    try {
-        const response = await fetch(`${BASE_URL}users`);
-        return response.ok ? await response.json() : [];
-    } catch (error) {
-        console.error('Error fetching user data:', error);
-        alert('Cannot connect to database. Ensure JSON server is running.');
-        return [];
-    }
+const HOMEPAGES = {
+  passenger: 'homepage.html',
+  admin: 'admin-dashboard.html',
+  support: 'support-dashboard.html',
 };
+
+// ====== Toast Notification ======
+function showToast(message, type = 'info') {
+  const oldToast = document.querySelector('.toast');
+  if (oldToast) oldToast.remove();
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  setTimeout(() => toast.classList.add('show'), 100);
+  setTimeout(() => toast.classList.remove('show'), 3000);
+  setTimeout(() => toast.remove(), 3600);
+}
+
+// ====== Fetch Users ======
+const fetchUsers = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}users`);
+    if (!response.ok) throw new Error('Database connection failed');
+    return await response.json();
+  } catch (error) {
+    console.error(' Error fetching users:', error);
+    showToast('⚠ Cannot connect to server. Check JSON Server.', 'error');
+    return [];
+  }
+};
+
+// ====== Detect Role (Always Admin) ======
+function detectRoleFromPage() {
+  return 'admin'; // fixed role for admin login
+}
+
+// ====== Page Ready ======
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.getElementById('admin-login-form');
+  if (!loginForm) return;
+
+  const loginButton = loginForm.querySelector('.btn.primary');
+  const role = detectRoleFromPage();
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('admin-email').value.trim();
+    const password = document.getElementById('admin-password').value.trim();
+
+    if (!email || !password) {
+      showToast('⚠ Please enter both email and password.', 'warning');
+      return;
+    }
+
+    // Show loading state
+    loginButton.disabled = true;
+    loginButton.innerHTML = '<span class="loader"></span> Logging in...';
+
+    // Fetch users
+    const users = await fetchUsers();
+
+    // Match admin credentials
+    const adminUser = users.find(
+      (u) => u.email === email && u.password === password && u.role === role
+    );
+
+    if (adminUser) {
+      console.log(` Login successful for ${email} (${adminUser.role})`);
+      showToast(' Admin Login successful! Redirecting...', 'success');
+
+      setTimeout(() => {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userRole', adminUser.role);
+        localStorage.setItem('userEmail', email);
+        window.location.href = HOMEPAGES.admin;
+      }, 1500);
+    } else {
+      console.warn(` Invalid admin credentials for ${email}`);
+      showToast(' Invalid credentials. Try again.', 'error');
+      document.getElementById('admin-password').value = '';
+      loginButton.disabled = false;
+      loginButton.textContent = 'Log In';
+    }
+  });
+});

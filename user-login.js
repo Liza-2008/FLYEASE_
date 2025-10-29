@@ -1,5 +1,3 @@
-// ✅ FlyEase Login Script (supports Passenger / Admin / Support roles)
-// Enhanced with Toasts + Loading Animation + Role Auto-Detection
 
 const BASE_URL = 'http://localhost:3000/';
 const HOMEPAGES = {
@@ -30,7 +28,7 @@ const fetchUsers = async () => {
     if (!response.ok) throw new Error('Database connection failed');
     return await response.json();
   } catch (error) {
-    console.error('❌ Error fetching users:', error);
+    console.error(' Error fetching users:', error);
     showToast('⚠ Cannot connect to server. Check JSON Server.', 'error');
     return [];
   }
@@ -79,8 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     if (user) {
-      console.log(`✅ Login successful for ${email} (${user.role})`);
-      showToast('✅ Login successful! Redirecting...', 'success');
+      console.log(` Login successful for ${email} (${user.role})`);
+      showToast(' Login successful! Redirecting...', 'success');
 
       setTimeout(() => {
         localStorage.setItem('isLoggedIn', 'true');
@@ -89,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = HOMEPAGES[user.role] || HOMEPAGES.passenger;
       }, 1500);
     } else {
-      console.warn(`❌ Invalid credentials for ${email} (${role})`);
-      showToast('❌ Invalid credentials. Try again.', 'error');
+      console.warn(` Invalid credentials for ${email} (${role})`);
+      showToast(' Invalid credentials. Try again.', 'error');
       document.getElementById('password').value = '';
       loginButton.disabled = false;
       loginButton.textContent = 'Log In';
