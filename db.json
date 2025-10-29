@@ -1,6 +1,6 @@
 {
   "users": [
-    { "_id": "U001", "name": "Priya Sharma", "email": "priya@flyease.com", "password": "password123", "role": "user" },
+    { "_id": "U001", "name": "Priya Sharma", "email": "priya@flyease.com", "password": "password123", "role": "passenger" },
     { "_id": "U002", "name": "Admin User", "email": "admin@flyease.com", "password": "admin", "role": "admin" },
     { "_id": "U003", "name": "Support Staff", "email": "support@flyease.com", "password": "support", "role": "support" }
   ],

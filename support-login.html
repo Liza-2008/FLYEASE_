@@ -1,58 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlyEase – Support Panel Login</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="homepage.css">
-    <link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlyEase – Support Staff Login</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="support-login.css" />
 </head>
+
 <body>
-
-    <header class="site-header">
-      <div class="container header-inner">
-        <div class="logo">✈ FlyEase</div>
-        <nav class="site-nav">
-          <a href="homepage.html">Home</a>
-        </nav>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        ✈ FlyEase
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main class="login-page">
-        <div class="login-container fade-in">
-            <h2>Airline Support Login</h2>
-            
-            <form id="support-login-form">
-                <div class="field">
-                    <label for="support-id">Employee ID / Username</label>
-                    <input type="text" id="support-id" placeholder="Enter employee ID" required>
-                </div>
-                
-                <div class="field">
-                    <label for="support-password">Password</label>
-                    <input type="password" id="support-password" placeholder="Enter password" required>
-                </div>
-                
-                <a href="forgot-password.html" class="small-link forgot-link">Forgot Password?</a>
-                
-                <button type="submit" class="btn primary full-width-btn support-btn">Log In</button>
-            </form>
-            
-            <div class="back-home">
-              <a href="login.html">← Back to Role Selection</a>
-            </div>
+  <!-- Login Section -->
+  <main class="login-page">
+    <div class="login-container fade-in">
+      <h2>Support Staff Login</h2>
+      <p class="login-subtext">Welcome back! Please sign in to manage operations efficiently 👩‍💻</p>
+
+      <form id="support-login-form">
+        <div class="field">
+          <label for="support-username">Employee ID / Username</label>
+          <input type="text" id="support-username" placeholder="Enter your username or ID" required />
         </div>
-    </main>
 
-    <footer class="login-footer">
-        <p>© 2025 FlyEase. All rights reserved.</p>
-    </footer>
-    
-    <script src="support-login.js"></script>
+        <div class="field">
+          <label for="support-password">Password</label>
+          <input type="password" id="support-password" placeholder="Enter password" required />
+        </div>
+
+        <a href="forgot-password.html" class="forgot-link">Forgot Password?</a>
+        <button type="submit" class="btn primary">Log In</button>
+      </form>
+
+      <div class="back-home">
+        <a href="login.html">← Back to Role Selection</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="login-footer">
+    © 2025 FlyEase. All rights reserved.
+  </footer>
+
+  <script src="support-login.js"></script>
 </body>
 </html>
