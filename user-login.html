@@ -1,57 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlyEase – Passenger Login</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="homepage.css">
-    <link rel="stylesheet" href="login.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlyEase – Passenger Login</title>
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="user-login.css" />
 </head>
+
 <body>
+<!-- Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      ✈ FlyEase
+    </div>
+  </div>
+</header>
 
-    <header class="site-header">
-      <div class="container header-inner">
-        <div class="logo">✈ FlyEase</div>
-        <nav class="site-nav">
-          <a href="homepage.html">Home</a>
-        </nav>
-      </div>
-    </header>
+  <!-- Login Section -->
+  <main class="login-page">
+    <div class="login-container fade-in">
+      <h2>Passenger Login</h2>
+      <p class="login-subtext">Welcome back! Please sign in to continue your journey ✈</p>
 
-    <main class="login-page">
-        <div class="login-container fade-in user-form-box">
-            <h2>Passenger Login</h2>
-            
-            <form id="user-login-form">
-                <div class="field">
-                    <label for="email">Email / Mobile Number</label>
-                    <input type="text" id="email" placeholder="Enter email or mobile number" required>
-                </div>
-                
-                <div class="field">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter password" required>
-                </div>
-                
-                <a href="forgot-password.html" class="small-link forgot-link">Forgot Password?</a>
-                
-                <button type="submit" class="btn primary full-width-btn">Log In</button>
-            </form>
-            
-            <p class="signup-link">New user? <a href="user-signup.html">Sign Up</a></p>
-            
-            <div class="back-home">
-              <a href="login.html">← Back to Role Selection</a>
-            </div>
+      <form id="user-login-form">
+        <div class="field">
+          <label for="email">Email / Mobile Number</label>
+          <input type="text" id="email" placeholder="Enter email or mobile number" required />
         </div>
-    </main>
 
-    <script src="user-login.js"></script>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter password" required />
+        </div>
+
+        <a href="forgot-password.html" class="forgot-link">Forgot Password?</a>
+        <button type="submit" class="btn primary">Log In</button>
+      </form>
+
+      <p class="signup-link">New user? <a href="user-signup.html">Sign Up</a></p>
+      <div class="back-home">
+        <a href="login.html">← Back to Role Selection</a>
+      </div>
+    </div>
+  </main>
+
+    <!-- Footer -->
+  <footer class="login-footer">
+    © 2025 FlyEase. All rights reserved.
+  </footer>
+
+  <script src="user-login.js"></script>
 </body>
 </html>
