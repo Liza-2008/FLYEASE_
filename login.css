@@ -4,13 +4,23 @@
   --highlight: #00c6ff;
   --light-gray: #f5f7fa;
   --white: #ffffff;
-  --shadow: 0 6px 20px rgba(0,0,0,0.1);
-  --radius: 14px;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  --radius: 16px;
 }
 
 /* Reset */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { font-family: 'Inter', sans-serif; background: var(--light-gray); color: var(--primary); }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Inter', sans-serif;
+  background: var(--light-gray);
+  color: var(--primary);
+  overflow-x: hidden;
+}
 
 /* Header */
 .site-header {
@@ -19,97 +29,173 @@ html, body { font-family: 'Inter', sans-serif; background: var(--light-gray); co
   position: sticky;
   top: 0;
   z-index: 10;
+  backdrop-filter: blur(10px);
 }
+
 .header-inner {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 14px 24px;
+  padding: 16px 24px;
 }
-.logo { font-size: 22px; font-weight: 700; color: var(--accent); }
-nav a {
-  text-decoration: none;
-  color: var(--primary);
-  font-weight: 600;
-  margin-left: 16px;
-}
-nav a:hover { color: var(--accent); }
 
-/* Main login selection */
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Main login section */
 .login-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 120px);
-  padding: 40px 20px;
-  background: linear-gradient(135deg, var(--accent), var(--highlight));
+  min-height: calc(100vh - 140px);
+  padding: 60px 20px;
+
+  /* ✈️ Airplane-themed background */
+  background-image: url("assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  position: relative;
 }
 
+/* ✨ Refined background overlay — clearer, less blur */
+.login-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.3); /* softer white tint */
+  backdrop-filter: blur(3px); /* subtle clarity */
+}
+
+/* Login container */
 .login-container {
-  background: var(--white);
-  padding: 40px 50px;
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 50px 60px;
   border-radius: var(--radius);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-  max-width: 900px;
-  width: 100%;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
+  max-width: 1000px;
+  width: 95%;
   text-align: center;
+  transition: all 0.3s ease;
 }
 
 .login-container h1 {
-  font-size: 28px;
+  font-size: 30px;
   font-family: 'Poppins', sans-serif;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   color: var(--primary);
+  letter-spacing: 0.5px;
 }
 
+/* Role Buttons */
 .role-buttons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-  margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 25px;
+  margin-bottom: 40px;
 }
 
+/* Role Cards */
 .role-card {
   background: var(--light-gray);
   border-radius: var(--radius);
-  padding: 28px 20px;
+  padding: 35px 25px;
   text-decoration: none;
   color: var(--primary);
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   box-shadow: var(--shadow);
-  transition: all 0.3s ease;
+  height: 280px;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+.role-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.role-card.user::before {
+  background: linear-gradient(135deg, #4da6ff, #007bff);
+}
+
+.role-card.admin::before {
+  background: linear-gradient(135deg, #f7c948, #f1a208);
+}
+
+.role-card.support::before {
+  background: linear-gradient(135deg, #b47cff, #6f00ff);
+}
+
+.role-card:hover::before {
+  opacity: 1;
+}
+
 .role-card:hover {
-  transform: translateY(-6px);
-  background: var(--accent);
+  transform: translateY(-8px) scale(1.03);
   color: var(--white);
 }
-.role-card .icon {
-  font-size: 40px;
-  margin-bottom: 10px;
+
+.icon {
+  font-size: 52px;
+  margin-bottom: 12px;
+  z-index: 2;
+  transition: color 0.4s ease, transform 0.3s ease;
 }
+
+.role-card:hover .icon {
+  transform: scale(1.15);
+  color: var(--white);
+}
+
 .role-card h2 {
   font-size: 22px;
   font-weight: 700;
-  margin-bottom: 6px;
-}
-.role-card p {
-  font-size: 15px;
-  opacity: 0.9;
+  margin-bottom: 8px;
+  z-index: 2;
 }
 
-.back-home {
-  margin-top: 10px;
+.role-card p {
+  font-size: 15px;
+  opacity: 0.95;
+  text-align: center;
+  z-index: 2;
 }
+
+/* Back to Home */
+.back-home {
+  margin-top: 25px;
+}
+
 .back-home a {
   text-decoration: none;
   color: var(--accent);
   font-weight: 600;
+  font-size: 16px;
+  transition: color 0.3s ease;
 }
+
 .back-home a:hover {
+  color: var(--highlight);
   text-decoration: underline;
 }
 
@@ -118,33 +204,43 @@ nav a:hover { color: var(--accent); }
   background: var(--primary);
   color: var(--white);
   text-align: center;
-  padding: 12px 0;
+  padding: 16px 0;
   font-size: 14px;
+  letter-spacing: 0.3px;
 }
 
-/* Fade-in effect */
+/* Animation */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s forwards ease-out;
+  transform: translateY(25px);
+  animation: fadeInUp 0.9s forwards ease-out;
 }
+
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* --- ADMIN SPECIFIC STYLES (Add to the end of login.css) --- */
-.btn.admin-btn {
-    background: #f1c40f; /* Standard Gold/Yellow for distinction */
-}
-.btn.admin-btn:hover {
-    background: #d4ac0d; /* Darker shade of gold on hover */
-}
-
-/* --- SUPPORT SPECIFIC STYLES (Add to the end of login.css) --- */
-.btn.support-btn {
-    background: #9b59b6; /* Standard Purple/Indigo color */
-}
-.btn.support-btn:hover {
-    background: #8e44ad; /* Darker shade on hover */
+/* Responsive */
+@media (max-width: 950px) {
+  .login-container {
+    padding: 40px 30px;
+  }
+  .role-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .role-card {
+    width: 90%;
+    height: 240px;
+  }
+  .login-container h1 {
+    font-size: 26px;
+  }
 }

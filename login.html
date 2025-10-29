@@ -3,64 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FlyEase – Login Selection</title>
+  <title>FlyEase | Login Portal</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="login.css" />
 </head>
 <body>
-
-  <link rel="stylesheet" href="homepage.css"> 
-    
-    <link rel="stylesheet" href="login.css">
-
   <!-- Header -->
-  <header class="site-header">
-  <div class="container header-inner">
-    <div class="logo">✈ FlyEase</div>
-    <nav class="site-nav">
-      </nav>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      ✈ FlyEase
+    </div>
   </div>
 </header>
 
-  <!-- Login Role Selection -->
+
+  <!-- Main Section -->
   <main class="login-page">
     <div class="login-container fade-in">
       <h1>Who are you logging in as?</h1>
-
       <div class="role-buttons">
+        
+        <!-- Passenger Login -->
         <a href="user-login.html" class="role-card user">
-          <div class="icon">🧍‍♂️</div>
-          <h2>User</h2>
-          <p>Passengers who book & travel</p>
+          <i class="fa-solid fa-person-walking-luggage icon"></i>
+          <h2>Passenger Login</h2>
+          <p>Access your FlyEase account to book and manage flights.</p>
         </a>
 
+        <!-- Admin Login -->
         <a href="admin-login.html" class="role-card admin">
-          <div class="icon">🧑‍💼</div>
-          <h2>Admin</h2>
-          <p>Manages flights, users, and payments</p>
+          <i class="fa-solid fa-user-shield icon"></i>
+          <h2>Admin Login</h2>
+          <p>Manage flight schedules, bookings, and passenger data.</p>
         </a>
 
+        <!-- Support Login -->
         <a href="support-login.html" class="role-card support">
-          <div class="icon">👨‍🔧</div>
-          <h2>Airline Support</h2>
-          <p>Handles verifications, luggage, seat confirmations</p>
+          <i class="fa-solid fa-headset icon"></i>
+          <h2>Support Staff Login</h2>
+          <p>Assist travelers and handle real-time service updates.</p>
         </a>
+
       </div>
 
       <div class="back-home">
-        <a href="homepage.html">← Back to Home</a>
+        <a href="index.html"><i class="fa-solid fa-arrow-left-long"></i> Back to Home</a>
       </div>
     </div>
   </main>
 
+  <!-- Footer -->
   <footer class="login-footer">
-    <p>© 2025 FlyEase. All rights reserved.</p>
+    © 2025 FlyEase. All rights reserved.
   </footer>
 
+  <!-- JS -->
   <script src="login.js"></script>
-
 </body>
 </html>
