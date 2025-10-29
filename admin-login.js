@@ -1,8 +1,8 @@
 const BASE_URL = 'http://localhost:3000/';
 const HOMEPAGES = {
   passenger: 'homepage.html',
-  admin: 'admin-dashboard.html',
-  support: 'support-dashboard.html',
+  admin: 'admin.html',
+  support: 'support.html',
 };
 
 // ====== Toast Notification ======

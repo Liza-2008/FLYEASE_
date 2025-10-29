@@ -1,113 +1,43 @@
-// admin.js - FINAL INTEGRATED CODE (Uses centralized data-manager.js utilities)
+// Example data
+const flights = [
+  { id: "99eb", flight: "AI203", from: "DEL", to: "JFK", price: 45000 },
+  { id: "b837", flight: "EK507", from: "DEL", to: "DXB", price: 25000 },
+  { id: "484c", flight: "SQ401", from: "DEL", to: "SIN", price: 38000 },
+];
 
-// NOTE: Assumes getCollection and updateCollection are exposed globally by data-manager.js
+// Populate flight table
+const tableBody = document.getElementById("flightTableBody");
 
-// --- 1. CORE DASHBOARD FUNCTIONS ---
-
-// Update quick stats (Blueprint Step 11: View total bookings, View revenue reports)
-const updateStats = () => {
-    // CRITICAL FIX: Use the global utility to fetch centralized data
-    const flights = getCollection('flights');
-    const bookings = getCollection('bookings'); 
-    
-    // Calculate total revenue
-    const totalRevenue = bookings.reduce((sum, booking) => {
-        // Safely parse amount from "₹XX,XXX" format
-        const amount = parseInt(booking.amountPaid.replace('₹', '').replace(',', ''));
-        return sum + (isNaN(amount) ? 0 : amount);
-    }, 0);
-
-    document.getElementById('stat-flights').textContent = flights.length;
-    document.getElementById('stat-bookings').textContent = bookings.length;
-    document.getElementById('stat-revenue').textContent = `₹${totalRevenue.toLocaleString('en-IN')}`;
-};
-
-// Render the flight management table (Blueprint Step 11: View all flights, Status Management)
-const renderFlightTable = (flights) => {
-    const container = document.getElementById('flight-management-container');
-    
-    const tableHTML = `
-        <table class="schedule-table admin-table">
-            <thead>
-                <tr>
-                    <th>Flight ID</th>
-                    <th>Route</th>
-                    <th>Date / Time</th>
-                    <th>Price</th>
-                    <th>Seats (Avail.)</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${flights.map(flight => `
-                    <tr data-flight-id="${flight.flightId}">
-                        <td>${flight.flightNo}</td>
-                        <td>${flight.from} → ${flight.to}</td>
-                        <td>${flight.date} @ ${flight.time}</td>
-                        <td>₹${flight.price.toLocaleString('en-IN')}</td>
-                        <td>${flight.seats}</td>
-                        <td>
-                            <select class="status-selector" data-id="${flight.flightId}">
-                                <option value="On Time" ${flight.status === 'On Time' ? 'selected' : ''}>On Time</option>
-                                <option value="Delayed" ${flight.status === 'Delayed' ? 'selected' : ''}>Delayed</option>
-                                <option value="Cancelled" ${flight.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button class="btn primary small-btn edit-btn" data-id="${flight.flightId}">Edit</button>
-                            <button class="btn small-btn delete-btn" data-id="${flight.flightId}">Del</button>
-                        </td>
-                    </tr>
-                `).join('')}
-            </tbody>
-        </table>
+function renderFlights() {
+  tableBody.innerHTML = "";
+  flights.forEach(flight => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${flight.id}</td>
+      <td>${flight.flight}</td>
+      <td>${flight.from}</td>
+      <td>${flight.to}</td>
+      <td>₹${flight.price.toLocaleString()}</td>
+      <td>
+        <button class="action-btn edit-btn">Edit</button>
+        <button class="action-btn delete-btn">Delete</button>
+      </td>
     `;
-    container.innerHTML = tableHTML;
-    attachEventListeners();
-};
+    tableBody.appendChild(row);
+  });
+}
 
-// Attaches listeners for status change and edit/delete buttons
-const attachEventListeners = () => {
-    // Admin Feature: Manage flight status (Update status)
-    document.querySelectorAll('.status-selector').forEach(select => {
-        select.addEventListener('change', (e) => {
-            const flightId = e.target.dataset.id;
-            const newStatus = e.target.value;
-            
-            // CRITICAL FIX: Use the global utility to fetch and update data
-            let flights = getCollection('flights');
-            const flightIndex = flights.findIndex(f => f.flightId === flightId);
-            if (flightIndex > -1) {
-                flights[flightIndex].status = newStatus;
-                updateCollection('flights', flights); // Save updated data back to Local Storage
-                alert(`Status for ${flights[flightIndex].flightNo} updated to ${newStatus}.`);
-                updateStats(); // Refresh stats display
-            }
-        });
-    });
+renderFlights();
 
-    // Admin Feature: Add/Edit/Delete flight entries (Simulated)
-    document.querySelector('.add-flight-btn').addEventListener('click', () => {
-        alert('Simulating: Opens form to add new flight.');
-    });
-
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            if (confirm('Are you sure you want to delete this flight? (Simulated)')) {
-                alert('Flight deleted! (Simulated)');
-            }
-        });
-    });
-};
-
-
-// --- 2. INITIALIZATION ---
-document.addEventListener('DOMContentLoaded', () => {
-    // NOTE: The local initialization/fetching functions (ensureDataStore, fetchAllFlights) 
-    // are REMOVED as data-manager.js now handles the initialization on homepage load.
-    
-    updateStats();
-    const flights = getCollection('flights'); // Fetch using global utility
-    renderFlightTable(flights);
+// Add New Flight (demo)
+document.getElementById("addFlightBtn").addEventListener("click", () => {
+  const newFlight = {
+    id: Math.random().toString(36).substring(2, 6),
+    flight: "NEW123",
+    from: "DEL",
+    to: "LHR",
+    price: 50000,
+  };
+  flights.push(newFlight);
+  renderFlights();
 });
