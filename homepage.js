@@ -5,34 +5,31 @@ const TEST_PNR_GOOD = "G00D1A";    // Works immediately (for testing)
 const TEST_PNR_FUTURE = "FUTU8B";  // Fails check-in window (for testing)
 
 
-// --- Authentication Gatekeeper Function ---
+// =========================================================
+// AUTHENTICATION GATEKEEPER FUNCTION
+// =========================================================
 const checkAuthAndRedirect = (e) => {
-    // Check if the user is logged in (flag set in user-login.js)
     if (localStorage.getItem('isLoggedIn') !== 'true') {
-        e.preventDefault(); // Stop the transactional action
-        
-        // Use a simple local flag to ensure the alert only fires once per protected click attempt
+        e.preventDefault();
+
         const hasAlerted = localStorage.getItem('auth_alerted') === 'true';
-        
         if (!hasAlerted) {
-             alert('Please log in to access this feature.');
-             localStorage.setItem('auth_alerted', 'true');
+            alert('Please log in to access this feature.');
+            localStorage.setItem('auth_alerted', 'true');
         }
-        
-        // Redirect to the login selection page
+
         window.location.href = 'login.html';
         return false;
     }
-    // If authenticated, clear the alert flag and proceed
+
     localStorage.removeItem('auth_alerted');
     return true;
 };
 
 
 // =========================================================
-// 0. Data Seeding Function (Simulated Database)
+// DATA SEEDING FUNCTION (Simulated Database)
 // =========================================================
-
 const seedInitialBookings = () => {
     const existingBookings = JSON.parse(localStorage.getItem('flyease_bookings')) || [];
 
@@ -42,7 +39,6 @@ const seedInitialBookings = () => {
         return d.toISOString();
     };
     
-    // --- PNR 1: GOOD PNR (Check-in available now) ---
     if (!existingBookings.some(b => b.pnr === TEST_PNR_GOOD)) {
         existingBookings.push({
             pnr: TEST_PNR_GOOD,
@@ -54,7 +50,6 @@ const seedInitialBookings = () => {
         });
     }
 
-    // --- PNR 2: FUTURE PNR (Too early for check-in) ---
     if (!existingBookings.some(b => b.pnr === TEST_PNR_FUTURE)) {
         existingBookings.push({
             pnr: TEST_PNR_FUTURE,
@@ -62,18 +57,61 @@ const seedInitialBookings = () => {
             lastName: 'Singh',
             flightRoute: 'EK-203 (DEL to DXB)',
             paymentStatus: 'SUCCESS',
-            paymentDate: getDateHoursAgo(12), 
+            paymentDate: getDateHoursAgo(12),
         });
     }
 
     localStorage.setItem('flyease_bookings', JSON.stringify(existingBookings));
-    console.log('Test booking data seeded.');
+    console.log('✅ Test booking data seeded.');
 };
 
 
-// --- Function to handle the fade-in effect ---
-const fadeEls = document.querySelectorAll('.fade-in');
+// =========================================================
+// NAVIGATION BAR UPDATER + LOGOUT HANDLER
+// =========================================================
+const updateNavForAuth = () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const nav = document.querySelector('.site-nav');
 
+    if (nav) {
+        if (isLoggedIn) {
+            nav.innerHTML = `
+                <a href="homepage.html">Home</a>
+                <a href="#book">Book Flights</a>
+                <a href="flight-schedules.html">Flight Schedules</a>
+                <a href="check-in.html">Check-In</a>
+                <a href="my-tickets.html">My Tickets</a> 
+                <a href="#" id="logoutLink">Logout</a>
+            `;
+        } else {
+            nav.innerHTML = `
+                <a href="homepage.html">Home</a>
+                <a href="#destinations">Destinations</a>
+                <a href="flight-schedules.html">Flight Schedules</a>
+                <a href="check-in.html">Check-In</a>
+                <a href="login.html">Login</a>
+            `;
+        }
+
+        // ✅ Add Logout logic dynamically
+        const logoutLink = document.getElementById('logoutLink');
+        if (logoutLink) {
+            logoutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                alert("You have been logged out.");
+                window.location.href = "homepage.html";
+            });
+        }
+    }
+};
+
+
+// =========================================================
+// FADE-IN EFFECT ON SCROLL
+// =========================================================
+const fadeEls = document.querySelectorAll('.fade-in');
 const fadeInOnScroll = () => {
     fadeEls.forEach(el => {
         const rect = el.getBoundingClientRect();
@@ -85,135 +123,83 @@ const fadeInOnScroll = () => {
 
 
 // =========================================================
-// 1. Core Functionality: Button Click Listeners & Form Submissions
+// MAIN DOMContentLoaded FUNCTION
 // =========================================================
 document.addEventListener('DOMContentLoaded', () => {
-    seedInitialBookings(); 
-    
-    // --- PROTECTED BUTTON: "Book Your Flight" Teaser Button ---
+    seedInitialBookings();
+    updateNavForAuth();
+
+    // --- PROTECTED BUTTON: "Book Your Flight" ---
     const bookFlightBtn = document.querySelector('#book .btn.primary');
     if (bookFlightBtn) {
         bookFlightBtn.addEventListener('click', (e) => {
             if (checkAuthAndRedirect(e)) {
-                // If checkAuthAndRedirect returns true, this code runs:
                 window.location.href = 'book-flight.html';
             }
         });
     }
 
-    // Logic for "View Live Schedules" button (UNPROTECTED)
+    // --- UNPROTECTED: "View Live Schedules" ---
     const viewScheduleBtn = document.getElementById('view-schedule-btn');
     if (viewScheduleBtn) {
-        viewScheduleBtn.addEventListener('click', (e) => {
-             // NO AUTH CHECK NEEDED
+        viewScheduleBtn.addEventListener('click', () => {
             window.location.href = 'flight-schedules.html'; 
         });
     }
 
-    // homepage.js: Function to swap the navbar links
-const updateNavForAuth = () => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    const nav = document.querySelector('.site-nav');
-
-    // This is a simplified manual DOM replacement (You may need to adapt your specific HTML structure)
-    if (nav) {
-        if (isLoggedIn) {
-            nav.innerHTML = `
-                <a href="homepage.html">Home</a>
-                <a href="#book">Book Flights</a>
-                <a href="flight-schedules.html">Flight Schedules</a>
-                <a href="check-in.html">Check-In</a>
-                <a href="my-tickets.html">My Tickets</a> 
-                <a href="logout.html">Logout</a>
-            `;
-        } else {
-            nav.innerHTML = `
-                <a href="homepage.html">Home</a>
-                <a href="#destinations">Destinations</a>
-                <a href="flight-schedules.html">Flight Schedules</a>
-                <a href="check-in.html">Check-In</a>
-                <a href="login.html">Login</a>
-            `;
-        }
-    }
-};
-
-// CALL THIS FUNCTION in your homepage.js DOMContentLoaded block:
-// document.addEventListener('DOMContentLoaded', updateNavForAuth);
-    
-    // --- PROTECTED FORM: HOMEPAGE CHECK-IN FORM SUBMISSION ---
+    // --- PROTECTED FORM: HOMEPAGE CHECK-IN FORM ---
     const homeCheckinForm = document.getElementById("homepage-checkin-form");
     if (homeCheckinForm) {
         homeCheckinForm.addEventListener('submit', (e) => {
-            if (checkAuthAndRedirect(e)) { 
-                // If authenticated, proceed with original redirection logic
-                e.preventDefault(); // Prevent default submission if auth passes
+            if (checkAuthAndRedirect(e)) {
+                e.preventDefault();
                 const pnr = document.getElementById("pnr-input-home").value;
                 const lastName = document.getElementById("lastname-input-home").value;
                 window.location.href = `check-in.html?pnr=${pnr}&lastName=${lastName}`;
             } else {
-                 e.preventDefault(); // Ensure form doesn't submit if auth fails
+                e.preventDefault();
             }
         });
     }
 
-    // Call fade-in on load
     fadeInOnScroll();
 });
 
 
 // =========================================================
-// 2. Navigation Link Protections & Smooth Scroll
+// PROTECT LINKS (for dynamic nav)
 // =========================================================
-document.querySelectorAll('nav a').forEach(link => {
-    const linkHref = link.getAttribute('href');
+document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A') {
+        const linkHref = e.target.getAttribute('href');
+        if (!linkHref) return;
 
-    // Filter out smooth scroll links (starts with #)
-    if (linkHref.startsWith('#')) {
-        // --- UNPROTECTED: SMOOTH SCROLL ---
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    } 
-    // Filter out known UNPROTECTED external links (Login, Destinations, Flight Schedules, Home)
-    else if (
-        linkHref.includes('login.html') ||
-        linkHref.includes('flight-schedules.html') ||
-        linkHref.includes('destinations') || // Anchor links for destinations
-        linkHref.includes('homepage.html')
-    ) {
-        // --- UNPROTECTED: Public Links (Let the default link action run) ---
-    }
-    else {
-        // --- PROTECTED: TRANSACTIONAL LINKS (Book, Check-in, My Tickets, Logout) ---
-        link.addEventListener('click', (e) => {
-            // This is the gatekeeper for all links that lead to transactional pages
+        if (
+            linkHref.includes('book-flight.html') ||
+            linkHref.includes('check-in.html') ||
+            linkHref.includes('my-tickets.html')
+        ) {
             checkAuthAndRedirect(e);
-            // If checkAuthAndRedirect returns true, the default link action proceeds.
-        });
+        }
     }
 });
 
 
 // =========================================================
-// 4. Optional: Scroll-to-top button (if present)
+// SCROLL-TO-TOP BUTTON
 // =========================================================
 const scrollTopBtn = document.querySelector('.scroll-top');
 if (scrollTopBtn) {
-  window.addEventListener('scroll', () => {
-    scrollTopBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
-  });
-
-  scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+    window.addEventListener('scroll', () => {
+        scrollTopBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
+    });
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 }
 
+
 // =========================================================
-// 5. Optional: Fade-in animation on scroll
+// FADE-IN ANIMATION
 // =========================================================
 window.addEventListener('scroll', fadeInOnScroll);
