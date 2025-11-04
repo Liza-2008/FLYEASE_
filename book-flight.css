@@ -370,14 +370,17 @@ footer {
 }
 
 /* Inner Container for Footer Content */
-.foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1140px; /* Use your container max-width */
-    margin: 0 auto;
-    padding: 0 20px;
+.footer {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 14px 0;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1);
+  margin-top: auto; /* ✅ ensures footer stays at bottom */
 }
+
 
 /* CRITICAL: Ensure the main content section pushes the footer down */
 .full-section {
