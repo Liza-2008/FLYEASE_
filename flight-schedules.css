@@ -94,5 +94,13 @@ body { font-family: 'Inter', sans-serif; color: var(--primary); background: var(
   }
 }
 
-/* Footer Styles */
-footer { background: var(--primary); color: var(--white); padding: 20px 0; text-align: center; }
+.footer {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 14px 0;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1);
+  margin-top: auto; /* ✅ ensures footer stays at bottom */
+}

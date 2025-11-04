@@ -1,4 +1,13 @@
 /* General Layout */
+:root {
+  --primary: #0a1a3a;
+  --accent: #3a7bd5;
+  --highlight: #00c6ff;
+  --light-gray: #f5f7fa;
+  --white: #ffffff;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  --radius: 16px;
+}
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -206,4 +215,14 @@ tbody tr:hover {
   .cards {
     grid-template-columns: 1fr;
   }
+}
+.footer {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 14px 0;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1);
+  margin-top: auto; /* ✅ ensures footer stays at bottom */
 }

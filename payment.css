@@ -144,5 +144,15 @@
     background: transparent !important;
     color: var(--primary) !important;
 }
+.footer {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 14px 0;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1);
+  margin-top: auto; /* ✅ ensures footer stays at bottom */
+}
 
 /* Button style defined in homepage.css */
