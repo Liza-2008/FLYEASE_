@@ -1,28 +1,44 @@
 {
   "users": [
-    { "_id": "U001", "name": "Priya Sharma", "email": "priya@flyease.com", "password": "password123", "role": "passenger" },
-    { "_id": "U002", "name": "Admin User", "email": "admin@flyease.com", "password": "admin", "role": "admin" },
-    { "_id": "U003", "name": "Support Staff", "email": "support@flyease.com", "password": "support", "role": "support" }
+    { "id": "U001", "name": "Priya Sharma", "email": "priya@flyease.com", "password": "password123", "role": "passenger" },
+    { "id": "U002", "name": "Admin User", "email": "admin@flyease.com", "password": "admin", "role": "admin" },
+    { "id": "U003", "name": "Support Staff", "email": "support@flyease.com", "password": "support", "role": "support" }
   ],
   "flights": [
-    { "flightId": "FL001", "flightNo": "AI-101", "from": "DEL", "to": "JFK", "date": "2025-11-15", "time": "14:00", "seats": 50, "price": 45000, "status": "On Time" },
-    { "flightId": "FL002", "flightNo": "EK-203", "from": "DEL", "to": "DXB", "date": "2025-11-15", "time": "22:00", "seats": 120, "price": 25000, "status": "Delayed" },
-    { "flightId": "FL003", "flightNo": "SQ-440", "from": "DEL", "to": "SIN", "date": "2025-11-16", "time": "06:00", "seats": 15, "price": 38000, "status": "On Time" }
+    { "id": "FL001", "flightNumber": "AI-101", "from": "DEL", "to": "JFK", "date": "2025-11-15", "time": "14:00", "seatsAvailable": 50, "price": 45000, "status": "On Time" },
+    { "id": "FL002", "flightNumber": "EK-203", "from": "DEL", "to": "DXB", "date": "2025-11-15", "time": "22:00", "seatsAvailable": 120, "price": 25000, "status": "Delayed" },
+    { "id": "FL003", "flightNumber": "SQ-440", "from": "DEL", "to": "SIN", "date": "2025-11-16", "time": "06:00", "seatsAvailable": 15, "price": 38000, "status": "On Time" }
   ],
   "bookings": [
-    { 
-      "bookingId": "B001", "userId": "U001", "flightId": "FL001", 
-      "pnr": "G00D1A", "name": "Priya Sharma", "lastName": "Sharma", 
-      "flightRoute": "AI-101 (DEL to JFK)", "amountPaid": "₹45,000", 
-      "paymentStatus": "SUCCESS", "paymentDate": "2025-10-27T08:00:00.000Z",
-      "seat": "15C", "luggageVerified": true, "checkinComplete": true 
+    {
+      "id": "B001",
+      "userId": "U001",
+      "flightId": "FL001",
+      "pnr": "G00D1A",
+      "firstName": "Priya",
+      "lastName": "Sharma",
+      "paymentAmount": 45000,
+      "paymentStatus": "SUCCESS",
+      "paymentDate": "2025-10-27T08:00:00.000Z",
+      "seat": "15C",
+      "luggageKg": 20,
+      "checkInDone": true,
+      "status": "checked-in"
     },
-    { 
-      "bookingId": "B002", "userId": "U001", "flightId": "FL002", 
-      "pnr": "FUTU8B", "name": "Raj Singh", "lastName": "Singh",
-      "flightRoute": "EK-203 (DEL to DXB)", "amountPaid": "₹25,000", 
-      "paymentStatus": "SUCCESS", "paymentDate": "2025-10-27T08:00:00.000Z",
-      "seat": null, "luggageVerified": false, "checkinComplete": false 
+    {
+      "id": "B002",
+      "userId": "U001",
+      "flightId": "FL002",
+      "pnr": "FUTU8B",
+      "firstName": "Raj",
+      "lastName": "Singh",
+      "paymentAmount": 25000,
+      "paymentStatus": "SUCCESS",
+      "paymentDate": "2025-10-27T08:00:00.000Z",
+      "seat": null,
+      "luggageKg": 0,
+      "checkInDone": false,
+      "status": "booked"
     }
   ],
   "payments": []
