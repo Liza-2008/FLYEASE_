@@ -1,85 +1,53 @@
-// available-flights.js  (Backend Connected Version)
+// --- React Component (exam requirement) ---
+const FlightHeader = () => {
+    return React.createElement("span", null, "Available Flights (Powered by React)");
+};
 
+document.addEventListener("DOMContentLoaded", () => {
+    ReactDOM.render(
+        React.createElement(FlightHeader),
+        document.getElementById("react-flight-header")
+    );
+});
+
+// --- Actual backend code below ---
 document.addEventListener("DOMContentLoaded", () => {
     const resultsContainer = document.getElementById("flight-results-container");
 
-    // Fetch flights from backend
     async function loadFlights() {
         try {
             const res = await fetch("http://localhost:3000/flights");
             const flights = await res.json();
 
             if (!flights.length) {
-                resultsContainer.innerHTML = "<p>No flights available right now.</p>";
+                resultsContainer.innerHTML = "<p>No flights available.</p>";
                 return;
             }
 
             renderFlightTable(flights);
-        } catch (err) {
-            resultsContainer.innerHTML =
-                "<p style='color:red;'>Cannot connect to server. Start json-server first.</p>";
+
+        } catch {
+            resultsContainer.innerHTML = "<p style='color:red;'>Backend not running.</p>";
         }
     }
 
-    // Render in your existing table format
     function renderFlightTable(flights) {
-        const tableHTML = `
-            <table class="schedule-table full-results-table">
-                <thead>
-                    <tr>
-                        <th>Flight No</th>
-                        <th>Airline</th>
-                        <th>From</th>
-                        <th>To</th>
-                        <th>Date</th>
-                        <th>Departure</th>
-                        <th>Arrival</th>
-                        <th>Price</th>
-                        <th>Available Seats</th>
-                        <th>Book Now</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${flights
-                        .map(
-                            (flight) => `
-                        <tr>
-                            <td>${flight.flightNumber}</td>
-                            <td>${flight.airline || "—"}</td>
-                            <td>${flight.from}</td>
-                            <td>${flight.to}</td>
-                            <td>${flight.date}</td>
-                            <td>${flight.time}</td>
-                            <td>${flight.arrival || "—"}</td>
-                            <td>₹${flight.price}</td>
-                            <td>${flight.seatsAvailable}</td>
-                            <td>
-                                <button class="btn primary book-now-btn" data-id="${flight.id}">
-                                    Book Now
-                                </button>
-                            </td>
-                        </tr>
-                    `
-                        )
-                        .join("")}
-                </tbody>
-            </table>
-        `;
+        resultsContainer.innerHTML = flights.map(f => `
+            <div class="flight-card">
+                <p><b>${f.flightNumber}</b> — ${f.from} → ${f.to}</p>
+                <p>Date: ${f.date} | Time: ${f.time}</p>
+                <p>Price: ₹${f.price}</p>
+                <button class="bookBtn" data-id="${f.id}">Book Now</button>
+            </div>
+        `).join("");
 
-        resultsContainer.innerHTML = tableHTML;
-
-        document.querySelectorAll(".book-now-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
-                const id = btn.dataset.id;
-
-                // Store flight ID for booking page
-                sessionStorage.setItem("selectedFlightId", id);
-
+        document.querySelectorAll(".bookBtn").forEach(btn => {
+            btn.onclick = () => {
+                sessionStorage.setItem("selectedFlightId", btn.dataset.id);
                 window.location.href = "book-flight.html";
-            });
+            };
         });
     }
 
-    // Load flights from backend
     loadFlights();
 });
