@@ -1,88 +1,94 @@
-// book-flight.js - Complete Code (Fading, Form Submission, and Tab Switching)
+// book-flight.js  (Backend Connected Version)
 
 document.addEventListener("DOMContentLoaded", () => {
-    // =========================================================
-    // 1. FADE-IN EFFECT (Existing Logic)
-    // =========================================================
-    const fadeEls = document.querySelectorAll(".fade-in");
 
-    const fadeInOnScroll = () => {
-        fadeEls.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 100) {
-                el.classList.add("visible");
-            }
-        });
-    };
-    window.addEventListener("scroll", fadeInOnScroll);
-    window.addEventListener("load", fadeInOnScroll);
+    const flightDetailsDiv = document.getElementById("selected-flight-details");
+    const bookingForm = document.getElementById("booking-form");
 
+    // Get selected flight ID from session storage
+    const selectedId = sessionStorage.getItem("selectedFlightId");
 
-   // book-flight.js (Section 2: Primary Form Submission)
-
-// =========================================================
-// 2. PRIMARY FORM SUBMISSION (FIXED to include all forms)
-// =========================================================
-
-const forms = ['one-way-form', 'round-trip-form', 'multi-city-form'];
-
-forms.forEach(formId => {
-    const form = document.getElementById(formId);
-    if (form) {
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            // All forms redirect to the Available Flights page
-            window.location.href = "available-flights.html"; 
-        });
-    }
-});
-
-    // =========================================================
-    // 3. TAB SWITCHING LOGIC (New Sliding Feature)
-    // =========================================================
-    const tabs = document.querySelectorAll(".tab");
-    const formWrapper = document.getElementById("form-wrapper");
-    
-    // Function to handle the actual form switch
-    const switchForm = (targetFormId) => {
-        // 1. Update the tab visual state
-        tabs.forEach(t => {
-            t.classList.remove("active");
-            if (t.dataset.form === targetFormId) {
-                t.classList.add("active");
-            }
-        });
-
-        // 2. Manage the form containers
-        const allForms = formWrapper.querySelectorAll('.search-form');
-        
-        allForms.forEach(form => {
-            if (form.id === `${targetFormId}-form`) {
-                // Show target form
-                form.classList.remove("hidden-form");
-                form.classList.add("active-form");
-                
-                // Adjust wrapper height to prevent jumping (critical for smooth transition)
-                formWrapper.style.height = `${form.offsetHeight}px`;
-            } else {
-                // Hide other forms
-                form.classList.remove("active-form");
-                form.classList.add("hidden-form");
-            }
-        });
+    if (!selectedId) {
+        flightDetailsDiv.innerHTML = "<p>No flight selected. Please go back.</p>";
+        return;
     }
 
-    // Attach click listeners to tabs
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            const targetFormId = tab.dataset.form; // 'one-way', 'round-trip', or 'multi-city'
-            switchForm(targetFormId);
-        });
+    // Fetch flight details from backend
+    async function loadFlightDetails() {
+        try {
+            const res = await fetch(`http://localhost:3000/flights/${selectedId}`);
+            const flight = await res.json();
+
+            if (!flight.id) {
+                flightDetailsDiv.innerHTML = "<p>Flight not found.</p>";
+                return;
+            }
+
+            renderFlightDetails(flight);
+
+        } catch (err) {
+            flightDetailsDiv.innerHTML =
+                "<p style='color:red;'>Cannot connect to backend. Start json-server.</p>";
+        }
+    }
+
+    // Display flight details
+    function renderFlightDetails(f) {
+        flightDetailsDiv.innerHTML = `
+            <h3>Selected Flight</h3>
+            <p><strong>Flight No:</strong> ${f.flightNumber}</p>
+            <p><strong>From:</strong> ${f.from}</p>
+            <p><strong>To:</strong> ${f.to}</p>
+            <p><strong>Date:</strong> ${f.date}</p>
+            <p><strong>Time:</strong> ${f.time}</p>
+            <p><strong>Price:</strong> ₹${f.price}</p>
+        `;
+    }
+
+    // Generate PNR
+    function generatePNR() {
+        return Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    // Submit booking
+    bookingForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(bookingForm);
+
+        const booking = {
+            pnr: generatePNR(),
+            flightId: selectedId,
+            firstName: formData.get("firstName"),
+            lastName: formData.get("lastName"),
+            age: formData.get("age"),
+            luggage: formData.get("luggage"),
+            seat: formData.get("seat") || "Not Assigned",
+            paymentAmount: formData.get("amount"),
+            status: "booked",
+            bookedAt: new Date().toISOString()
+        };
+
+        try {
+            const res = await fetch("http://localhost:3000/bookings", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(booking)
+            });
+
+            const savedBooking = await res.json();
+
+            // Save booking for ticket page
+            sessionStorage.setItem("lastBooking", JSON.stringify(savedBooking));
+
+            // redirect to ticket page
+            window.location.href = "ticket.html";
+
+        } catch (err) {
+            alert("Error saving booking. Start json-server.");
+        }
     });
 
-    // Initialize height on load (run after forms are structured)
-    const activeForm = document.querySelector('.active-form');
-    if (activeForm) {
-        formWrapper.style.height = `${activeForm.offsetHeight}px`;
-    }
+    // Load the selected flight
+    loadFlightDetails();
 });

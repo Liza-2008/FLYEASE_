@@ -1,17 +1,28 @@
-// available-flights.js
+// available-flights.js  (Backend Connected Version)
 
-document.addEventListener('DOMContentLoaded', () => {
-    const resultsContainer = document.getElementById('flight-results-container');
+document.addEventListener("DOMContentLoaded", () => {
+    const resultsContainer = document.getElementById("flight-results-container");
 
-    // --- SIMULATED DYNAMIC FLIGHT DATA ---
-    const mockFlights = [
-        // Data structure includes all required Blueprint columns (Flight No, Airline, Price, Seats) [cite: 45, 46]
-        { id: 'FL001', flightNo: 'AI-101', airline: 'Air India', from: 'DEL', to: 'JFK', date: '2025-11-15', departure: '14:00', arrival: '19:30', price: 45000, seats: 50 },
-        { id: 'FL002', flightNo: 'EK-203', airline: 'Emirates', from: 'DEL', to: 'DXB', date: '2025-11-15', departure: '22:00', arrival: '01:00', price: 25000, seats: 120 },
-        { id: 'FL003', flightNo: 'SQ-440', airline: 'Singapore', from: 'DEL', to: 'SIN', date: '2025-11-16', departure: '06:00', arrival: '14:00', price: 38000, seats: 15 },
-    ];
+    // Fetch flights from backend
+    async function loadFlights() {
+        try {
+            const res = await fetch("http://localhost:3000/flights");
+            const flights = await res.json();
 
-    const renderFlightTable = (flights) => {
+            if (!flights.length) {
+                resultsContainer.innerHTML = "<p>No flights available right now.</p>";
+                return;
+            }
+
+            renderFlightTable(flights);
+        } catch (err) {
+            resultsContainer.innerHTML =
+                "<p style='color:red;'>Cannot connect to server. Start json-server first.</p>";
+        }
+    }
+
+    // Render in your existing table format
+    function renderFlightTable(flights) {
         const tableHTML = `
             <table class="schedule-table full-results-table">
                 <thead>
@@ -29,38 +40,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     </tr>
                 </thead>
                 <tbody>
-                    ${flights.map(flight => `
+                    ${flights
+                        .map(
+                            (flight) => `
                         <tr>
-                            <td>${flight.flightNo}</td>
-                            <td>${flight.airline}</td>
+                            <td>${flight.flightNumber}</td>
+                            <td>${flight.airline || "—"}</td>
                             <td>${flight.from}</td>
                             <td>${flight.to}</td>
                             <td>${flight.date}</td>
-                            <td>${flight.departure}</td>
-                            <td>${flight.arrival}</td>
-                            <td>₹${flight.price.toLocaleString()}</td>
-                            <td>${flight.seats}</td>
+                            <td>${flight.time}</td>
+                            <td>${flight.arrival || "—"}</td>
+                            <td>₹${flight.price}</td>
+                            <td>${flight.seatsAvailable}</td>
                             <td>
-                                <button class="btn primary book-now-btn" data-flight-id="${flight.id}">Book Now</button>
+                                <button class="btn primary book-now-btn" data-id="${flight.id}">
+                                    Book Now
+                                </button>
                             </td>
                         </tr>
-                    `).join('')}
+                    `
+                        )
+                        .join("")}
                 </tbody>
             </table>
         `;
+
         resultsContainer.innerHTML = tableHTML;
 
-        // Attach event listeners to the new "Book Now" buttons
-        document.querySelectorAll('.book-now-btn').forEach(button => {
-            button.addEventListener('click', (e) => {
-                const flightId = e.target.dataset.flightId;
-                
-                // Blueprint Step 6: Redirect to booking-details.html with Flight ID in query
-                window.location.href = `booking-details.html?flightId=${flightId}`;
+        document.querySelectorAll(".book-now-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const id = btn.dataset.id;
+
+                // Store flight ID for booking page
+                sessionStorage.setItem("selectedFlightId", id);
+
+                window.location.href = "book-flight.html";
             });
         });
-    };
+    }
 
-    // Simulate fetching data after search (1 second delay)
-    setTimeout(() => renderFlightTable(mockFlights), 1000);
+    // Load flights from backend
+    loadFlights();
 });
