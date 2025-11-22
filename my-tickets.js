@@ -1,3 +1,29 @@
+/* ------------------ REACT TITLE COMPONENT ------------------ */
+
+const MyTicketsTitle = () => {
+    return React.createElement(
+        "div",
+        {
+            style: {
+                color: "#007bff",
+                fontSize: "22px",
+                fontWeight: "bold",
+                marginBottom: "10px"
+            }
+        },
+        "My Tickets (React Component Active)"
+    );
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    ReactDOM.render(
+        React.createElement(MyTicketsTitle),
+        document.getElementById("react-ticket-title")
+    );
+});
+
+/* ------------------ BACKEND TICKET LOGIC ------------------ */
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const container = document.getElementById("tickets-container");
@@ -76,8 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <td>${b.status}</td>
           <td>
             <button class="download-btn" data-pnr="${b.pnr}">Download</button>
-            ${b.status !== "cancelled" ? 
-              `<button class="check-btn" data-pnr="${b.pnr}" data-last="${b.lastName}">Check-In</button>` : ""}
+            ${
+              b.status !== "cancelled"
+                ? `<button class="check-btn" data-pnr="${b.pnr}" data-last="${b.lastName}">Check-In</button>`
+                : ""
+            }
           </td>
         </tr>
       `;
