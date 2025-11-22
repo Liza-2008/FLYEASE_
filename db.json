@@ -2,7 +2,8 @@
   "users": [
     { "id": "U001", "name": "Priya Sharma", "email": "priya@flyease.com", "password": "password123", "role": "passenger" },
     { "id": "U002", "name": "Admin User", "email": "admin@flyease.com", "password": "admin", "role": "admin" },
-    { "id": "U003", "name": "Support Staff", "email": "support@flyease.com", "password": "support", "role": "support" }
+    { "id": "U003", "name": "Support Staff", "email": "support@flyease.com", "password": "support", "role": "support" },
+    { "id": "U004", "name": "Liza Kalra", "email": "liza.kalra24086@gmail.com", "password": "1234", "role": "admin" }
   ],
   "flights": [
     { "id": "FL001", "flightNumber": "AI-101", "from": "DEL", "to": "JFK", "date": "2025-11-15", "time": "14:00", "seatsAvailable": 50, "price": 45000, "status": "On Time" },
