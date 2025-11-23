@@ -1,13 +1,61 @@
 {
   "users": [
-    { "id": "U001", "name": "Priya Sharma", "email": "priya@flyease.com", "password": "password123", "role": "passenger" },
-    { "id": "U002", "name": "Admin User", "email": "admin@flyease.com", "password": "admin", "role": "admin" },
-    { "id": "U003", "name": "Support Staff", "email": "support@flyease.com", "password": "support", "role": "support" }
+    {
+      "id": "U001",
+      "name": "Priya Sharma",
+      "email": "priya@flyease.com",
+      "password": "password123",
+      "role": "passenger"
+    },
+    {
+      "id": "U002",
+      "name": "Admin User",
+      "email": "admin@flyease.com",
+      "password": "admin",
+      "role": "admin"
+    },
+    {
+      "id": "U003",
+      "name": "Support Staff",
+      "email": "support@flyease.com",
+      "password": "support",
+      "role": "support"
+    }
   ],
   "flights": [
-    { "id": "FL001", "flightNumber": "AI-101", "from": "DEL", "to": "JFK", "date": "2025-11-15", "time": "14:00", "seatsAvailable": 50, "price": 45000, "status": "On Time" },
-    { "id": "FL002", "flightNumber": "EK-203", "from": "DEL", "to": "DXB", "date": "2025-11-15", "time": "22:00", "seatsAvailable": 120, "price": 25000, "status": "Delayed" },
-    { "id": "FL003", "flightNumber": "SQ-440", "from": "DEL", "to": "SIN", "date": "2025-11-16", "time": "06:00", "seatsAvailable": 15, "price": 38000, "status": "On Time" }
+    {
+      "id": "FL001",
+      "flightNumber": "AI-101",
+      "from": "DEL",
+      "to": "JFK",
+      "date": "2025-11-15",
+      "time": "14:00",
+      "seatsAvailable": 50,
+      "price": 45000,
+      "status": "On Time"
+    },
+    {
+      "id": "FL002",
+      "flightNumber": "EK-203",
+      "from": "DEL",
+      "to": "DXB",
+      "date": "2025-11-15",
+      "time": "22:00",
+      "seatsAvailable": 120,
+      "price": 25000,
+      "status": "Delayed"
+    },
+    {
+      "id": "FL003",
+      "flightNumber": "SQ-440",
+      "from": "DEL",
+      "to": "SIN",
+      "date": "2025-11-16",
+      "time": "06:00",
+      "seatsAvailable": 15,
+      "price": 38000,
+      "status": "On Time"
+    }
   ],
   "bookings": [
     {
@@ -39,6 +87,32 @@
       "luggageKg": 0,
       "checkInDone": false,
       "status": "booked"
+    },
+    {
+      "id": "Bkb61",
+      "pnr": "CYNXJV",
+      "flightId": "FL001",
+      "firstName": "Liza",
+      "lastName": "Kalra",
+      "age": "20",
+      "luggage": "20kg (Standard)",
+      "seat": "Not Assigned",
+      "paymentAmount": "45000",
+      "status": "booked",
+      "bookedAt": "2025-11-23T14:47:23.706Z"
+    },
+    {
+      "id": "Bzqx3",
+      "pnr": "YMJWPI",
+      "flightId": "FL001",
+      "firstName": "Liza",
+      "lastName": "Kalra",
+      "age": "20",
+      "luggage": "20kg (Standard)",
+      "seat": "Not Assigned",
+      "paymentAmount": "45000",
+      "status": "booked",
+      "bookedAt": "2025-11-23T14:51:23.632Z"
     }
   ],
   "payments": []

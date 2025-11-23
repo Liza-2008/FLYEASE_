@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const summaryElement = document.getElementById("flight-details");
     const form = document.getElementById("booking-details-form");
 
-    // Read userId from localStorage
+    // Read userId from localStorage (if you set this on login)
     const userId = localStorage.getItem("currentUserId");
 
     // Read flightId from URL
@@ -31,17 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
             renderFlight(flight);
 
         } catch (err) {
+            console.error(err);
             summaryElement.innerHTML = `<p class="error">❌ Backend not running.</p>`;
         }
     }
 
     function renderFlight(f) {
         summaryElement.innerHTML = `
-            <p><strong>Flight:</strong> ${f.flightNumber}</p>
-            <p><strong>Route:</strong> ${f.from} → ${f.to}</p>
-            <p><strong>Date:</strong> ${f.date}</p>
-            <p><strong>Time:</strong> ${f.time}</p>
-            <p><strong>Price:</strong> ₹${f.price}</p>
+            <p><strong>Flight:</strong> ${escapeHtml(f.flightNumber)}</p>
+            <p><strong>Route:</strong> ${escapeHtml(f.from)} → ${escapeHtml(f.to)}</p>
+            <p><strong>Date:</strong> ${escapeHtml(f.date)}</p>
+            <p><strong>Time:</strong> ${escapeHtml(f.time)}</p>
+            <p><strong>Price:</strong> ₹${escapeHtml(f.price)}</p>
         `;
 
         // Save flight details for payment page
@@ -53,18 +54,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const passengerData = {
             userId: userId,
-            fullName: document.getElementById("fullName").value,
-            email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value,
+            fullName: document.getElementById("fullName").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
             idType: document.getElementById("idType").value,
-            idNumber: document.getElementById("idNumber").value,
+            idNumber: document.getElementById("idNumber").value.trim(),
             luggage: document.getElementById("luggage").value
         };
 
         sessionStorage.setItem("passengerDetails", JSON.stringify(passengerData));
 
-        window.location.href = `payment.html?flightId=${flightId}`;
+        window.location.href = `payment.html?flightId=${encodeURIComponent(flightId)}`;
     });
+
+    function escapeHtml(s){ return String(s||"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
 
     loadFlight();
 });

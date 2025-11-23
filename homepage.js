@@ -1,3 +1,4 @@
+// homepage.js
 document.addEventListener("DOMContentLoaded", () => {
 
     // --------------------------------------
@@ -6,9 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuBtn = document.getElementById("menubutton");
     const navMenu = document.getElementById("nav-menu");
 
-    menuBtn.addEventListener("click", () => {
-        navMenu.classList.toggle("hidden");
-    });
+    if (menuBtn && navMenu) {
+        menuBtn.addEventListener("click", () => {
+            navMenu.classList.toggle("hidden");
+        });
+    }
 
     // --------------------------------------
     // LOGIN STATE CHECK
@@ -19,23 +22,25 @@ document.addEventListener("DOMContentLoaded", () => {
     // --------------------------------------
     // NAV MENU CONTENT (BASED ON LOGIN)
     // --------------------------------------
-    if (isLoggedIn && currentUserId) {
-        navMenu.innerHTML = `
-            <a href="homepage.html">Home</a>
-            <a href="available-flights.html">Book Flights</a>
-            <a href="flight-schedules.html">Flight Schedules</a>
-            <a href="my-tickets.html">My Tickets</a>
-            <a href="check-in.html">Check-in</a>
-            <a href="#" id="logoutLink">Logout</a>
-        `;
-    } else {
-        navMenu.innerHTML = `
-            <a href="homepage.html">Home</a>
-            <a href="#destinations">Destinations</a>
-            <a href="flight-schedules.html">Flight Schedules</a>
-            <a href="check-in.html">Check-in</a>
-            <a href="login.html">Login</a>
-        `;
+    if (navMenu) {
+        if (isLoggedIn && currentUserId) {
+            navMenu.innerHTML = `
+                <a href="homepage.html">Home</a>
+                <a href="available-flights.html">Book Flights</a>
+                <a href="flight-schedules.html">Flight Schedules</a>
+                <a href="my-tickets.html">My Tickets</a>
+                <a href="check-in.html">Check-in</a>
+                <a href="#" id="logoutLink">Logout</a>
+            `;
+        } else {
+            navMenu.innerHTML = `
+                <a href="homepage.html">Home</a>
+                <a href="#destinations">Destinations</a>
+                <a href="flight-schedules.html">Flight Schedules</a>
+                <a href="check-in.html">Check-in</a>
+                <a href="login.html">Login</a>
+            `;
+        }
     }
 
     // --------------------------------------
@@ -64,13 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // --------------------------------------
-    // BOOK FLIGHT BUTTON
+    // BOOK FLIGHT BUTTON (NOW -> book-flight.html)
     // --------------------------------------
     const bookBtn = document.getElementById("homepage-book-btn");
     if (bookBtn) {
         bookBtn.addEventListener("click", () => {
             requiresLogin(() => {
-                window.location.href = "available-flights.html";
+                // Redirect to the trip selection page (book-flight.html)
+                window.location.href = "book-flight.html";
             });
         });
     }
@@ -97,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const pnr = document.getElementById("pnr-input-home").value;
                 const last = document.getElementById("lastname-input-home").value;
 
-                window.location.href = `check-in.html?pnr=${pnr}&lastName=${last}`;
+                window.location.href = `check-in.html?pnr=${encodeURIComponent(pnr)}&lastName=${encodeURIComponent(last)}`;
             });
         });
     }
