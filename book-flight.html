@@ -13,81 +13,78 @@
 </head>
 <body>
 
-    <div data-include="header.html"></div>
-
   <header class="site-header">
     <div class="header-inner">
       <div class="logo">✈ FlyEase</div>
       <nav class="site-nav" id="nav-menu">
-        <a href="homepage.html">Home</a>
-        <a href="book-flight.html" class="active">Book Flights</a>
-        <a href="flight-schedules.html">Flight Schedules</a>
-        <a href="available-flights.html">Available Flights</a>
-        <a href="check-in.html">Check-In</a>
-        <a href="my-tickets.html">My Tickets</a>
-        <a href="#" id="logoutLink">Logout</a>
+        <!-- your existing navbar content will be replaced by include.js if used -->
       </nav>
     </div>
   </header>
 
-  <section id="book" class="full-section transparent-bg">
-    <div class="container book-grid">
+  <main class="container">
+    <section class="book-grid">
+      <div class="book-info fade-in">
+        <h2>Travel Smarter. Travel FlyEase.</h2>
+        <p>From easy bookings to real-time updates, FlyEase ensures comfort, punctuality, and a seamless flying experience.</p>
+      </div>
 
-        <div class="book-info fade-in">
-            <h2>Travel Smarter. Travel FlyEase.</h2>
-            <p>From easy bookings to real-time updates, FlyEase ensures comfort, punctuality, 
-               and a seamless flying experience.</p>
+      <div class="book-form fade-in">
+        <div class="tabs">
+          <button type="button" class="tab active" data-form="one-way">One Way</button>
+          <button type="button" class="tab" data-form="round-trip">Round Trip</button>
+          <button type="button" class="tab" data-form="multi-city">Multi-City</button>
         </div>
 
-        <div class="book-form fade-in">
-            <h2>Your Selected Flight</h2>
-            <div id="selected-flight-details">Loading...</div>
+        <form id="search-form" class="search-form">
+          <input type="hidden" id="selected-trip" value="one-way">
 
-            <h3>Enter Passenger Details</h3>
+          <div class="field">
+            <label>From</label>
+            <input id="fromInput" type="text" placeholder="Origin (e.g. Delhi)" required>
+          </div>
 
-            <form id="booking-form">
-              <div class="field">
-                <label>First Name</label>
-                <input name="firstName" required />
-              </div>
+          <div class="field">
+            <label>To</label>
+            <input id="toInput" type="text" placeholder="Destination (e.g. Mumbai)" required>
+          </div>
 
-              <div class="field">
-                <label>Last Name</label>
-                <input name="lastName" required />
-              </div>
+          <div class="field">
+            <label>Depart</label>
+            <input id="departInput" type="date" required>
+          </div>
 
-              <div class="field">
-                <label>Age</label>
-                <input type="number" name="age" required />
-              </div>
+          <div class="field" id="returnWrapper" style="display:none;">
+            <label>Return</label>
+            <input id="returnInput" type="date">
+          </div>
 
-              <div class="field">
-                <label>Luggage</label>
-                <select name="luggage">
-                  <option>20kg (Standard)</option>
-                  <option>Extra 5kg</option>
-                  <option>Extra 10kg</option>
-                </select>
-              </div>
+          <div class="field">
+            <label>Passengers</label>
+            <select id="passengerInput">
+              <option value="1">1 Adult</option>
+              <option value="2">2 Adults</option>
+            </select>
+          </div>
 
-              <div class="field">
-                <label>Price (Auto-filled)</label>
-                <input id="amountField" name="amount" readonly />
-              </div>
+          <div class="field">
+            <label>Class</label>
+            <select id="classInput">
+              <option value="Economy">Economy</option>
+              <option value="Business">Business</option>
+            </select>
+          </div>
 
-              <button type="submit" class="btn primary">Confirm Booking</button>
-            </form>
-        </div>
-        
-    </div> 
-</section>  
+          <button type="submit" class="btn primary">Proceed</button>
+        </form>
+      </div>
+    </section>
+  </main>
 
-<footer class="footer">© 2025 FlyEase. All rights reserved.</footer>
-<script src="book-flight.js"></script>
+  <script src="book-flight.js"></script>
 
-<div data-include="footer.html"></div>
-<script src="include.js"></script>
-
-
+  <!-- Footer -->
+  <div data-include="footer.html"></div>
+  <script src="include.js"></script>
 </body>
 </html>
