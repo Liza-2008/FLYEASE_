@@ -1,11 +1,14 @@
-// booking-details.js (FINAL VERSION)
+// booking-details.js (FINAL VERSION FOR OPTION A)
 
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     const summaryElement = document.getElementById("flight-details");
     const form = document.getElementById("booking-details-form");
 
-    // --- Read flightId from URL ---
+    // Read userId from localStorage
+    const userId = localStorage.getItem("currentUserId");
+
+    // Read flightId from URL
     const urlParams = new URLSearchParams(window.location.search);
     const flightId = urlParams.get("flightId");
 
@@ -14,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // --- Load flight from backend ---
+    // Fetch flight from backend
     async function loadFlight() {
         try {
             const res = await fetch(`http://localhost:3000/flights/${flightId}`);
@@ -28,13 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
             renderFlight(flight);
 
         } catch (err) {
-            summaryElement.innerHTML = `
-                <p class="error">❌ Backend not running. Start json-server.</p>
-            `;
+            summaryElement.innerHTML = `<p class="error">❌ Backend not running.</p>`;
         }
     }
 
-    // --- Render flight details ---
     function renderFlight(f) {
         summaryElement.innerHTML = `
             <p><strong>Flight:</strong> ${f.flightNumber}</p>
@@ -44,15 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
             <p><strong>Price:</strong> ₹${f.price}</p>
         `;
 
-        // Save for next page
+        // Save flight details for payment page
         sessionStorage.setItem("selectedFlightDetails", JSON.stringify(f));
     }
 
-    // --- On submit ---
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
         const passengerData = {
+            userId: userId,
             fullName: document.getElementById("fullName").value,
             email: document.getElementById("email").value,
             phone: document.getElementById("phone").value,
@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         sessionStorage.setItem("passengerDetails", JSON.stringify(passengerData));
 
-        // Redirect to payment page
         window.location.href = `payment.html?flightId=${flightId}`;
     });
 
