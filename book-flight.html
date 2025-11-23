@@ -19,141 +19,133 @@
     <div class="header-inner">
       <div class="logo">✈ FlyEase</div>
       <nav class="site-nav" id="nav-menu">
-  <a href="homepage.html">Home</a>
-  <a href="book-flight.html" class="active">Book Flights</a>
-  <a href="homepage.html#schedule">Flight Schedules</a>
-  <a href="homepage.html#destinations">Destinations</a>
-  <a href="homepage.html#checkin">Check-In</a>
-</nav>
+        <a href="homepage.html">Home</a>
+        <a href="book-flight.html" class="active">Book Flights</a>
+        <a href="homepage.html#schedule">Flight Schedules</a>
+        <a href="homepage.html#destinations">Destinations</a>
+        <a href="homepage.html#checkin">Check-In</a>
+      </nav>
     </div>
   </header>
 
-  <!-- Booking Section -->
+  <!-- Original SEARCH UI (we KEEP this) -->
   <section id="book" class="full-section transparent-bg">
     <div class="container book-grid">
 
-        <div class="book-info fade-in">
-            <h2>Travel Smarter. Travel FlyEase.</h2>
-            <p>
-                From easy bookings to real-time updates, FlyEase ensures comfort, punctuality, 
-                and a seamless flying experience — so you can focus on the adventure, not the hassle.
-            </p>
+      <div class="book-info fade-in">
+        <h2>Travel Smarter. Travel FlyEase.</h2>
+        <p>
+          From easy bookings to real-time updates, FlyEase ensures comfort, punctuality, 
+          and a seamless flying experience — so you can focus on the adventure, not the hassle.
+        </p>
+      </div>
+
+      <div class="book-form fade-in">
+
+        <div class="tabs">
+          <span class="tab active" data-form="one-way">One Way</span>
+          <span class="tab" data-form="round-trip">Round Trip</span>
+          <span class="tab" data-form="multi-city">Multi-City</span>
         </div>
 
-        <div class="book-form fade-in">
-            <div class="tabs">
-                <span class="tab active" data-form="one-way">One Way</span>
-                <span class="tab" data-form="round-trip">Round Trip</span>
-                <span class="tab" data-form="multi-city">Multi-City</span>
+        <div id="form-wrapper">
+
+          <!-- One Way Search -->
+          <form id="one-way-form" class="search-form active-form">
+            <div class="field">
+              <label>From</label>
+              <input id="fromInput" type="text" placeholder="Origin" />
+            </div>
+            <div class="field">
+              <label>To</label>
+              <input id="toInput" type="text" placeholder="Destination" />
+            </div>
+            <div class="field">
+              <label>Depart</label>
+              <input id="departInput" type="date" />
             </div>
 
-            <div id="form-wrapper">
-                
-                <form id="one-way-form" class="search-form active-form">
-                    <div class="field">
-                        <label>From</label>
-                        <input id="fromInput" type="text" placeholder="Origin" />
-                    </div>
-                    <div class="field">
-                        <label>To</label>
-                        <input id="toInput" type="text" placeholder="Destination" />
-                    </div>
-                    <div class="field">
-                        <label>Depart</label>
-                        <input id="departInput" type="date" />
-                    </div>
-                    <div class="field hidden-field"></div> 
-                    
-                    <div class="field">
-                        <label>Passengers</label>
-                        <select id="passengerInput">
-                            <option>1 Adult</option>
-                            <option>2 Adults</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label>Class</label>
-                        <select id="classInput">
-                            <option>Economy</option>
-                            <option>Business</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn primary">Search</button>
-                </form>
+            <div class="field hidden-field"></div>
 
-                <form id="round-trip-form" class="search-form hidden-form">
-                    <div class="field">
-                        <label>From</label>
-                        <input type="text" placeholder="Origin" />
-                    </div>
-                    <div class="field">
-                        <label>To</label>
-                        <input type="text" placeholder="Destination" />
-                    </div>
-                    <div class="field">
-                        <label>Depart</label>
-                        <input type="date" />
-                    </div>
-                    <div class="field">
-                        <label>Return</label>
-                        <input type="date" />
-                    </div>
-                    <div class="field">
-                        <label>Passengers</label>
-                        <select><option>1 Adult</option></select>
-                    </div>
-                    <div class="field">
-                        <label>Class</label>
-                        <select><option>Economy</option></select>
-                    </div>
-                    <button type="submit" class="btn primary">Search</button>
-                </form>
+            <div class="field">
+              <label>Passengers</label>
+              <select id="passengerInput">
+                <option>1 Adult</option>
+                <option>2 Adults</option>
+              </select>
+            </div>
 
-                <form id="multi-city-form" class="search-form hidden-form multi-city-layout">
-                    <label class="flight-label">Flight 1</label>
-                    <div class="field">
-                        <input type="text" placeholder="From" />
-                    </div>
-                    <div class="field">
-                        <input type="text" placeholder="To" />
-                    </div>
-                    <div class="field">
-                        <input type="date" />
-                    </div>
-                    
-                    <label class="flight-label">Flight 2</label>
-                    <div class="field">
-                        <input type="text" placeholder="From" />
-                    </div>
-                    <div class="field">
-                        <input type="text" placeholder="To" />
-                    </div>
-                    <div class="field">
-                        <input type="date" />
-                    </div>
+            <div class="field">
+              <label>Class</label>
+              <select id="classInput">
+                <option>Economy</option>
+                <option>Business</option>
+              </select>
+            </div>
 
-                    <div class="field span-all">
-                        <label>Passengers</label>
-                        <select><option>1 Adult</option></select>
-                    </div>
-                    <div class="field span-all">
-                        <label>Class</label>
-                        <select><option>Economy</option></select>
-                    </div>
-                    <button type="submit" class="btn primary span-all">Search</button>
-                </form>
-                
-            </div> 
+            <button type="submit" class="btn primary">Search</button>
+          </form>
+
+          <!-- Round Trip -->
+          <form id="round-trip-form" class="search-form hidden-form">
+            <div class="field"><label>From</label><input type="text"></div>
+            <div class="field"><label>To</label><input type="text"></div>
+            <div class="field"><label>Depart</label><input type="date"></div>
+            <div class="field"><label>Return</label><input type="date"></div>
+            <div class="field"><label>Passengers</label><select><option>1 Adult</option></select></div>
+            <div class="field"><label>Class</label><select><option>Economy</option></select></div>
+            <button type="submit" class="btn primary">Search</button>
+          </form>
+
+          <!-- Multi City -->
+          <form id="multi-city-form" class="search-form hidden-form multi-city-layout">
+            <label class="flight-label">Flight 1</label>
+            <div class="field"><input type="text" placeholder="From"></div>
+            <div class="field"><input type="text" placeholder="To"></div>
+            <div class="field"><input type="date"></div>
+
+            <label class="flight-label">Flight 2</label>
+            <div class="field"><input type="text" placeholder="From"></div>
+            <div class="field"><input type="text" placeholder="To"></div>
+            <div class="field"><input type="date"></div>
+
+            <div class="field span-all"><label>Passengers</label><select><option>1 Adult</option></select></div>
+            <div class="field span-all"><label>Class</label><select><option>Economy</option></select></div>
+            <button class="btn primary span-all">Search</button>
+          </form>
+
         </div>
-        
-    </div> 
-</section>  
 
-  <!-- Footer -->
-  <footer class="footer">
-    © 2025 FlyEase. All rights reserved.
-  </footer>
-    
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW BACKEND BOOKING AREA (FINAL CONFIRMATION PAGE) -->
+  <section class="confirm-container" id="finalBookingSection">
+
+    <div id="selected-flight-details" class="confirm-box">
+      <h3>Selected Flight</h3>
+    </div>
+
+    <form id="booking-form" class="confirm-form">
+      <h3>Passenger Details</h3>
+
+      <div class="field"><label>First Name</label><input name="firstName" required></div>
+      <div class="field"><label>Last Name</label><input name="lastName" required></div>
+      <div class="field"><label>Age</label><input name="age" type="number" required></div>
+      <div class="field"><label>Luggage</label>
+        <select name="luggage">
+          <option>20kg (Included)</option>
+          <option>25kg (+₹500)</option>
+          <option>30kg (+₹900)</option>
+        </select>
+      </div>
+      <div class="field"><label>Amount</label><input name="amount" required></div>
+
+      <button class="btn primary">Confirm Booking</button>
+    </form>
+
+  </section>
 
   <script src="book-flight.js"></script>
 
