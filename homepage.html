@@ -4,136 +4,120 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FlyEase – Flight Scheduling & Passenger Portal</title>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="homepage.css">
 </head>
+
 <body>
 
   <!-- HEADER -->
-<header class="site-header">
-  <div class="header-inner">
-    <div class="logo">✈ FlyEase</div>
-    <nav class="site-nav hidden" id="nav-menu">
-  <a href="#home">Home</a>
-  <a href="#book">Book Flights</a> 
-  <a href="#schedule">Flight Schedules</a>
-  <a href="#destinations">Destinations</a>
-  <a href="#checkin">Check-in</a>
-  <a href="login.html">Log in</a>
-</nav>
+  <header class="site-header">
+    <div class="header-inner">
 
-    <!-- menu button -->
-    <button class="menubutton" id="menubutton">☰</button>
-  </div>
-</header>
+      <div class="logo">✈ FlyEase</div>
 
+      <nav class="site-nav hidden" id="nav-menu">
+        <!-- Populated via homepage.js -->
+      </nav>
+
+      <button class="menubutton" id="menubutton">☰</button>
+    </div>
+  </header>
 
   <!-- HERO -->
   <section id="home" class="hero full-hero">
     <video autoplay muted loop id="video-bg">
       <source src="assets/airplane.mp4" type="video/mp4">
     </video>
+
     <div class="hero-overlay"></div>
+
     <div class="container hero-content">
       <h1>Your Journey, Our Priority</h1>
       <p>Book, manage, and fly with ease. Experience travel the modern way.</p>
     </div>
   </section>
 
-  <!--BOOK FLIGHTS -->
-<section id="book" class="full-section teaser-section">
-  <div class="container fade-in">
-    <h2>Ready to Fly?</h2>
-    <p>Plan your next journey with FlyEase — fast, easy, and reliable.</p>
-    <button class="btn primary">
-      Book Your Flight
-    </button>
-  </div>
-</section>
+  <!-- BOOK FLIGHTS -->
+  <section id="book" class="full-section teaser-section fade-in">
+    <div class="container">
+      <h2>Ready to Fly?</h2>
+      <p>Plan your next journey with FlyEase — fast, easy, and reliable.</p>
+      <button class="btn primary" id="homepage-book-btn">
+        Book Your Flight
+      </button>
+    </div>
+  </section>
 
-<!-- SCHEDULE -->
-<section id="schedule" class="full-section teaser-section">
-  <div class="container fade-in">
-    <h2>See Flight Schedules Without Any Delay</h2>
-    <p>Get real-time status and timings for all departures and arrivals.</p>
-    
-    <button class="btn primary" id="view-schedule-btn">
-      View Live Schedules
-    </button>
-  </div>
-</section>
+  <!-- SCHEDULE -->
+  <section id="schedule" class="full-section teaser-section fade-in">
+    <div class="container">
+      <h2>See Flight Schedules Without Any Delay</h2>
+      <p>Get real-time status and timings for all departures and arrivals.</p>
+
+      <button class="btn primary" id="view-schedule-btn">
+        View Live Schedules
+      </button>
+    </div>
+  </section>
 
   <!-- DESTINATIONS -->
-<section id="destinations" class="full-section">
-  <div class="container">
-    <h2 class="section-title">Popular Destinations</h2>
-    <div class="tiles">
-      <div class="tile">
-        <img src="assets/paris.jpg" alt="Paris">
-        <div class="caption">Paris</div>
-      </div>
-      <div class="tile">
-        <img src="assets/newyork.jpg" alt="New York">
-        <div class="caption">New York</div>
-      </div>
-      <div class="tile">
-        <img src="assets/tokyo.jpg" alt="Tokyo">
-        <div class="caption">Tokyo</div>
-      </div>
-      <div class="tile">
-        <img src="assets/london.jpg" alt="London">
-        <div class="caption">London</div>
-      </div>
-      <div class="tile">
-        <img src="assets/dubai.jpg" alt="Dubai">
-        <div class="caption">Dubai</div>
-      </div>
-      <div class="tile">
-        <img src="assets/sydney.jpg" alt="Sydney">
-        <div class="caption">Sydney</div>
-      </div>
-      <div class="tile">
-        <img src="assets/singapore.jpg" alt="Singapore">
-        <div class="caption">Singapore</div>
-      </div>
-      <div class="tile">
-        <img src="assets/rome.jpg" alt="Rome">
-        <div class="caption">Rome</div>
+  <section id="destinations" class="full-section fade-in">
+    <div class="container">
+      <h2 class="section-title">Popular Destinations</h2>
+
+      <div class="tiles">
+        <div class="tile"><img src="assets/paris.jpg"><div class="caption">Paris</div></div>
+        <div class="tile"><img src="assets/newyork.jpg"><div class="caption">New York</div></div>
+        <div class="tile"><img src="assets/tokyo.jpg"><div class="caption">Tokyo</div></div>
+        <div class="tile"><img src="assets/london.jpg"><div class="caption">London</div></div>
+        <div class="tile"><img src="assets/dubai.jpg"><div class="caption">Dubai</div></div>
+        <div class="tile"><img src="assets/sydney.jpg"><div class="caption">Sydney</div></div>
+        <div class="tile"><img src="assets/singapore.jpg"><div class="caption">Singapore</div></div>
+        <div class="tile"><img src="assets/rome.jpg"><div class="caption">Rome</div></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- CHECK-IN -->
-<section id="checkin" class="checkin-section">
-  <div class="boarding-pass">
-    <div class="boarding-left">
-      <h3>FlyEase Check-in</h3>
-      <p>Your journey, simplified.</p>
-    </div>
+  <section id="checkin" class="checkin-section fade-in">
+    <div class="boarding-pass">
 
-    <div class="boarding-right">
-      <h2>Online Check-in</h2>
-      <form id="homepage-checkin-form" class="checkin-form">
-        <div class="field">
-          <label for="pnr-input-home">Booking Reference</label>
-          <input type="text" id="pnr-input-home" placeholder="Enter PNR / Booking ID" required>
-        </div>
-        <div class="field">
-          <label for="lastname-input-home">Last Name</label>
-          <input type="text" id="lastname-input-home" placeholder="Enter Last Name" required>
-        </div>
-        <button type="submit" class="btn primary">Proceed to Check-in</button>
-      </form>
-    </div>
-  </div>
-</section>
+      <div class="boarding-left">
+        <h3>FlyEase Check-in</h3>
+        <p>Your journey, simplified.</p>
+      </div>
 
-<script src="data-manager.js"></script>
-<script src="homepage.js"></script>
+      <div class="boarding-right">
+        <h2>Online Check-in</h2>
+
+        <form id="homepage-checkin-form" class="checkin-form">
+          <div class="field">
+            <label for="pnr-input-home">Booking Reference</label>
+            <input type="text" id="pnr-input-home" placeholder="Enter PNR / Booking ID" required>
+          </div>
+
+          <div class="field">
+            <label for="lastname-input-home">Last Name</label>
+            <input type="text" id="lastname-input-home" placeholder="Enter Last Name" required>
+          </div>
+
+          <button type="submit" class="btn primary">Proceed to Check-in</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="homepage.js"></script>
 
 </body>
 </html>
