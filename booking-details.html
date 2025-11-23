@@ -36,49 +36,52 @@
     </div>
 
     <form id="booking-details-form" class="passenger-form">
-        <h3>Passenger Information</h3>
-        <div class="form-grid">
-            <div class="field">
-                <label>Full Name</label>
-                <input type="text" id="fullName" required />
-            </div>
+    <h3>Passenger Information</h3>
+    <div class="form-grid">
 
-            <div class="field">
-                <label>Email</label>
-                <input type="email" id="email" required />
-            </div>
-
-            <div class="field">
-                <label>Phone</label>
-                <input type="tel" id="phone" required />
-            </div>
-
-            <div class="field">
-                <label>ID Type</label>
-                <select id="idType" required>
-                    <option value="">Select ID Type</option>
-                    <option>Aadhaar</option>
-                    <option>Passport</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label>ID Number</label>
-                <input type="text" id="idNumber" required />
-            </div>
-
-            <div class="field">
-                <label>Luggage Weight</label>
-                <select id="luggage">
-                    <option>20kg (Standard)</option>
-                    <option>Extra 5kg</option>
-                    <option>Extra 10kg</option>
-                </select>
-            </div>
+        <div class="field">
+            <label>Passenger Full Name [cite: 50]</label>
+            <input id="fullName" type="text" placeholder="John Doe" required>
         </div>
 
-        <button type="submit" class="btn primary large-btn">Proceed to Payment</button>
-    </form>
+        <div class="field">
+            <label>Email [cite: 51]</label>
+            <input id="email" type="email" placeholder="email@example.com" required>
+        </div>
+
+        <div class="field">
+            <label>Phone [cite: 52]</label>
+            <input id="phone" type="tel" placeholder="+91-9876543210" required>
+        </div>
+
+        <div class="field">
+            <label>ID Type (Aadhaar / Passport) [cite: 53]</label>
+            <select id="idType" required>
+                <option value="">Select ID Type</option>
+                <option>Aadhaar</option>
+                <option>Passport</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>ID Number [cite: 54]</label>
+            <input id="idNumber" type="text" required>
+        </div>
+
+        <div class="field">
+            <label>Luggage Weight (Optional) [cite: 55]</label>
+            <select id="luggage">
+                <option>Standard (20kg)</option>
+                <option>Extra 5kg</option>
+                <option>Extra 10kg</option>
+            </select>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn primary large-btn">Proceed to Payment</button>
+</form>
+
 </section>
 
 <footer class="footer">© 2025 FlyEase. All rights reserved.</footer>

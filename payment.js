@@ -1,64 +1,122 @@
-// payment.js
+// payment.js — create booking + payment, then redirect to ticket page
 
-// Function to parse query parameters from the URL
-const getQueryParam = (name) => {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-};
+document.addEventListener("DOMContentLoaded", () => {
 
-// Function to generate a random 6-digit PNR (Blueprint Step 8)
-const generatePNR = () => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let pnr = '';
-    for (let i = 0; i < 6; i++) {
-        pnr += characters.charAt(Math.floor(Math.random() * characters.length));
+  // helper to generate PNR (6 chars alnum)
+  function generatePNR() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let out = "";
+    for (let i = 0; i < 6; i++) out += chars.charAt(Math.floor(Math.random() * chars.length));
+    return out;
+  }
+
+  const summaryBox = document.getElementById("payment-summary");
+  const form = document.getElementById("payment-form");
+  const payBtn = document.getElementById("pay-now-btn");
+
+  // read flight and passenger saved earlier
+  const flight = JSON.parse(sessionStorage.getItem("selectedFlightDetails") || "null");
+  const passenger = JSON.parse(sessionStorage.getItem("passengerDetails") || "null");
+
+  if (!flight || !passenger) {
+    summaryBox.innerHTML = `<p class="error">Missing booking details. Please go back to booking and try again.</p>`;
+    form.style.display = "none";
+    return;
+  }
+
+  // show summary
+  summaryBox.innerHTML = `
+    <h3>Payment Summary</h3>
+    <p><strong>Passenger:</strong> ${escapeHtml(passenger.fullName || passenger.fullname || "")}</p>
+    <p><strong>Flight:</strong> ${escapeHtml(flight.flightNumber || flight.id || "")}</p>
+    <p><strong>Route:</strong> ${escapeHtml(flight.from)} → ${escapeHtml(flight.to)}</p>
+    <p><strong>Date:</strong> ${escapeHtml(flight.date)} ${escapeHtml(flight.time || "")}</p>
+    <p style="margin-top:8px"><strong>Amount:</strong> ₹${Number(flight.price || flight.amount || 0).toLocaleString('en-IN')}</p>
+  `;
+
+  // form submit: create booking then payment
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    payBtn.disabled = true;
+    payBtn.textContent = "Processing...";
+
+    const pnr = generatePNR();
+
+    // build booking object (store enough info to display later)
+    const bookingObj = {
+      id: "B" + Math.random().toString(36).substring(2, 8),
+      pnr,
+      flightId: flight.id,
+      flightNumber: flight.flightNumber || flight.id,
+      from: flight.from,
+      to: flight.to,
+      date: flight.date,
+      time: flight.time,
+      firstName: (passenger.fullName || passenger.fullname || "").split(" ")[0] || "",
+      lastName: (passenger.fullName || passenger.fullname || "").split(" ").slice(1).join(" ") || "",
+      age: passenger.age || null,
+      luggage: passenger.luggage || passenger.luggage || "",
+      seat: "Not Assigned",
+      paymentAmount: flight.price || 0,
+      status: "booked",
+      checkInDone: false,
+      bookedAt: new Date().toISOString()
+    };
+
+    try {
+      // 1) Save booking
+      const bookingResp = await fetch("http://localhost:3000/bookings", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(bookingObj)
+      });
+
+      if (!bookingResp.ok) throw new Error("Failed to save booking");
+
+      const savedBooking = await bookingResp.json();
+
+      // 2) Save payment record
+      const paymentObj = {
+        id: "P" + Math.random().toString(36).substring(2, 8),
+        bookingId: savedBooking.id,
+        pnr: savedBooking.pnr,
+        flightId: flight.id,
+        amount: savedBooking.paymentAmount,
+        method: new FormData(form).get("payment_mode") || "card",
+        status: "SUCCESS",
+        paidAt: new Date().toISOString()
+      };
+
+      const paymentResp = await fetch("http://localhost:3000/payments", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(paymentObj)
+      });
+
+      if (!paymentResp.ok) throw new Error("Failed to save payment");
+
+      const savedPayment = await paymentResp.json();
+
+      // 3) keep last booking & payment in sessionStorage for ticket page
+      sessionStorage.setItem("lastBooking", JSON.stringify(savedBooking));
+      sessionStorage.setItem("lastPayment", JSON.stringify(savedPayment));
+
+      // short success feedback and redirect to ticket
+      setTimeout(() => {
+        window.location.href = `ticket.html?pnr=${encodeURIComponent(savedBooking.pnr)}`;
+      }, 400);
+
+    } catch (err) {
+      console.error(err);
+      alert("Payment failed — please ensure json-server is running and try again.");
+      payBtn.disabled = false;
+      payBtn.textContent = "Pay Now";
     }
-    return pnr;
-};
+  });
 
-// Function to simulate saving the booking data (Blueprint Step 8)
-const saveBookingToLocalJSON = (bookingData) => {
-    const bookings = JSON.parse(localStorage.getItem('flyease_bookings')) || [];
-    bookings.push(bookingData);
-    localStorage.setItem('flyease_bookings', JSON.stringify(bookings));
-};
+  // small helper to escape text to avoid accidental HTML injection in display
+  function escapeHtml(s) {
+    return String(s || "").replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const paymentForm = document.getElementById('payment-form');
-    const payNowBtn = document.getElementById('pay-now-btn');
-    const flightId = getQueryParam('flightId');
-    
-    // --- (In a real app, logic to fetch final amount based on flightId goes here) ---
-    // For prototype simplicity, we assume the amount is known from the previous page.
-    
-    if (paymentForm) {
-        paymentForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            payNowBtn.disabled = true;
-            payNowBtn.textContent = 'Processing...'; // Simulated processing (Blueprint Step 8)
-
-            // 1. Generate PNR and prepare data
-            const generatedPNR = generatePNR();
-            
-            // NOTE: In a full app, you would retrieve ALL passenger details here.
-            const newBooking = {
-                pnr: generatedPNR,
-                flightId: flightId,
-                amountPaid: document.getElementById('amount-payable').textContent, // For display
-                paymentStatus: 'SUCCESS',
-                // Add passenger data retrieved from previous storage/form submission
-            };
-
-            // 2. Simulate success delay and save data
-            setTimeout(() => {
-                // Save the booking data to the browser's JSON storage
-                saveBookingToLocalJSON(newBooking);
-
-                // Blueprint Step 8: Redirects to Ticket Page
-                alert('Payment Successful! Generating E-Ticket.');
-                window.location.href = `ticket.html?pnr=${generatedPNR}`;
-                
-            }, 2500); // 2.5 second simulated payment processing delay
-        });
-    }
 });

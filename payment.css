@@ -1,158 +1,48 @@
-/* payment.css */
-
-/* Define necessary variables if not relying on homepage.css */
 :root {
   --primary: #0a1a3a;
   --accent: #3a7bd5;
   --white: #ffffff;
   --light-gray: #f5f7fa;
-  --radius: 14px;
-  --shadow: 0 6px 20px rgba(0,0,0,0.1);
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
-.payment-section {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
+* { box-sizing: border-box; margin:0; padding:0; }
+body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto; background:var(--light-gray); color:var(--primary); }
+
+.container { max-width:1100px; margin:0 auto; padding:18px; }
+
+.site-header { background:var(--white); box-shadow:var(--shadow); position:sticky; top:0; z-index:20; }
+.header-inner { display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+.logo { font-weight:700; color:var(--accent); font-size:20px; }
+.site-nav a { margin-left:18px; text-decoration:none; font-weight:600; color:#2b2b2b; }
+.site-nav a:hover{ color:var(--accent); }
+
+.payment-section { margin:28px 0 60px; }
+.payment-section h2 { text-align:center; font-size:28px; margin-bottom:18px; }
+
+.summary-box {
+  background:var(--white); padding:18px; border-radius:var(--radius); box-shadow:var(--shadow);
+  margin-bottom:18px;
 }
 
-.payment-section h2 {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--primary);
-    text-align: center;
-    margin-bottom: 30px;
-}
+.payment-form, .payment-form .field { display:block; }
+.payment-form { background:var(--white); padding:18px; border-radius:var(--radius); box-shadow:var(--shadow); }
 
-/* Payment Summary Box */
-.payment-summary {
-    background: var(--white);
-    padding: 25px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    margin-bottom: 30px;
-}
-.payment-summary h3 {
-    font-size: 20px;
-    color: var(--accent);
-    margin-bottom: 10px;
-}
-.payment-summary p {
-    font-size: 16px;
-    line-height: 1.6;
-}
-.payment-summary .final-amount {
-    font-size: 24px;
-    color: #b30000; /* Red color for amount due */
-    margin-top: 15px;
-    font-weight: 700;
-}
+.payment-options { display:flex; gap:12px; margin-bottom:16px; }
+.radio-card { flex:1; padding:12px; border-radius:10px; border:1px solid #e6e6e6; text-align:center; cursor:pointer; font-weight:600; }
+.radio-card input { display:none; }
+.radio-card .icon { display:block; font-size:20px; margin-bottom:6px; }
 
+.card-fields { border:1px solid #f0f0f0; padding:12px; border-radius:8px; }
+.form-row { display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:12px; }
 
-/* Payment Methods Selection */
-.payment-methods-box {
-    background: var(--white);
-    padding: 30px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-}
-.payment-methods-box h3 {
-    font-size: 22px;
-    color: var(--primary);
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
+.field { margin-bottom:12px; }
+.field label { display:block; margin-bottom:6px; font-weight:600; }
+.field input { width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; }
 
-.payment-options {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-}
+.btn.primary { width:100%; background:var(--accent); color:var(--white); padding:12px; border-radius:8px; border:none; font-weight:700; margin-top:12px; cursor:pointer;}
+.btn.primary:hover { background:#245ea8; }
 
-.radio-card {
-    flex: 1;
-    display: block;
-    padding: 15px;
-    border: 2px solid #ddd;
-    border-radius: var(--radius);
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s ease;
-    font-weight: 600;
-}
-.radio-card:hover {
-    border-color: var(--accent);
-}
-.radio-card input[type="radio"]:checked + .icon {
-    color: var(--accent);
-    font-weight: 700;
-}
-.radio-card input[type="radio"] {
-    display: none;
-}
-.radio-card .icon {
-    display: block;
-    font-size: 24px;
-    margin-bottom: 5px;
-}
-
-/* Card Details Form */
-.card-details-form {
-    border: 1px solid #f0f0f0;
-    padding: 20px;
-    border-radius: 8px;
-}
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-/* Reusing field/input styles from other forms */
-.field {
-    text-align: left;
-    margin-bottom: 15px;
-}
-.field label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: var(--primary);
-    font-size: 14px;
-}
-.field input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box; 
-}
-
-/* payment.css: FINAL NAVIGATION STABILITY FIX */
-
-/* 1. Ensure the Book Flights link is always active on this page */
-.site-nav a[href="book-flight.html"] {
-    background: var(--accent) !important;
-    color: var(--white) !important;
-    /* You may need to adjust padding/border-radius here if homepage.css styles were complex */
-}
-
-/* 2. Ensure NO OTHER link is active */
-.site-nav a[href="check-in.html"] {
-    background: transparent !important;
-    color: var(--primary) !important;
-}
-.footer {
-  background: var(--primary);
-  color: var(--white);
-  text-align: center;
-  padding: 14px 0;
-  font-size: 14px;
-  letter-spacing: 0.3px;
-  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1);
-  margin-top: auto; /* ✅ ensures footer stays at bottom */
-}
-
-/* Button style defined in homepage.css */
+.footer { background:var(--primary); color:white; text-align:center; padding:12px 0; margin-top:40px; }
+.error { color:#b30000; font-weight:700; }
