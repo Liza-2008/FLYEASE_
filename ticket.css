@@ -1,122 +1,97 @@
-/* ticket.css - Final Standalone Styles for the E-Ticket Page */
-
-/* Base Colors & Variables (Must be defined locally for independence) */
 :root {
   --primary: #0a1a3a;
   --accent: #3a7bd5;
-  --white: #ffffff;
+  --white: #fff;
   --light-gray: #f5f7fa;
-  --success: #1b7f3b; 
   --shadow: 0 6px 20px rgba(0,0,0,0.08);
   --radius: 14px;
+  --success: #1b7f3b;
 }
 
-/* Base Layout (Copying required styles from booking-details.css) */
-.ticket-section {
-    padding: 60px 0 80px;
-}
-.container { 
-    max-width: 1140px; 
-    margin: 0 auto; 
-    padding: 0 20px; 
-}
-.btn {
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.btn.primary {
-    background: var(--accent);
-    color: var(--white);
-}
-.btn.primary:hover {
-    background: #2a61b8;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Inter, sans-serif; background:var(--light-gray); }
 
-/* E-Ticket Box Styling */
+.container { max-width:1100px; margin:auto; padding:20px; }
+
+.site-header {
+  background:white;
+  box-shadow:var(--shadow);
+  position:sticky; top:0; z-index:10;
+}
+.header-inner { display:flex; justify-content:space-between; padding:12px 0; }
+.logo { font-size:20px; color:var(--accent); font-weight:700; }
+
+.site-nav a { margin-left:20px; color:var(--primary); text-decoration:none; font-weight:600; }
+.site-nav a:hover { color:var(--accent); }
+
 .ticket-box {
-    max-width: 750px;
-    margin: 0 auto;
-    padding: 40px;
-    background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    border-top: 5px solid var(--accent);
+  background:white;
+  padding:30px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  border-top:5px solid var(--accent);
+  max-width:780px;
+  margin:40px auto;
 }
 
-.ticket-box h2 {
-    font-size: 32px;
-    color: var(--primary);
-    text-align: center;
-    margin-bottom: 25px;
-    font-weight: 700;
-}
+h2 { text-align:center; margin-bottom:20px; color:var(--primary); }
 
-/* Success Banner */
 .status-banner {
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-    background: #eafaf1; /* Light green background */
-    color: var(--success); 
-    border: 1px solid var(--success);
+  background:#eafaf1;
+  border:1px solid var(--success);
+  color:var(--success);
+  padding:12px;
+  border-radius:8px;
+  text-align:center;
+  margin-bottom:20px;
+  font-weight:700;
+  font-size:18px;
 }
 
-/* Ticket Details Grid */
 .ticket-details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px 30px;
-    margin-bottom: 40px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  margin-bottom:30px;
 }
+
 .detail-group h4 {
-    font-size: 14px;
-    color: #666;
-    text-transform: uppercase;
-    margin-bottom: 5px;
+  font-size:13px;
+  color:#666;
+  margin-bottom:6px;
+  text-transform:uppercase;
 }
 .detail-group p {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--primary);
-}
-.highlight-pnr {
-    font-size: 24px !important;
-    color: var(--accent);
-    font-weight: 700 !important;
+  font-size:17px;
+  font-weight:600;
 }
 
-/* Action Buttons */
+.highlight-pnr { font-size:24px; color:var(--accent); }
+
 .ticket-actions {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
+  display:flex;
+  gap:15px;
+  justify-content:center;
 }
-.ticket-actions .large-btn {
-    width: 48%;
-    padding: 12px 20px;
-    font-size: 16px;
+
+.btn {
+  padding:12px 18px;
+  border:none;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
 }
-.btn.secondary {
-    background: var(--primary); 
-    color: var(--white);
-}
-.btn.secondary:hover {
-    background: #1f3358;
-}
+
+.btn.primary { background:var(--accent); color:white; }
+.btn.primary:hover { background:#245ea8; }
+
+.btn.secondary { background:var(--primary); color:white; }
+.btn.secondary:hover { background:#12294e; }
 
 .footer {
-  background: var(--primary);
-  color: var(--white);
-  text-align: center;
-  padding: 14px 0;
-  font-size: 14px;
-  letter-spacing: 0.3px;
-  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1);
-  margin-top: auto; /* ✅ ensures footer stays at bottom */
+  background:var(--primary);
+  color:white;
+  text-align:center;
+  padding:12px 0;
+  margin-top:30px;
 }
