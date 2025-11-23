@@ -1,70 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FlyEase — Booking Details</title>
-  <link rel="stylesheet" href="booking-details.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlyEase – Booking Details</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="booking-details.css" />
 </head>
 <body>
-  <header class="bd-header">
-    <div class="bd-inner">
-      <div class="logo">✈ FlyEase</div>
-      <nav class="bd-nav">
-        <a href="homepage.html">Home</a>
-        <a href="available-flights.html">Flights</a>
-        <a href="my-tickets.html">My Tickets</a>
-        <a href="check-in.html">Check-In</a>
-      </nav>
+
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="logo">✈ FlyEase</div>
+        <nav class="site-nav">
+            <a href="homepage.html">Home</a>
+            <a href="available-flights.html">Available Flights</a>
+            <a href="book-flight.html" class="active">Book Flights</a>
+            <a href="flight-schedules.html">Flight Schedules</a>
+            <a href="check-in.html">Check-In</a>
+            <a href="my-tickets.html">My Tickets</a>
+        </nav>
     </div>
-  </header>
+</header>
 
-  <main class="bd-main">
-    <section class="bd-card" id="bookingCard">
-      <div id="loading">Loading booking...</div>
-      <div id="notfound" class="error" style="display:none;">Booking not found.</div>
+<section class="booking-details-section container">
+    <h2>Passenger and Booking Details</h2>
 
-      <div id="bookingDetails" style="display:none;">
-        <h2>E-Ticket / Booking Details</h2>
+    <div class="flight-summary fade-in">
+        <h3>Selected Flight Summary</h3>
+        <p id="flight-details">Loading flight details...</p>
+    </div>
 
-        <div class="grid">
-          <div class="box">
-            <h4>Passenger</h4>
-            <p id="bd-passenger">—</p>
-            <p><small id="bd-age"></small></p>
-          </div>
+    <form id="booking-details-form" class="passenger-form">
+        <h3>Passenger Information</h3>
+        <div class="form-grid">
+            <div class="field">
+                <label>Full Name</label>
+                <input type="text" id="fullName" required />
+            </div>
 
-          <div class="box">
-            <h4>Flight</h4>
-            <p id="bd-flight">—</p>
-            <p id="bd-route"></p>
-            <p id="bd-date-time"></p>
-          </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" id="email" required />
+            </div>
 
-          <div class="box">
-            <h4>Booking</h4>
-            <p><strong>PNR:</strong> <span id="bd-pnr"></span></p>
-            <p><strong>Status:</strong> <span id="bd-status"></span></p>
-            <p id="bd-cancel-reason" style="color:crimson; display:none;"></p>
-          </div>
+            <div class="field">
+                <label>Phone</label>
+                <input type="tel" id="phone" required />
+            </div>
 
-          <div class="box">
-            <h4>Seat & Fare</h4>
-            <p><strong>Seat:</strong> <span id="bd-seat"></span></p>
-            <p><strong>Amount:</strong> <span id="bd-amount"></span></p>
-            <p><small id="bd-payment-date"></small></p>
-          </div>
+            <div class="field">
+                <label>ID Type</label>
+                <select id="idType" required>
+                    <option value="">Select ID Type</option>
+                    <option>Aadhaar</option>
+                    <option>Passport</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>ID Number</label>
+                <input type="text" id="idNumber" required />
+            </div>
+
+            <div class="field">
+                <label>Luggage Weight</label>
+                <select id="luggage">
+                    <option>20kg (Standard)</option>
+                    <option>Extra 5kg</option>
+                    <option>Extra 10kg</option>
+                </select>
+            </div>
         </div>
 
-        <div class="actions">
-          <button id="downloadTicket" class="btn">Download Ticket</button>
-          <button id="goCheckin" class="btn primary">Go to Check-in</button>
-          <button id="backToTickets" class="btn ghost">My Tickets</button>
-        </div>
-      </div>
-    </section>
-  </main>
+        <button type="submit" class="btn primary large-btn">Proceed to Payment</button>
+    </form>
+</section>
 
-  <script src="booking-details.js"></script>
+<footer class="footer">© 2025 FlyEase. All rights reserved.</footer>
+
+<script src="booking-details.js"></script>
+
 </body>
 </html>
