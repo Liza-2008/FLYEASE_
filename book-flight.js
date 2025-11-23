@@ -1,96 +1,91 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // UI Elements
-    const confirmSection = document.getElementById("finalBookingSection");
-    const flightDetailsBox = document.getElementById("selected-flight-details");
+    const flightDetailsDiv = document.getElementById("selected-flight-details");
     const bookingForm = document.getElementById("booking-form");
+    const amountField = document.getElementById("amountField");
 
-    // Read selected flight ID from sessionStorage
+    // Get selected FLIGHT ID (like "FL001")
     const selectedId = sessionStorage.getItem("selectedFlightId");
 
-    // If no ID found → hide confirmation area
     if (!selectedId) {
-        confirmSection.style.display = "none";
-    } else {
-        confirmSection.style.display = "block";
-        loadFlightDetails();
+        flightDetailsDiv.innerHTML = "<p>No flight selected. Go back to Available Flights.</p>";
+        return;
     }
 
-    /* ---------------------------------------------
-       LOAD SELECTED FLIGHT FROM JSON-SERVER
-    --------------------------------------------- */
+    // Fetch this exact flight from JSON server
     async function loadFlightDetails() {
         try {
             const res = await fetch(`http://localhost:3000/flights/${selectedId}`);
             const flight = await res.json();
 
-            flightDetailsBox.innerHTML = `
-                <h3>Selected Flight</h3>
-                <p><strong>Flight:</strong> ${flight.flightNumber}</p>
-                <p><strong>Route:</strong> ${flight.from} → ${flight.to}</p>
-                <p><strong>Date:</strong> ${flight.date}</p>
-                <p><strong>Time:</strong> ${flight.time}</p>
-                <p><strong>Price:</strong> ₹${flight.price}</p>
-            `;
+            if (!flight || !flight.id) {
+                flightDetailsDiv.innerHTML = "<p>Flight not found.</p>";
+                return;
+            }
 
-        } catch {
-            flightDetailsBox.innerHTML = "<p style='color:red;'>Backend not running.</p>";
+            renderFlightDetails(flight);
+
+        } catch (err) {
+            flightDetailsDiv.innerHTML =
+                "<p style='color:red;'>Backend not running. Start json-server.</p>";
         }
     }
 
-    /* ---------------------------------------------
-       GENERATE PNR
-    --------------------------------------------- */
-    function generatePNR() {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        const part1 = chars[Math.floor(Math.random() * chars.length)];
-        const part2 = chars[Math.floor(Math.random() * chars.length)];
-        const nums = Math.floor(1000 + Math.random() * 9000);
-        return part1 + part2 + nums;
+    // Show flight details on page
+    function renderFlightDetails(f) {
+        flightDetailsDiv.innerHTML = `
+            <p><strong>Flight No:</strong> ${f.flightNumber}</p>
+            <p><strong>Route:</strong> ${f.from} → ${f.to}</p>
+            <p><strong>Date:</strong> ${f.date}</p>
+            <p><strong>Time:</strong> ${f.time}</p>
+            <p><strong>Price:</strong> ₹${f.price}</p>
+        `;
+
+        // auto fill price into booking form
+        amountField.value = f.price;
     }
 
-    /* ---------------------------------------------
-       SUBMIT BOOKING
-    --------------------------------------------- */
+    function generatePNR() {
+        return Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    // Submit booking
     bookingForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const fd = new FormData(bookingForm);
-        const pnr = generatePNR();
+        const formData = new FormData(bookingForm);
 
-        const res = await fetch(`http://localhost:3000/flights/${selectedId}`);
-        const flight = await res.json();
-
-        const newBooking = {
-            id: "B" + Math.random().toString(36).substring(2, 10),
-            userId: sessionStorage.getItem("currentUserId") || "U001",
+        const booking = {
+            id: "B" + Math.random().toString(36).substring(2, 6),
+            pnr: generatePNR(),
             flightId: selectedId,
-            pnr,
-            firstName: fd.get("firstName"),
-            lastName: fd.get("lastName"),
-            age: fd.get("age"),
-            luggage: fd.get("luggage"),
-            paymentAmount: fd.get("amount"),
+            firstName: formData.get("firstName"),
+            lastName: formData.get("lastName"),
+            age: formData.get("age"),
+            luggage: formData.get("luggage"),
             seat: "Not Assigned",
+            paymentAmount: amountField.value,
             status: "booked",
-            checkInDone: false,
-            date: flight.date,
-            time: flight.time,
-            from: flight.from,
-            to: flight.to,
-            flightNumber: flight.flightNumber
+            bookedAt: new Date().toISOString()
         };
 
-        await fetch("http://localhost:3000/bookings", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newBooking)
-        });
+        try {
+            const res = await fetch("http://localhost:3000/bookings", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(booking)
+            });
 
-        alert("Booking Successful!");
+            const savedBooking = await res.json();
 
-        sessionStorage.setItem("lastPNR", pnr);
-        window.location.href = `booking-details.html?pnr=${pnr}`;
+            sessionStorage.setItem("lastBooking", JSON.stringify(savedBooking));
+
+            window.location.href = "ticket.html";
+
+        } catch (err) {
+            alert("Error saving booking. Start json-server.");
+        }
     });
 
+    loadFlightDetails();
 });
