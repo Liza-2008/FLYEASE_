@@ -34,31 +34,56 @@ body::before {
 }
 
 /* ===== Header ===== */
+/* Header */
 .site-header {
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: var(--shadow);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  backdrop-filter: blur(10px);
+    background: var(--white);
+    border-bottom: 1px solid #eee;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }
-
 .header-inner {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    width: 100%;
 }
-
 .logo {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
 }
 
+/* Navigation */
+.site-nav {
+    display: flex;
+    gap: 20px;
+}
+.site-nav a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 500;
+    padding: 7px;
+    transition: color 0.3s;
+}
+.site-nav a:hover { color: var(--accent); }
+/* NOTE: Corrected '.Check-in' class to 'a[href*="check-in"]' if you want a specific style for it */
+.site-nav a[href*="check-in"] {
+    background: rgb(0, 119, 255);
+    border-radius: 8px;
+    color: var(--white);
+    padding: 8px 16px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.site-nav a[href*="check-in"]:hover { background: var(--highlight); }
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 /* ===== Login Section ===== */
 .login-page {
   display: flex;

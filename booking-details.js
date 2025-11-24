@@ -1,23 +1,19 @@
-// booking-details.js (FINAL VERSION FOR OPTION A)
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const summaryElement = document.getElementById("flight-details");
     const form = document.getElementById("booking-details-form");
 
-    // Read userId from localStorage (if you set this on login)
-    const userId = localStorage.getItem("currentUserId");
+    let selectedFlight = null;  // Store the loaded flight here
 
-    // Read flightId from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const flightId = urlParams.get("flightId");
+    const userId = localStorage.getItem("currentUserId");
+    const params = new URLSearchParams(window.location.search);
+    const flightId = params.get("flightId");
 
     if (!flightId) {
-        summaryElement.innerHTML = "<p class='error'>Error: No flight selected.</p>";
+        summaryElement.innerHTML = "<p class='error'>❌ No flight selected.</p>";
         return;
     }
 
-    // Fetch flight from backend
     async function loadFlight() {
         try {
             const res = await fetch(`http://localhost:3000/flights/${flightId}`);
@@ -28,46 +24,60 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            selectedFlight = flight; // ⭐ Save for submit handler
             renderFlight(flight);
 
-        } catch (err) {
-            console.error(err);
-            summaryElement.innerHTML = `<p class="error">❌ Backend not running.</p>`;
+        } catch (e) {
+            summaryElement.innerHTML = "<p class='error'>Backend not running.</p>";
         }
     }
 
     function renderFlight(f) {
         summaryElement.innerHTML = `
-            <p><strong>Flight:</strong> ${escapeHtml(f.flightNumber)}</p>
-            <p><strong>Route:</strong> ${escapeHtml(f.from)} → ${escapeHtml(f.to)}</p>
-            <p><strong>Date:</strong> ${escapeHtml(f.date)}</p>
-            <p><strong>Time:</strong> ${escapeHtml(f.time)}</p>
-            <p><strong>Price:</strong> ₹${escapeHtml(f.price)}</p>
+            <p><strong>Flight:</strong> ${f.flightNumber}</p>
+            <p><strong>Route:</strong> ${f.from} → ${f.to}</p>
+            <p><strong>Date:</strong> ${f.date}</p>
+            <p><strong>Time:</strong> ${f.time}</p>
+            <p><strong>Price:</strong> ₹${f.price}</p>
         `;
 
-        // Save flight details for payment page
         sessionStorage.setItem("selectedFlightDetails", JSON.stringify(f));
     }
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const passengerData = {
-            userId: userId,
-            fullName: document.getElementById("fullName").value.trim(),
-            email: document.getElementById("email").value.trim(),
-            phone: document.getElementById("phone").value.trim(),
-            idType: document.getElementById("idType").value,
-            idNumber: document.getElementById("idNumber").value.trim(),
-            luggage: document.getElementById("luggage").value
-        };
+        // ⭐ MATCHED WITH YOUR FORM INPUT IDs
+        const fullName = document.getElementById("fullName").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const idType = document.getElementById("idType").value;
+        const idNumber = document.getElementById("idNumber").value;
+        const luggage = document.getElementById("luggage").value;
 
-        sessionStorage.setItem("passengerDetails", JSON.stringify(passengerData));
+const nameParts = fullName.trim().split(" ");
+const firstName = nameParts[0] || "";
+const lastName = nameParts.slice(1).join(" ") || "";
 
-        window.location.href = `payment.html?flightId=${encodeURIComponent(flightId)}`;
+const bookingData = {
+    firstName,
+    lastName,
+    email,
+    phone,
+    idType,
+    idNumber,
+    luggage,
+    from: selectedFlight.from,
+    to: selectedFlight.to,
+    flightNumber: selectedFlight.flightNumber,
+    date: selectedFlight.date,
+    price: selectedFlight.price
+};
+
+        localStorage.setItem("selectedFlight", JSON.stringify(bookingData));
+
+        window.location.href = "payment.html";
     });
-
-    function escapeHtml(s){ return String(s||"").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c])); }
 
     loadFlight();
 });

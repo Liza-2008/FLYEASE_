@@ -5,84 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FlyEase – Booking Details</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="booking-details.css" />
 </head>
+
 <body>
 
 <header class="site-header">
-    <div class="container header-inner">
+    <div class="header-inner container">
         <div class="logo">✈ FlyEase</div>
-        <nav class="site-nav" id="nav-menu">
-            <!-- existing navbar or include.js will handle this -->
+
+        <nav class="site-nav">
+            <a href="homepage.html">Home</a>
+            <a href="book-flight.html" class="active">Book Flights</a>
+            <a href="available-flights.html">Available Flights</a>
+            <a href="flight-schedules.html">Schedules</a>
+            <a href="my-tickets.html">My Tickets</a>
+            <a href="logout.html">Logout</a>
         </nav>
     </div>
 </header>
 
-<section class="booking-details-section container">
-    <h2>Passenger and Booking Details</h2>
+<div class="page-bg"></div>
 
-    <div class="flight-summary fade-in">
-        <h3>Selected Flight Summary</h3>
-        <p id="flight-details">Loading flight details...</p>
-    </div>
+<main class="booking-container">
 
-    <form id="booking-details-form" class="passenger-form">
-        <h3>Passenger Information</h3>
-        <div class="form-grid">
+    <div class="booking-card">
 
-            <div class="field">
-                <label>Passenger Full Name</label>
-                <input type="text" id="fullName" placeholder="John Doe" required>
-            </div>
+        <h2 class="title">Passenger & Booking Details</h2>
 
-            <div class="field">
-                <label>Email</label>
-                <input id="email" type="email" placeholder="email@example.com" required>
-            </div>
-
-            <div class="field">
-                <label>Phone</label>
-                <input type="tel" id="phone" placeholder="+91-9876543210" required>
-            </div>
-
-            <div class="field">
-                <label>ID Type (Aadhaar / Passport)</label>
-                <select id="idType" required>
-                    <option value="">Select ID Type</option>
-                    <option>Aadhaar</option>
-                    <option>Passport</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label>ID Number</label>
-                <input id="idNumber" type="text" required>
-            </div>
-
-            <div class="field">
-                <label>Luggage Weight (Optional)</label>
-                <select id="luggage">
-                    <option>Standard (20kg)</option>
-                    <option>Extra 5kg</option>
-                    <option>Extra 10kg</option>
-                </select>
-            </div>
-
+        <div class="summary-box fade-in">
+            <h3>Selected Flight Summary</h3>
+            <div id="flight-details" class="summary-text">Loading flight details...</div>
         </div>
 
-        <button type="submit" class="btn primary large-btn">Proceed to Payment</button>
-    </form>
+        <form id="booking-details-form" class="details-form">
 
-</section>
+            <h3 class="section-title">Passenger Information</h3>
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" placeholder="John Doe" required>
+                </div>
+
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="email@example.com" required>
+                </div>
+
+                <div class="field">
+                    <label>Phone</label>
+                    <input type="tel" id="phone" placeholder="+91-9876543210" required>
+                </div>
+
+                <div class="field">
+                    <label>ID Type</label>
+                    <select id="idType" required>
+                        <option value="">Select ID Type</option>
+                        <option value="Aadhaar">Aadhaar</option>
+                        <option value="Passport">Passport</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>ID Number</label>
+                    <input type="text" id="idNumber" placeholder="Enter ID Number" required>
+                </div>
+
+                <div class="field">
+                    <label>Luggage</label>
+                    <select id="luggage">
+                        <option>Standard (20kg)</option>
+                        <option>Extra 5kg</option>
+                        <option>Extra 10kg</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button class="btn primary" type="submit">Proceed to Payment</button>
+
+        </form>
+
+    </div>
+
+</main>
+
+<footer class="footer">
+    © 2025 FlyEase. All rights reserved.
+</footer>
 
 <script src="booking-details.js"></script>
-
-<!-- Footer -->
-<div data-include="footer.html"></div>
 <script src="include.js"></script>
 
 </body>

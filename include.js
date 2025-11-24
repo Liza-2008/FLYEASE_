@@ -1,57 +1,68 @@
-/* include.js — Universal Header & Footer Loader */
-
-// STEP 1: Load external HTML components
 document.addEventListener("DOMContentLoaded", () => {
-    const includes = document.querySelectorAll("[data-include]");
+  const includes = document.querySelectorAll("[data-include]");
 
-    includes.forEach(el => {
-        const file = el.getAttribute("data-include");
+  includes.forEach(el => {
+    const file = el.getAttribute("data-include");
 
-        fetch(file)
-            .then(resp => resp.text())
-            .then(html => {
-                el.innerHTML = html;
-                if (file === "header.html") setupDynamicNavbar(); 
-            });
-    });
+    fetch(file)
+      .then(res => res.text())
+      .then(html => {
+        el.innerHTML = html;
+
+        if (file === "header.html") {
+          setupNavbar();
+        }
+      });
+  });
 });
 
-// STEP 2: Dynamic Navbar for all pages
-function setupDynamicNavbar() {
+function setupNavbar() {
+  const nav = document.getElementById("global-nav");
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-    const nav = document.getElementById("global-nav");
-    if (!nav) return;
+  if (isLoggedIn) {
+    nav.innerHTML = `
+        <a href="homepage.html">Home</a>
+        <a href="book-flight.html">Book Flights</a>
+        <a href="flight-schedules.html">Flight Schedules</a>
+        <a href="check-in.html">Check-In</a>
+        <a href="my-tickets.html">My Tickets</a>
+        <a href="#" id="logoutBtn">Logout</a>
+    `;
+  } else {
+    nav.innerHTML = `
+        <a href="homepage.html">Home</a>
+        <a href="book-flight.html">Book Flights</a>
+        <a href="flight-schedules.html">Flight Schedules</a>
+        <a href="check-in.html">Check-In</a>
+        <a href="login.html">Login</a>
+    `;
+  }
 
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", e => {
+      e.preventDefault();
+      localStorage.removeItem("isLoggedIn");
+      window.location.href = "homepage.html";
+    });
+  }
 
-    if (isLoggedIn) {
-        nav.innerHTML = `
-            <a href="homepage.html">Home</a>
-            <a href="book-flight.html">Book Flights</a>
-            <a href="flight-schedules.html">Flight Schedules</a>
-            <a href="check-in.html">Check-In</a>
-            <a href="my-tickets.html">My Tickets</a>
-            <a href="#" id="logoutBtn">Logout</a>
-        `;
+  // mobile
+  const menuBtn = document.getElementById("menubutton");
+menuBtn.onclick = () => {
+    if (nav.style.display === "flex") {
+        nav.style.display = "none";
     } else {
-        nav.innerHTML = `
-            <a href="homepage.html">Home</a>
-            <a href="book-flight.html">Book Flights</a>
-            <a href="flight-schedules.html">Flight Schedules</a>
-            <a href="check-in.html">Check-In</a>
-            <a href="login.html">Login</a>
-        `;
+        nav.style.display = "flex";
+        nav.style.flexDirection = "column";
+        nav.style.background = "white";
+        nav.style.padding = "15px";
+        nav.style.position = "absolute";
+        nav.style.top = "60px";
+        nav.style.right = "10px";
+        nav.style.borderRadius = "8px";
+        nav.style.boxShadow = "0 3px 12px rgba(0,0,0,0.2)";
     }
-
-    // Logout handler
-    const logoutBtn = document.getElementById("logoutBtn");
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            localStorage.removeItem("isLoggedIn");
-            localStorage.removeItem("username");
-            alert("Logged out!");
-            window.location.href = "homepage.html";
-        });
-    }
+};
 }
