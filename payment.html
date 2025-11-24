@@ -5,86 +5,101 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FlyEase – Secure Payment</title>
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="payment.css" />
 </head>
+
 <body>
 
-  <header class="site-header">
-    <div class="header-inner container">
-      <div class="logo">✈ FlyEase</div>
-      <nav class="site-nav">
-        <a href="homepage.html">Home</a>
-        <a href="available-flights.html">Available Flights</a>
-        <a href="book-flight.html">Book Flights</a>
-        <a href="flight-schedules.html">Flight Schedules</a>
-        <a href="check-in.html">Check-In</a>
-        <a href="my-tickets.html">My Tickets</a>
-      </nav>
+<header class="site-header">
+  <div class="header-inner container">
+    <div class="logo">✈ FlyEase</div>
+    <nav class="site-nav">
+      <a href="homepage.html">Home</a>
+      <a href="book-flight.html">Book Flights</a>
+      <a href="available-flights.html">Available Flights</a>
+      <a href="flight-schedules.html">Flight Schedules</a>
+      <a href="check-in.html">Check-In</a>
+      <a href="my-tickets.html">My Tickets</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-bg"></div>
+
+<main class="payment-container">
+
+  <div class="payment-card">
+
+    <h2 class="title">Complete Your Payment</h2>
+
+    <div class="summary-box">
+      <h3>Fare Summary</h3>
+      <p><strong>Flight:</strong> <span id="sumFlight"></span></p>
+      <p><strong>Route:</strong> <span id="sumRoute"></span></p>
+      <p><strong>Date:</strong> <span id="sumDate"></span></p>
+      <p><strong>Amount Payable:</strong> ₹<span id="sumAmount"></span></p>
     </div>
-  </header>
 
-  <main class="container">
-    <section class="payment-section">
-      <h2>Complete Your Payment</h2>
+    <form id="payment-form">
 
-      <div class="summary-box" id="payment-summary">
-        <!-- Filled by JS -->
+      <h3>Choose Payment Method</h3>
+
+      <div class="payment-options">
+        <label class="radio-card">
+          <input type="radio" name="mode" value="card" checked />
+          <span class="icon">💳</span> Card
+        </label>
+
+        <label class="radio-card">
+          <input type="radio" name="mode" value="upi" />
+          <span class="icon">📱</span> UPI
+        </label>
+
+        <label class="radio-card">
+          <input type="radio" name="mode" value="wallet" />
+          <span class="icon">💰</span> Wallet
+        </label>
       </div>
 
-      <form id="payment-form" class="payment-form">
-        <h3>Payment Method</h3>
-
-        <div class="payment-options">
-          <label class="radio-card">
-            <input type="radio" name="payment_mode" value="card" checked required>
-            <span class="icon">💳</span> Card
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="payment_mode" value="upi" required>
-            <span class="icon">📱</span> UPI
-          </label>
-          <label class="radio-card">
-            <input type="radio" name="payment_mode" value="wallet" required>
-            <span class="icon">💰</span> Wallet
-          </label>
+      <div id="card-fields" class="card-fields">
+        <div class="field">
+          <label>Card Holder</label>
+          <input type="text" id="cardName" placeholder="John Doe" required />
         </div>
 
-        <div id="card-fields" class="card-fields">
+        <div class="field">
+          <label>Card Number</label>
+          <input type="text" id="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456" required />
+        </div>
+
+        <div class="row">
           <div class="field">
-            <label for="cardName">Card Holder</label>
-            <input id="cardName" type="text" placeholder="John Doe" required />
+            <label>Expiry</label>
+            <input type="month" id="expiry" required />
           </div>
 
           <div class="field">
-            <label for="cardNumber">Card Number</label>
-            <input id="cardNumber" type="text" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456" required />
-          </div>
-
-          <div class="form-row">
-            <div class="field">
-              <label for="expiry">Expiry</label>
-              <input id="expiry" type="month" required />
-            </div>
-            <div class="field">
-              <label for="cvv">CVV</label>
-              <input id="cvv" type="password" maxlength="4" placeholder="123" required />
-            </div>
+            <label>CVV</label>
+            <input type="password" id="cvv" maxlength="4" placeholder="123" required />
           </div>
         </div>
+      </div>
 
-        <button id="pay-now-btn" class="btn primary submit-btn" type="submit">Pay Now</button>
-      </form>
-    </section>
-  </main>
+      <button id="pay-now-btn" type="submit" class="btn primary">Pay Now</button>
 
-  <script src="payment.js"></script>
+    </form>
 
-  <!-- Footer -->
-  <div data-include="footer.html"></div>
+  </div>
+</main>
+
+<footer class="footer">© 2025 FlyEase. All rights reserved.</footer>
+
+<script src="payment.js"></script>
 <script src="include.js"></script>
 
 </body>

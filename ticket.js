@@ -1,111 +1,74 @@
-// ticket.js — final backend version
-
-function getQueryParam(name) {
-  const p = new URLSearchParams(window.location.search);
-  return p.get(name);
+function getPNRFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("pnr");
 }
 
 async function fetchBooking(pnr) {
-  try {
-    const r = await fetch(`http://localhost:3000/bookings?pnr=${encodeURIComponent(pnr)}`);
-    const j = await r.json();
-    return j[0] || null;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
-}
-
-async function fetchFlight(id) {
-  try {
-    const r = await fetch(`http://localhost:3000/flights/${encodeURIComponent(id)}`);
-    return r.ok ? r.json() : null;
-  } catch {
-    return null;
-  }
-}
-
-function formatINR(n) {
-  return "₹" + Number(n || 0).toLocaleString("en-IN");
-}
-
-function generatePDF(booking, flight) {
-  try {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-
-    doc.setFontSize(16);
-    doc.text("FlyEase — E-Ticket", 20, 20);
-
-    doc.setFontSize(12);
-    doc.text(`PNR: ${booking.pnr}`, 20, 30);
-    doc.text(`Passenger: ${booking.firstName} ${booking.lastName}`, 20, 40);
-
-    if (flight) {
-      doc.text(`Flight: ${flight.flightNumber}`, 20, 50);
-      doc.text(`Route: ${flight.from} → ${flight.to}`, 20, 60);
-      doc.text(`Date: ${flight.date}  Time: ${flight.time}`, 20, 70);
+    try {
+        const r = await fetch("http://localhost:3000/bookings");
+        const all = await r.json();
+        return all.find(b => b.pnr.toLowerCase() === pnr.toLowerCase()) || null;
+    } catch (err) {
+        console.error(err);
+        return null;
     }
-
-    doc.text(`Seat: ${booking.seat}`, 20, 80);
-    doc.text(`Amount Paid: ${formatINR(booking.paymentAmount)}`, 20, 90);
-
-    doc.save(`Ticket_${booking.pnr}.pdf`);
-  } catch (e) {
-    alert('PDF generation failed. Make sure jsPDF is included.');
-    console.error(e);
-  }
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  let booking = null;
 
-  // 1 — try sessionStorage
-  const stored = sessionStorage.getItem("lastBooking");
-  if (stored) {
-    try { booking = JSON.parse(stored); } catch {}
-  }
+    const pnr = getPNRFromURL();
+    if (!pnr) {
+        alert("PNR not found.");
+        return;
+    }
 
-  // 2 — fallback to query param
-  if (!booking) {
-    const pnr = getQueryParam("pnr");
-    if (pnr) booking = await fetchBooking(pnr);
-  }
+    document.getElementById("pnr-display").textContent = pnr;
 
-  if (!booking) {
-    const banner = document.querySelector(".status-banner");
-    if (banner) banner.innerHTML = "❌ Booking not found";
-    return;
-  }
+    const booking = await fetchBooking(pnr);
 
-  const flight = await fetchFlight(booking.flightId);
+    if (!booking) {
+        alert("Invalid PNR or ticket not found.");
+        return;
+    }
 
-  const setText = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+    document.querySelector(".status-banner").textContent = "BOOKING CONFIRMED";
 
-  setText("pnr-display", booking.pnr);
-  setText("passenger-name", `${booking.firstName} ${booking.lastName}`);
-  setText("flight-route", flight ? `${flight.flightNumber} — ${flight.from} → ${flight.to}` : (booking.flightRoute || "N/A"));
-  setText("date-time", flight ? `${flight.date} • ${flight.time}` : "N/A");
-  setText("seat-number", booking.seat || "N/A");
-  setText("amount-paid", formatINR(booking.paymentAmount));
+    // ⭐ Updated for new structure
+    console.log("Booking Data:", booking);
+    const passengerName = booking.fullName || "Unknown Passenger";
+document.getElementById("passenger-name").textContent = passengerName;
+    const route = `${booking.from} → ${booking.to}`;
+    const dateTime = booking.date || "—";
+    const amountPaid = booking.price || booking.amountPaid || "—";
 
-  // Success banner
-  const banner = document.querySelector(".status-banner");
-  if (banner) banner.textContent = "Payment Status: " + (booking.paymentStatus || booking.status || "SUCCESS") + " ✓";
+    document.getElementById("passenger-name").textContent = passengerName;
+    document.getElementById("flight-route").textContent = route;
+    document.getElementById("date-time").textContent = dateTime;
+    document.getElementById("seat-number").textContent = booking.seat || "Not Assigned";
+    document.getElementById("amount-paid").textContent = "₹" + amountPaid;
 
-  // Download button
-  const downloadBtn = document.getElementById("download-btn");
-  if (downloadBtn) {
-    downloadBtn.addEventListener("click", () => {
-      generatePDF(booking, flight);
-    });
-  }
+    // --------- PDF GENERATION FIX ----------
+    document.getElementById("download-btn").onclick = () => {
 
-  // Check-in button
-  const checkinBtn = document.getElementById("checkin-btn");
-  if (checkinBtn) {
-    checkinBtn.addEventListener("click", () => {
-      window.location.href = `check-in.html?pnr=${encodeURIComponent(booking.pnr)}&lastName=${encodeURIComponent(booking.lastName || "")}`;
-    });
-  }
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+
+        pdf.setFontSize(18);
+        pdf.text("FlyEase — E-Ticket", 20, 20);
+
+        pdf.setFontSize(12);
+        pdf.text(`PNR: ${pnr}`, 20, 40);
+        pdf.text(`Passenger: ${passengerName}`, 20, 50);
+        pdf.text(`Route: ${route}`, 20, 60);
+        pdf.text(`Date: ${dateTime}`, 20, 70);
+        pdf.text(`Seat: ${booking.seat || "Not Assigned"}`, 20, 80);
+        pdf.text(`Amount Paid: ₹${amountPaid}`, 20, 90);
+        pdf.text(`Flight Number: ${booking.flightNumber || "—"}`, 20, 100);
+
+        pdf.save(`Ticket_${pnr}.pdf`);
+    };
+
+    document.getElementById("checkin-btn").onclick = () => {
+        window.location.href = `check-in.html?pnr=${pnr}`;
+    };
 });

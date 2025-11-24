@@ -42,13 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // ✔ USER DOES NOT EXIST → Create new user account
-        const newUser = {
-            id: "U" + Math.random().toString(36).substring(2, 6),
-            name: email.split("@")[0],
-            email,
-            password,
-            role: "passenger"
-        };
+       // ✔ USER DOES NOT EXIST → Create new user account
+const newUser = {
+    id: "u" + Math.random().toString(36).substring(2, 6),
+    name: email.split("@")[0],
+    email: email.toLowerCase(),   // 🔥 VERY IMPORTANT FIX
+    password
+};
 
         await createUser(newUser);
         sessionStorage.setItem("currentUserId", newUser.id);

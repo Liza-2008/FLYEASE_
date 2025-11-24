@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FlyEase – Book Your Flight</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="book-flight.css" />
+
+  <!-- load include.js FIRST so header loads immediately -->
+  <script src="include.js" defer></script>
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="logo">✈ FlyEase</div>
-      <nav class="site-nav" id="nav-menu">
-        <!-- your existing navbar content will be replaced by include.js if used -->
-      </nav>
-    </div>
-  </header>
+  <!-- CORRECTED HEADER PLACEHOLDER -->
+ <div data-include="header.html"></div>
 
-  <main class="container">
+
+
+  <main class="page-main container">
     <section class="book-grid">
+
       <div class="book-info fade-in">
         <h2>Travel Smarter. Travel FlyEase.</h2>
         <p>From easy bookings to real-time updates, FlyEase ensures comfort, punctuality, and a seamless flying experience.</p>
       </div>
 
-      <div class="book-form fade-in">
-        <div class="tabs">
+      <aside class="book-form fade-in">
+        <div class="tabs" role="tablist" aria-label="Trip type">
           <button type="button" class="tab active" data-form="one-way">One Way</button>
           <button type="button" class="tab" data-form="round-trip">Round Trip</button>
           <button type="button" class="tab" data-form="multi-city">Multi-City</button>
         </div>
 
-        <form id="search-form" class="search-form">
+        <form id="search-form" class="search-form" autocomplete="off">
           <input type="hidden" id="selected-trip" value="one-way">
 
           <div class="field">
-            <label>From</label>
+            <label for="fromInput">From</label>
             <input id="fromInput" type="text" placeholder="Origin (e.g. Delhi)" required>
           </div>
 
           <div class="field">
-            <label>To</label>
+            <label for="toInput">To</label>
             <input id="toInput" type="text" placeholder="Destination (e.g. Mumbai)" required>
           </div>
 
           <div class="field">
-            <label>Depart</label>
+            <label for="departInput">Depart</label>
             <input id="departInput" type="date" required>
           </div>
 
           <div class="field" id="returnWrapper" style="display:none;">
-            <label>Return</label>
+            <label for="returnInput">Return</label>
             <input id="returnInput" type="date">
           </div>
 
           <div class="field">
-            <label>Passengers</label>
+            <label for="passengerInput">Passengers</label>
             <select id="passengerInput">
               <option value="1">1 Adult</option>
               <option value="2">2 Adults</option>
@@ -68,23 +68,26 @@
           </div>
 
           <div class="field">
-            <label>Class</label>
+            <label for="classInput">Class</label>
             <select id="classInput">
               <option value="Economy">Economy</option>
               <option value="Business">Business</option>
             </select>
           </div>
 
-          <button type="submit" class="btn primary">Proceed</button>
+          <div class="actions">
+            <button type="submit" class="btn primary">Proceed</button>
+          </div>
         </form>
-      </div>
+      </aside>
+
     </section>
   </main>
 
-  <script src="book-flight.js"></script>
+  <!-- CORRECTED FOOTER -->
+  <footer data-include="footer.html"></footer>
 
-  <!-- Footer -->
-  <div data-include="footer.html"></div>
-  <script src="include.js"></script>
+  <script src="book-flight.js" defer></script>
+
 </body>
 </html>
